@@ -69,7 +69,7 @@ const MeetingRooms = ({ areas, updateAreas }) => {
   return (
     <div className="section">
       <h3 className="section-heading">Meeting Rooms</h3>
-      <div className="meeting-rooms-grid">
+      <div className="meeting-rooms-grid grid">
         {[
           "discussionRoom",
           "interviewRoom",

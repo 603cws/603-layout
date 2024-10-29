@@ -48,7 +48,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     'Interview Room': '#32CD32', // Lime Green
     'Conference Room': '#FFD700', // Gold
     'Board Room': '#FFE4B5', // Moccasin
-    'Meeting Room': '#FFDAB9', // Peach Puff
+    'Meeting Room': '#FA8072', // Salmon
     'Meeting Room (Large)': '#FFDAB9', // Peach Puff
     'HR Room': '#90EE90', // Light Green
     'Finance Room': '#5F9EA0', // Cadet Blue
@@ -56,7 +56,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
   };
 
   // Ensure totalArea is greater than zero to prevent division by zero
-  var validTotalArea = totalArea > 0 ? totalArea : 4000; // Set default to 4000 sq ft
+  const validTotalArea = totalArea > 0 ? totalArea : 4000; // Set default to 4000 sq ft
 
   // Calculate the built area and available area
   const builtArea = Object.keys(areas).reduce((acc, key) => acc + areas[key] * areaValues[key], 0);

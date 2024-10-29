@@ -178,6 +178,12 @@ section h3 {
   margin-top: 10px;
   font-weight: bold;
   color: black;
+  /* display: flex; */
+  align-items: center;
+  justify-content: space-between; 
+  position: relative;
+  text-align: center;
+  width: 100%; 
 }
 
 .control-btn {

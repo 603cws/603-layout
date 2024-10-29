@@ -44,7 +44,7 @@ const SupportSpaces = ({ areas, updateAreas }) => {
   return (
     <div className="section">
       <h3 className="section-heading">Support Spaces</h3>
-      <div className="support-spaces-grid">
+      <div className="support-spaces-grid grid">
         {["ups", "bms", "server", "executiveWashroom"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">

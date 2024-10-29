@@ -62,7 +62,7 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
   return (
     <div className="section">
       <h3 className="section-heading">Open Workspaces</h3>
-      <div className="open-workspaces-grid">
+      <div className="open-workspaces-grid grid">
         {["linear", "lType"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
@@ -80,14 +80,13 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
                 <>
                   <Radio selectedValue={selectedSize} onChange={handleSizeChange} />
                   <div className="size-display">
-                    <strong>Desk Size:{sizeMapping[selectedSize]}</strong>
+                     <span>Desk Size:{sizeMapping[selectedSize]}</span>
                   </div>
-
                 </>
               )}
               {type === "lType" && (
                 <div className="size-display">
-                  <strong>Desk Size:{sizeMapping.lType}</strong>
+                   <span>Desk Size:{sizeMapping.lType}</span>
                 </div>
               )}
               <div className="value-display">

@@ -34,10 +34,15 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize }) => {
     }
   };
 
+  const handleSliderChange = (event) => {
+    const newSize = parseInt(event.target.value, 10);
+    setMdCabinSize(newSize);
+  };
+
   return (
     <div className="section">
       <h3 className="section-heading">Cabins</h3>
-      <div className="cabins-grid">
+      <div className="cabins-grid grid">
         {["md", "manager", "small"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
