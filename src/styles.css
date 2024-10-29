@@ -1,0 +1,1401 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  width: 100vw;/* Compensate for the scaling to maintain full width */
+  overflow-x: hidden; /* Hide horizontal overflow */
+  scale: 0.9;
+  /* overflow-y: hidden; */
+}
+
+.button-container {
+  display:flex;  
+  justify-content: space-between; 
+  
+}
+.button-container-main{
+  display: flex;
+  justify-content: space-between;
+ 
+}
+/* Hide spinners in Chrome, Safari, Edge, and Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide spinners in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Additional styles to ensure spinners are hidden */
+input[type="number"] {
+  appearance: textfield;
+}
+
+.control-btn, .toggle-unit-button {
+  padding: 10px 20px;  
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  /* Full viewport height */
+  width:100% ;
+  height: 100vh;
+  padding-top: 10px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Section Styles */
+.section-heading {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;/* Grey with 50% transparency */
+  padding: 10px;
+  border-radius: 25px;
+  color: rgba(18, 8, 8, 0.882); /* Optional: to make the text more readable */
+  background-color: #F5F5F5; /* Light grey background */
+  padding: 10px 15px;        /* Adjust padding as needed */
+  font-size: 1.2rem;         /* Customize font size */
+  font-weight: bold;         /* Bold text */
+  color: #333;               /* Dark grey text color */
+  border-radius: 4px;        /* Optional: Rounded corners */
+  margin-bottom: 20px;       /* Space below the heading */
+  z-index: 10;  
+}
+
+.sections-inner {
+  overflow: hidden; /* Hide both vertical and horizontal scrollbars */
+  padding-right: 30px; /* Added right padding to create space for scrollbar */
+  white-space: normal;  /* Allow line breaks */
+  width: 100%; /* Ensure it takes full width */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+section {
+  margin-bottom: 10px; /* Reduced margin for less space between sections */
+  padding: 5px 0; /* Reduced padding */
+  border-bottom: 1px solid #ddd; /* Kept the bottom border */
+  background-color: #f0f0f0; /* Grey background for section boxes */
+  border-radius: 3px; /* Reduced border radius for less rounded corners */
+  width: 100%; /* Ensure the section takes up the full width of its container */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+section * {
+  max-width: 100%; /* Ensure child elements do not exceed the width of the section */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+section img, section table {
+  max-width: 100%; /* Ensure images and tables do not exceed the width of the section */
+  height: auto; /* Maintain aspect ratio for images */
+}
+
+section h3 {
+  margin-bottom: 10px; /* Adjusted margin */
+  font-size: 16px; /* Adjusted font size */
+  padding-bottom: 5px;
+  font-weight: bold; /* Make heading text bold */
+  color: black; /* Make heading text black */
+}
+
+/* Workspace Styles */
+.workspace-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+
+/* Workspace Styles */
+.workspace-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: hidden; /* Hide horizontal scrollbar */}
+
+/* Workspace Styles */
+.workspace-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+
+/* Workspace Styles */
+.workspace-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding-left: 20px; /* Add padding to shift workspaces to the right */
+}
+
+
+.workspace {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  margin-bottom: 30px; 
+  margin-right: 20px; /* Adjust the margin as needed */
+}
+
+.workspace img {
+  width: 250px; /* Increased size */
+  height: 200px; /* Increased size */
+  margin-bottom: 10px; /* Space between image and control box */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Control Button Styles */
+.control-btn-box {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  background-color: #f9f9f9;
+  padding: 5px;
+  width:100%;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.size-display span{
+  font-weight: bold;
+  font-size: 16px;
+}
+.value-input {
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 80%; /* Adjust width as needed */
+  text-align: center;
+}
+
+.value-display {
+  margin-top: 10px;
+  font-weight: bold;
+  color: black;
+}
+
+.control-btn {
+  padding: 5px 10px; /* Adjusted size */
+  font-size: 16px; /* Adjusted size */
+  font-weight: bold;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+  background-color: #e0e0e0;
+}
+
+span {
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+
+
+
+/* Add flexbox properties to the content class */
+.content {
+  display: flex;
+  flex-wrap: wrap; /* Optional: allows children to wrap to the next line */
+  gap: 20px; /* Optional: adds space between children */
+  margin-top: 80px;
+}
+
+/* Specify width and height for the children of content */
+.content > * {
+  flex: 1 1 45%; /* Adjust the flex-grow, flex-shrink, and flex-basis properties as needed */
+  height: 300px; /* Specify the height of the children */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+
+#chart {
+  width: 40%; /* Adjust width as needed */
+  aspect-ratio: 1;
+  padding: 10px 0; /* Add padding if needed */
+  box-sizing: border-box; /* Include padding in width/height */
+}
+.flexbox-container {
+  display: flex;
+  justify-content: flex-start;   /* Align items to the start */
+  align-items: center;
+  position: absolute;/* Absolute position */
+  left: 0px;  /* Align to the left */
+  top: 130px;
+  box-sizing: border-box;
+  gap: 1rem; 
+}
+
+
+.flexbox-item {
+  outline: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Center text horizontally */
+  background: #003366;
+  min-width: 200px;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+  box-sizing: border-box;
+  padding: 13px 15px;
+  color: #ffff; /* Change text color to black */
+  font-size: 16px; /* Increase font size for better readability */
+  font-weight: 500; /* Make text bold */
+  letter-spacing: 1.2px;
+  text-transform: capitalize;
+  overflow: hidden;
+  cursor:default;
+  text-align: center; /* Center text */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.flexbox-item:hover {
+  opacity: .95;
+}
+
+.flexbox-item .animation {
+  border-radius: 100%;
+  animation: ripple 0.6s linear infinite;
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+  }
+}
+/* Built Available Area Styles */
+.built-available-area {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  position: fixed; /* Fixed position */
+  top: 420px; /* Adjust based on the height of your flexbox container */
+  left: 20px; /* Align with the flexbox container */
+  width: 50%; /* Same width as the flexbox container */
+  background-color: white; /* Background color */
+  padding: 10px; /* Padding */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 8px; /* Border radius */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+/* Error Message Styles */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 10px; 
+  background: white;
+  font-size: 13px;
+  left: 25%;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+
+
+.error-message .warning-icon {
+  margin-right: 5px;
+}
+
+/* Dynamic Text Styles */
+.dynamic-text {
+  margin-top: 20px; /* Adjust based on the height of your flexbox container */
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  position: fixed; /* Set to fixed position */
+  top: 500px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  width: 50%; /* Adjust width as needed */
+  background-color: white; /* Optional: background color */
+  border: 1px solid #ccc; /* Optional: border */
+  border-radius: 8px; /* Optional: border radius */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.dynamic-text div {
+  margin: 100px 0;
+}
+
+/* Scrollbar Styles */
+.relative {
+  position: relative;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, and Opera */
+}
+
+.snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-mandatory {
+  scroll-snap-type: mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
+.sections-inner::-webkit-scrollbar {
+  width: 8px; /* Custom scrollbar width */
+}
+
+.sections-inner::-webkit-scrollbar-thumb {
+  background-color: #888; /* Custom scrollbar color */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.sections-inner::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Darker color on hover */
+}
+
+.sections-inner {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: thin;  /* Firefox */
+  scrollbar-color: #888 #f0f0f0; /* Custom scrollbar color for Firefox */
+}
+
+/* Set Area Input Box Styles */
+.set-area-input {
+  width: 100%; /* Full width */
+  padding: 10px 1rem; /* Updated padding */
+  font-size: 20px; /* Larger font size */
+  font-weight:bolder;
+  border: 0; /* Remove border */
+  border-radius: 10px; /* Updated rounded corners */
+  box-sizing: border-box; /* Include padding and border in width */
+  margin-bottom: 10px; /* Space below the input box */
+  outline: 2px solid #FEBF00; /* Outline */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Font family */
+  background-color: #f2efef; /* Background color */
+  outline-offset: 3px; /* Outline offset */
+  transition: 0.25s; /* Transition */
+}
+.area-input{
+  width: 60%;
+}
+
+.set-area-input:focus {
+  outline-offset: 5px; /* Updated outline offset on focus */
+  background-color: #fff; /* Background color on focus */
+}
+
+.calculator-icon {
+  margin-right: 25px;
+  margin-left: -60px;
+  margin-bottom: -58px; /* Adjust the margin as needed */
+  font-size: 45px; /* Adjust the size as needed */
+  color: #FFD43B; /* Adjust the color as needed */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  border-radius: 10px;
+  border: 0;
+  padding: 10px 1rem;
+  transform: rotate(-45deg); 
+}
+
+.calculator-icon:hover {
+  transform: scale(1.1) rotate(-10deg);  /* Scale up the icon on hover */
+
+}
+
+.set-area-input.error {
+  border: 1px solid red; /* Red border for error state */
+}
+
+/* @keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+} */
+
+
+/* Button Styles */
+.button-container button {
+  padding: 10px 20px; /* Increased padding */
+  font-size: 16px; /* Larger font size */
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  border-radius: 15px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.button-container button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Updated Reset Button Styles */
+.reset-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em 3em !important;
+  background-color: yellow;
+  cursor: pointer;
+  box-shadow: 4px 6px 0px black;
+  border: 4px solid;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  z-index: 100;
+  transition: box-shadow 250ms, transform 250ms, filter 50ms;
+  margin-left: 605px;
+  font-weight: bold;
+}
+
+.reset-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 3px 0px black;
+  color: #000;
+}
+
+.reset-btn:active {
+  filter: saturate(0.75);
+}
+
+.reset-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: pink;
+  z-index: -1;
+  transform: translateX(-100%);
+  transition: transform 250ms;
+}
+
+.reset-btn:hover::after {
+  transform: translateX(0);
+}
+
+.bgContainer {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+  max-width: 35%; /* adjust this if the button text is not proper */
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.bgContainer span {
+  position: relative;
+  transform: translateX(-100%);
+  transition: all 250ms;
+}
+
+.reset-btn:hover .bgContainer > span {
+  transform: translateX(0);
+}
+
+.arrowContainer {
+  padding: 1em;
+  margin-inline-end: 1em;
+  border: 4px solid;
+  border-radius: 50%;
+  background-color: pink;
+  position: relative;
+  overflow: hidden;
+  transition: transform 250ms, background-color 250ms;
+  z-index: 100;
+}
+
+.arrowContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: yellow;
+  transform: translateX(-100%);
+  z-index: -1;
+  transition: transform 250ms ease-in-out;
+}
+
+.reset-btn:hover .arrowContainer::after {
+  transform: translateX(0);
+}
+
+.reset-btn:hover .arrowContainer {
+  transform: translateX(5px);
+}
+
+.reset-btn:active .arrowContainer {
+  transform: translateX(8px);
+}
+
+.arrowContainer svg {
+  vertical-align: middle;
+}
+
+
+/* New Button Styles */
+.set-area-button, .toggle-unit-button {
+  background-color: #ff0000; /* Red background for toggle button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.set-area-button:hover, .toggle-unit-button:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
+
+/* From Uiverse.io by Subaashbala */
+.set-area-button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em 0em 1em 1em;
+  background-color: yellow;
+  color: black; /* Ensure text color is visible */
+  cursor: pointer;
+  box-shadow: 4px 6px 0px black;
+  border: 4px solid;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  z-index: 100;
+  transition: box-shadow 250ms, transform 250ms, filter 50ms;
+}
+
+.set-area-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 3px 0px black;
+}
+
+.set-area-button:active {
+  filter: saturate(0.75);
+}
+
+.set-area-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: pink;
+  z-index: -1;
+  transform: translateX(-100%);
+  transition: transform 250ms;
+}
+
+.set-area-button:hover::after {
+  transform: translateX(0);
+}
+
+.bgContainer {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+  max-width: 35%; /* adjust this if the button text is not proper */
+  font-size: 2em;
+  font-weight: 600;
+  color: black; /* Ensure text color is visible */
+}
+
+.bgContainer span {
+  position: relative;
+  transform: translateX(0); /* Ensure text is always visible */
+  transition: all 250ms;
+}
+
+.set-area-button:hover .bgContainer > span {
+  transform: translateX(0); /* Ensure text is always visible */
+}
+
+.arrowContainer {
+  padding: 1em;
+  margin-inline-end: 1em;
+  border: 4px solid;
+  border-radius: 50%;
+  background-color: pink;
+  position: relative;
+  overflow: hidden;
+  transition: transform 250ms, background-color 250ms;
+  z-index: 100;
+}
+
+.arrowContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: yellow;
+  transform: translateX(-100%);
+  z-index: -1;
+  transition: transform 250ms ease-in-out;
+}
+
+.set-area-button:hover .arrowContainer::after {
+  transform: translateX(0);
+}
+
+.set-area-button:hover .arrowContainer {
+  transform: translateX(5px);
+}
+
+.set-area-button:active .arrowContainer {
+  transform: translateX(8px);
+}
+
+.arrowContainer svg {
+  vertical-align: middle;
+}
+
+/* Subsection styling */
+.subsection {
+  margin-bottom: 20px; /* Space between subsections */
+}
+
+
+/* Media Queries for Responsiveness */
+@media (max-width:1024px){
+  .grid{
+    grid-template-columns: repeat(2, 1fr) !important; 
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+
+  .sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto; /* Adjust height to fit content */
+    overflow-y: auto; /* Enable vertical scrolling within sections */
+    /* Add padding to sections */
+    box-sizing: border-box;
+  }
+
+  .flexbox-container {
+    width: 50%; /* Half width on small devices */
+    top: 100px;
+    /* left: 0px; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .flexbox-item{
+    height: 35px;
+  }
+
+  .built-available-area, .dynamic-text {
+    width: 100%; /* Full width on small devices */
+    margin-top: 20px;
+    position: static;
+  }
+
+  .set-area-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 30%;
+  }
+
+  .set-area-button:hover {
+    background-color: #0056b3;
+  }
+
+  .button-container{
+    display: flex;
+    flex-direction: row !important;
+    margin-bottom: 20px;
+    width: 50%;
+  }
+ 
+  .unit-toggle {
+    margin-top: 10px;
+  }
+
+  .unit-toggle label {
+    cursor: pointer;
+  }
+
+  .control-btn {
+    padding: 5px 10px; /* Adjusted size */
+    font-size: 16px; /* Adjusted size */
+    font-weight: bold;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+  }
+
+  .toggle-unit-button {
+    background-color: #ff0000; /* Red background for toggle button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .toggle-unit-button:hover {
+    background-color: #cc0000; /* Darker red on hover */
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px; /* Adjust the gap as needed */
+    width: 100%; /* Full width on small devices */
+  }
+
+  .set-area-input {
+    margin-bottom: 10px; /* Adjust as needed */
+    width: 100%; /* Full width on small devices */
+  }
+
+  .control-btn,
+  .toggle-unit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%; /* Full width on small devices */
+  }
+
+  .error {
+    border-color: red;
+  }
+
+  .error-message {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .warning-icon {
+    margin-right: 5px;
+  }
+  .apexcharts-title-text{
+    font-size: 16px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 16px; /* Adjust the gap as needed */
+  }
+  .section-heading{
+    font-size: 17px;
+  }
+  /*Open Workspace Tablet view CSS*/
+  .workspace{
+    height: 200px;
+    width: 200px;
+  }
+  .workspace img{
+    height: 130px;
+    width: 150px;
+  }
+  .counter{
+    width: 100%;
+  }
+  .value-display {
+    margin-top: 5px;
+    font-weight: bold;
+    color: black;
+    font-size: 13px;
+  }
+  .radio-inputs{
+    width: 100% !important;
+  }
+  .radio-inputs .radio .name{
+    font-size: 13px;
+    padding: 10px !important;
+  }
+  .value-display span{
+    font-size: 13px;
+  }
+  .size-display span{
+    font-size: 13px;
+  }
+
+  /*Cabins Tablet view CSS*/
+  .cabins-grid{
+    gap: 50px !important;
+  }
+  .md-cabin-size{
+    font-size: 13px !important;
+  }
+  .seats-description{
+    font-size: 13px;
+  }
+  
+}
+
+
+
+/* Treemap Styles */
+.treemap-container {
+  display: flex;
+  width: 100%;
+  height: 50%; /* Adjust height as needed */
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.treemap-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #fff;
+  font-weight: bold;
+}
+
+.design-space {
+  background-color: yellow;
+  color: #000;
+}
+
+.built-space {
+  background-color: blue;
+}
+
+.available-space {
+  background-color: grey;
+}
+
+.public-spaces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px; /* Adjust the gap as needed */
+}
+
+.public-spaces-grid .workspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meeting-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) ;
+  gap: 16px; /* Adjust the gap as needed */
+}
+
+.meeting-rooms-grid .workspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) !important; /* 2 columns */
+  gap: 16px; /* Adjust the gap as needed */
+}
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter-btn {
+  background-color: #d3d3d3; /* Grey background */
+  border: none;
+  padding: 5px 10px; /* Reduced padding */
+  cursor: pointer;
+  font-size: 16px; /* Reduced font size */
+  font-weight: bold;
+  color: #333;
+}
+
+.counter-btn:hover {
+  background-color: #b0b0b0; /* Darker grey on hover */
+}
+
+.counter-value {
+  background-color: #d3d3d3; /* Grey background */
+  padding: 5px 10px; /* Reduced padding */
+  margin: 0 5px; /* Reduced margin */
+  font-size: 16px; /* Reduced font size */
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  min-width: 40px; /* Reduced min-width */
+  border: none;
+  text-align: center;
+}
+
+.cabins-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 16px; /* Adjust the gap as needed */
+}
+
+.cabins-grid .workspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  text-align: center;
+}
+
+
+.support-spaces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 16px; /* Adjust the gap as needed */
+}
+
+.support-spaces-grid .workspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  text-align: center;
+}
+
+.workspace-image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.workspace-image {
+  width: 335px; /* Adjust size as needed */
+  height: 220px; /* Adjust size as needed */
+  margin-bottom: 10px; /* Space between image and other elements */
+}
+
+.workspace-description {
+  visibility: hidden;
+  width: 220px; /* Match the width of the image */
+  background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background */
+  color: #fff; /* White text */
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 100%; /* Position above the image */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 11;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.workspace-image-container:hover .workspace-description {
+  visibility: visible;
+  opacity: 1;
+}
+
+.open-workspaces-grid {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+.generate-boq-button{
+  left: 35% !important;
+}
+
+
+/* Mobile S (320px) */
+@media (max-width: 320px) {
+  .btn {
+    padding: 8px 16px;
+    font-size: 12px;
+    width: 100%; /* Full width on small mobile */
+  }
+}
+
+/* Mobile M (375px) */
+@media (max-width: 375px) {
+  .btn {
+    padding: 10px 18px;
+    font-size: 14px;
+    width: 100%; /* Full width on medium mobile */
+  }
+}
+
+/* Mobile L (425px) */
+@media (max-width: 425px) {
+ .size-input-container{
+  width: 100% !important;
+ }
+ .area-input{
+  width: 100% ;
+ }
+  .btn {
+    padding: 12px 20px;
+    font-size: 15px;
+    width: 100%; /* Full width on large mobile */
+  }
+  .set-area-input::placeholder{
+    font-size: 15px !important;
+  }
+  .area-input{
+    width: 75%;
+  }
+  .flexbox-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .flexbox-item{
+    font-size: 12px;
+  }
+  .generate-boq-button{
+    font-size: 12px !important;
+    width: 100% !important;
+    top: 450px !important;
+    left: 0 !important;
+  }
+  
+  #chart{
+    width: 100%;
+    height: 100% !important;
+  }
+  /*grid mobile view*/
+  .grid{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  
+
+  /*Open workspace mobile view css*/
+  .workspace{
+    height: 150px;
+    width: 50%;
+  }
+  .workspace img{
+    height: 100px;
+    width: 100%;
+  }
+  .counter{
+    width: 100%;
+  }
+  .value-display {
+    margin-top: 5px;
+    font-weight: bold;
+    color: black;
+    font-size: 10px;
+  }
+  .radio-inputs{
+    width: 100% !important;
+  }
+  .radio-inputs .radio .name{
+    font-size: 12px;
+    padding: 5px !important;
+  }
+  .value-display span{
+    font-size: 12px;
+  }
+  .size-display span{
+    font-size: 12px;
+  }
+
+  /*Cabins Mobile view CSS*/
+  .cabins-grid.workspace{
+    height: 150px;
+    width: 40%;
+  }
+  .cabins-grid.workspace img{
+    height: 100px;
+    width: 100%;
+  }
+  .md-cabin-size{
+    font-size: 12px !important;
+  }
+  .seats-description{
+    font-size: 12px;
+  }
+
+  /*Meeting room mobile view css*/
+ 
+  .meeting-rooms-grid.workspace{
+    height: 150px;
+    width: 40%;
+  }
+  .meeting-rooms-grid.workspace img{
+    height: 100px;
+    width: 100%;
+  }
+  
+ 
+}
+
+/* Style for the Generate BOQ button */
+/* Style for the Generate BOQ button */
+/* Style for the Generate BOQ button */
+.generate-boq-button {
+  position: relative;
+  padding: 15px 35px;
+  background: #003366; /* Changed to blue */
+  font-size: 16px;
+  font-weight: 700;
+  color: white; /* Changed to white for better contrast */
+  border: 2px solid #007bff; /* Changed to blue */
+  border-radius: 8px;
+  box-shadow: 0 0 0 #007bff8c; /* Changed to blue */
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 30px auto;
+  text-align: center;
+  top: 15px;
+}
+
+.generate-boq-button .star-1,
+.generate-boq-button .star-2,
+.generate-boq-button .star-3,
+.generate-boq-button .star-4,
+.generate-boq-button .star-5,
+.generate-boq-button .star-6 {
+  position: absolute;
+  filter: drop-shadow(0 0 0 #000000); /* Changed to black */
+  z-index: -5;
+  transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+}
+
+.generate-boq-button .star-1 {
+  top: 20%;
+  left: 20%;
+  width: 25px;
+}
+
+.generate-boq-button .star-2 {
+  top: 45%;
+  left: 45%;
+  width: 15px;
+}
+
+.generate-boq-button .star-3 {
+  top: 40%;
+  left: 40%;
+  width: 5px;
+}
+
+.generate-boq-button .star-4 {
+  top: 20%;
+  left: 40%;
+  width: 8px;
+}
+
+.generate-boq-button .star-5 {
+  top: 25%;
+  left: 45%;
+  width: 15px;
+}
+
+.generate-boq-button .star-6 {
+  top: 5%;
+  left: 50%;
+  width: 5px;
+}
+
+.generate-boq-button:hover {
+  background: transparent;
+  color: #007bff; /* Changed to blue */
+  box-shadow: 0 0 25px #007bff8c; /* Changed to blue */
+}
+
+.generate-boq-button:hover .star-1 {
+  top: -80%;
+  left: -30%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.generate-boq-button:hover .star-2 {
+  top: -25%;
+  left: 10%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.generate-boq-button:hover .star-3 {
+  top: 55%;
+  left: 25%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.generate-boq-button:hover .star-4 {
+  top: 30%;
+  left: 80%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.generate-boq-button:hover .star-5 {
+  top: 25%;
+  left: 115%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.generate-boq-button:hover .star-6 {
+  top: 5%;
+  left: 60%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.fil0 {
+  fill: #000000; /* Changed to black */
+}
+
+/* Other styles */
+
+.seats-display {
+  font-weight: bold;
+  font-size: 1.2em; /* Increase font size */
+  color: #333; /* Change text color */
+  margin-left: 10px; /* Add some margin to the left */
+  padding: 5px; /* Add some padding */
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 5px; /* Rounded corners */
+  display: inline-block; /* Keep it inline */
+}
+
+.slider-container {
+  margin-top: 10px;
+}
+
+.slider {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.size-input-container {
+  margin-top: 10px;
+}
+
+.size-input {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.dummy-display {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.seats-description {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Add this CSS to style the seat control buttons and input */
+.seat-control {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.seat-control button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.seat-control input {
+  width: 50px;
+  text-align: center;
+  margin: 0 5px;
+  font-size: 16px;
+}
+
+.seat-control button:hover {
+  background-color: #0056b3;
+}
+.input-wrapper{
+  display:inline-block;
+  position: relative;
+  width: 100%;
+}
+.reset-cross {
+  position: absolute;
+  right: 20px;
+  font-family: 'FontAwesome';
+  font-size: 35px;
+  cursor: pointer;
+  top: 10px;
+  opacity: 50%;
+  color:#333;
+}
+.reset-cross:hover{
+  opacity: 100%;
+}

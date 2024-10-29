@@ -1,0 +1,29 @@
+.--content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  height: 90%; /* Ensure the parent container has a height */
+}
+
+.--sections {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  overflow-y: auto; /* Ensure vertical scrollbar is present */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  height: 80%; /* Ensure sections take full height of the parent */
+  overflow-x: auto;
+  padding: 0 5px;
+}
+
+.--sections::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in WebKit browsers */
+}
+@media(max-width:425px){
+  .--sections{
+    width: 100% !important;
+  }
+}
