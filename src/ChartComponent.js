@@ -34,7 +34,7 @@ const ChartComponent = ({ areas, areaValues, isOverCapacity }) => {
       horizontalAlign: 'center'
     },
     chart: {
-      height: 450,
+      height: 350,
       type: 'treemap',
       toolbar: {
         show: true
@@ -102,7 +102,7 @@ const ChartComponent = ({ areas, areaValues, isOverCapacity }) => {
 
   return (
     <div id="chart">
-      <ReactApexChart options={options} series={options.series} type="treemap" height={450} />
+      <ReactApexChart options={options} series={options.series} type="treemap" height={350} />
     </div>
   );
 };

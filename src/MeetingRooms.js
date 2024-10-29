@@ -1,6 +1,7 @@
 import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
+import Tooltip from './ToolTip';
 
 const meetingRoomDescriptions = {
   discussionRoom: "This is the discussion room, ideal for small group discussions.",
@@ -52,18 +53,31 @@ const MeetingRooms = ({ areas, updateAreas }) => {
     }
   };
 
+  const sizeArea = {
+    discussionRoom: 380,
+    interviewRoom: 100,
+    conferenceRoom: 250,
+    boardRoom: 325,
+    meetingRoom: 100,
+    meetingRoomLarge: 120,
+    hrRoom: 80,
+    financeRoom: 100,
+    sales: 80,
+    videoRecordingRoom: 80
+  };
+
   return (
     <div className="section">
       <h3 className="section-heading">Meeting Rooms</h3>
-      <div className="meeting-rooms-grid grid">
+      <div className="meeting-rooms-grid">
         {[
-          "discussionRoom", 
-          "interviewRoom", 
-          "conferenceRoom", 
-          "boardRoom", 
-          "meetingRoom", 
-          "meetingRoomLarge", 
-          "hrRoom", 
+          "discussionRoom",
+          "interviewRoom",
+          "conferenceRoom",
+          "boardRoom",
+          "meetingRoom",
+          "meetingRoomLarge",
+          "hrRoom",
           "financeRoom",
           "sales",
           "videoRecordingRoom"
@@ -82,12 +96,17 @@ const MeetingRooms = ({ areas, updateAreas }) => {
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1).replace(/([A-Z])/g, ' $1')}: <span>{areas[type] || 0}</span>
-              </div>
-              {SEATS_PER_ROOM[type] > 0 && (
+                
+                {SEATS_PER_ROOM[type] > 0 && (
                 <div className="seats-description">
                   <strong>1 {type.replace(/([A-Z])/g, ' $1').toLowerCase()} = {SEATS_PER_ROOM[type]} pax</strong>
                 </div>
               )}
+
+                <Tooltip text={`Size: ${sizeArea[type]} sq ft`}>
+                <button className="info-button">i</button>
+              </Tooltip>
+              </div>
             </div>
           </div>
         ))}

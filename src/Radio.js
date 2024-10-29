@@ -33,7 +33,7 @@ const Radio = ({ selectedValue, onChange }) => {
             checked={selectedValue === "xl"}
             onChange={onChange}
           />
-          <span className="name">XL</span>
+          <span className="name">X Large</span>
         </label>
       </div>
     </StyledWrapper>
@@ -50,8 +50,8 @@ const StyledWrapper = styled.div`
     box-sizing: border-box;
     box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
     padding: 0.25rem;
-    font-size: 14px;
     width: 300px;
+    font-size: 14px;
   }
 
   .radio-inputs .radio {

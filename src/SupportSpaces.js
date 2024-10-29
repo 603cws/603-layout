@@ -1,6 +1,7 @@
 import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
+import Tooltip from './ToolTip';
 
 const supportSpaceDescriptions = {
   ups: "This is the UPS room, ensuring uninterrupted power supply.",
@@ -33,10 +34,17 @@ const SupportSpaces = ({ areas, updateAreas }) => {
     }
   };
 
+  const sizeArea = {
+    ups: 90,
+    bms: 90,
+    server: 40,
+    executiveWashroom: 60
+  };
+
   return (
     <div className="section">
       <h3 className="section-heading">Support Spaces</h3>
-      <div className="support-spaces-grid grid">
+      <div className="support-spaces-grid">
         {["ups", "bms", "server", "executiveWashroom"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
@@ -52,6 +60,10 @@ const SupportSpaces = ({ areas, updateAreas }) => {
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)} Room: <span>{areas[type] || 0}</span>
+
+                <Tooltip text={`Size: ${sizeArea[type]} sq ft`}>
+                  <button className="info-button">i</button>
+                </Tooltip>
               </div>
             </div>
           </div>

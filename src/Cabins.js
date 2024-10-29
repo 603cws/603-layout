@@ -1,6 +1,8 @@
 import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
+import Tooltip from './ToolTip';
+import BubbleSlider from './BubbleSlider';
 
 const workspaceDescriptions = {
   md: "This is the MD's cabin, designed for maximum comfort and productivity.",
@@ -32,15 +34,10 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize }) => {
     }
   };
 
-  const handleSliderChange = (event) => {
-    const newSize = parseInt(event.target.value, 10);
-    setMdCabinSize(newSize);
-  };
-
   return (
     <div className="section">
       <h3 className="section-heading">Cabins</h3>
-      <div className="cabins-grid grid">
+      <div className="cabins-grid">
         {["md", "manager", "small"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
@@ -56,11 +53,25 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize }) => {
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)} Cabin: <span>{areas[type] || 0}</span>
+
+                {type === "manager" && (
+                  <Tooltip text={`Size: 80 sq ft`}>
+                    <button className="info-button">i</button>
+                  </Tooltip>
+                )}
+                {type === "small" && (
+                  <div className="seats-description">
+                    <strong>1 small cabin = 4 pax</strong>
+                    <Tooltip text={`Size: 80 sq ft`} >
+                      <button className="info-button">i</button>
+                    </Tooltip>
+                  </div>
+                )}
               </div>
               {type === "md" && (
                 <div className="slider-container">
-                  <label htmlFor="md-cabin-size" className='md-cabin-size'>MD Cabin Size: {mdCabinSize} sq ft</label>
-                  <input
+                  {/* <label htmlFor="md-cabin-size">MD Cabin Size: {mdCabinSize} sq ft</label> */}
+                  {/* <input
                     type="range"
                     id="md-cabin-size"
                     min="120"
@@ -68,12 +79,11 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize }) => {
                     value={mdCabinSize}
                     onChange={handleSliderChange}
                     className="slider"
+                  /> */}
+                  <BubbleSlider
+                    value={mdCabinSize}
+                    onChange={setMdCabinSize}
                   />
-                </div>
-              )}
-              {type === "small" && (
-                <div className="seats-description">
-                  <strong>1 small cabin = 4 pax</strong>
                 </div>
               )}
             </div>

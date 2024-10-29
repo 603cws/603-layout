@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
+import Tooltip from './ToolTip';
 
 const publicSpaceDescriptions = {
   reception: "This is the reception area, the first point of contact for visitors.",
@@ -42,7 +43,7 @@ const PublicSpaces = ({ areas, updateAreas }) => {
   return (
     <div className="section">
       <h3 className="section-heading">Public Spaces</h3>
-      <div className="public-spaces-grid grid">
+      <div className="public-spaces-grid">
         {["reception", "lounge", "phoneBooth", "breakoutRoom"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
@@ -58,6 +59,12 @@ const PublicSpaces = ({ areas, updateAreas }) => {
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)}: <span>{Math.round(areas[type] || 0)}</span> {/* Round the value before displaying */}
+              
+                {type === "phoneBooth" && (
+                <Tooltip text={`Size: 25 sq ft`}>
+                  <button className="info-button">i</button>
+                </Tooltip>
+              )}
               </div>
             </div>
           </div>

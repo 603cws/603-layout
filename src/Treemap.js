@@ -25,10 +25,11 @@ const fullNames = {
   hrRoom: "HR Room",
   financeRoom: "Finance Room",
   executiveWashroom: "Executive Washroom",
-  breakoutRoom: "Breakout Room"
+  breakoutRoom: "Breakout Room",
+  videoRecordingRoom: "Video Recording Room"
 };
 
-const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
+const Treemap = ({ totalArea, areas, areaValues }) => {
   const colors = {
     'Linear Workspace': '#6495ED', // Cornflower Blue
     'L-Type Workspace': '#4169E1', // Royal Blue
@@ -47,7 +48,7 @@ const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
     'Interview Room': '#32CD32', // Lime Green
     'Conference Room': '#FFD700', // Gold
     'Board Room': '#FFE4B5', // Moccasin
-    'Meeting Room': '#FA8072', // Salmon
+    'Meeting Room': '#FFDAB9', // Peach Puff
     'Meeting Room (Large)': '#FFDAB9', // Peach Puff
     'HR Room': '#90EE90', // Light Green
     'Finance Room': '#5F9EA0', // Cadet Blue
@@ -55,7 +56,7 @@ const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
   };
 
   // Ensure totalArea is greater than zero to prevent division by zero
-  const validTotalArea = totalArea > 0 ? totalArea : 4000; // Set default to 4000 sq ft
+  var validTotalArea = totalArea > 0 ? totalArea : 4000; // Set default to 4000 sq ft
 
   // Calculate the built area and available area
   const builtArea = Object.keys(areas).reduce((acc, key) => acc + areas[key] * areaValues[key], 0);
@@ -105,8 +106,9 @@ const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
     tooltip: {
       y: {
         formatter: function (value) {
-          const percentage = ((value / validTotalArea) * 100).toFixed(2);
-          return `${percentage}% of total area`;
+          // const percentage = ((value / validTotalArea) * 100).toFixed(2);
+          // return `${percentage}% of total area`;
+          return `${value} sq ft of total area`;
         }
       }
     },
@@ -128,12 +130,24 @@ const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
     }
   };
 
+  const generateLegendItems = () => {
+    return series
+      .filter(item => item.y > 0) // Only areas that are displayed in the chart
+      .map(item => (
+        <div key={item.x} className="legend-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
+          <span className="legend-color" style={{ backgroundColor: item.fillColor, width: '20px', height: '20px', marginRight: '8px' }}></span>
+          <span className="legend-label">{item.x}</span>
+        </div>
+      ));
+  };
+
   return (
-    <>
     <div id="chart">
-      <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={350} />
+      <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={550} />
+      <div className="legend-container" style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap' }}>
+        {generateLegendItems()}
+      </div>
     </div>
-    </>
   );
 };
 

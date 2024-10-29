@@ -7,13 +7,13 @@ import PublicSpaces from "./PublicSpaces";
 import MeetingRooms from "./MeetingRooms";
 import { Tooltip } from "react-tooltip";
 import Treemap from "./Treemap";
-import Modal from "./Modal"; 
-import Card from "./Card";   
-import "./styles.css"; 
-import "./fixes.css";  
+import Modal from "./Modal";
+import Card from "./Card";
+import "./styles.css";
+import "./fixes.css";
 
 const initialAreaValues = {
-  linear: 20,
+  linear: 24,
   lType: 34,
   md: 120,
   manager: 80,
@@ -21,7 +21,7 @@ const initialAreaValues = {
   ups: 90,
   bms: 90,
   server: 40,
-  reception: 160,
+  reception: 120,
   lounge: 150,
   sales: 80,
   phoneBooth: 25,
@@ -30,12 +30,12 @@ const initialAreaValues = {
   conferenceRoom: 250,
   boardRoom: 325,
   meetingRoom: 100,
-  meetingRoomLarge: 300,
+  meetingRoomLarge: 120,
   hrRoom: 80,
   financeRoom: 100,
-  breakoutRoom: 80, 
-  executiveWashroom:60,
-  videoRecordingRoom:80,
+  breakoutRoom: 80,
+  executiveWashroom: 60,
+  videoRecordingRoom: 80,
 };
 
 const initialAreas = {
@@ -59,9 +59,9 @@ const initialAreas = {
   meetingRoomLarge: 0,
   hrRoom: 0,
   financeRoom: 0,
-  breakoutRoom: 0, 
-  executiveWashroom:0,
-  videoRecordingRoom:0,
+  breakoutRoom: 0,
+  executiveWashroom: 0,
+  videoRecordingRoom: 0,
 };
 
 const MAX_AREA = 25000;
@@ -105,30 +105,245 @@ const calculateLoungeArea = (totalArea) => {
   }
 };
 
+const  calculateLinear = (totalArea) => {
+  if (totalArea >= 1500 && totalArea <= 25000) {
+    return Math.round(totalArea * 0.40);
+  } else {
+    return 0;
+  }
+};
+
+const calculateLType = (totalArea) => {
+  if (totalArea >= 9000 && totalArea < 12000) {
+    return 34 * 5;
+  } else if (totalArea >= 12000 && totalArea < 15000) {
+    return 34 * 10;
+  } else if (totalArea >= 15000 && totalArea < 18000) {
+    return 34 * 15;
+  } else if (totalArea >= 18000 && totalArea < 21000) {
+    return 34 * 20;
+  } else if (totalArea >= 21000 && totalArea <= 25000) {
+    return 34 * 25;
+  } else {
+    return 0;
+  }
+};
+
+const calculateMd = (totalArea) => {
+  if (totalArea >= 1500 && totalArea < 6000) {
+    return 120 * 1;
+  } else if (totalArea >= 6000 && totalArea < 9000) {
+    return 120 * 2;
+  } else if (totalArea >= 9000 && totalArea < 12000) {
+    return 120 * 3;
+  } else if (totalArea >= 12000 && totalArea < 15000) {
+    return 120 * 4;
+  } else if (totalArea >= 15000 && totalArea < 18000) {
+    return 120 * 5;
+  } else if (totalArea >= 18000 && totalArea < 21000) {
+    return 120 * 6;
+  } else if (totalArea >= 21000 && totalArea <= 25000) {
+    return 120 * 7;
+  } else {
+    return 0;
+  }
+};
+
+const calculateManager = (totalArea) => {
+  if (totalArea >= 1500 && totalArea < 3000) {
+    return 80 * 1;
+  } else if (totalArea >= 3000 && totalArea < 6000) {
+    return 80 * 2;
+  } else if (totalArea >= 6000 && totalArea < 9000) {
+    return 80 * 3;
+  } else if (totalArea >= 9000 && totalArea < 12000) {
+    return 80 * 4;
+  } else if (totalArea >= 12000 && totalArea < 15000) {
+    return 80 * 5;
+  } else if (totalArea >= 15000 && totalArea < 18000) {
+    return 80 * 6;
+  } else if (totalArea >= 18000 && totalArea < 21000) {
+    return 80 * 7;
+  } else if (totalArea >= 21000 && totalArea <= 25000) {
+    return 80 * 8;
+  } else {
+    return 0;
+  }
+};
+
+const calculateSmall = (totalArea) => {
+  if (totalArea >= 1500 && totalArea < 3000) {
+    return 80 * 1;
+  } else if (totalArea >= 3000 && totalArea < 6000) {
+    return 80 * 2;
+  } else if (totalArea >= 6000 && totalArea < 9000) {
+    return 80 * 3;
+  } else if (totalArea >= 9000 && totalArea <= 25000) {
+    return 80 * 4;
+  } else {
+    return 0;
+  }
+};
+
+const calculateDiscussionRoom = (totalArea) => {
+  if (totalArea >= 12000 && totalArea <= 25000) {
+    return 380 * 1;
+  } else {
+    return 0;
+  }
+};
+
+const calculateInterviewRoom = (totalArea) => {
+  if (totalArea >= 6000 && totalArea < 12000) {
+    return 100 * 1;
+  } else if (totalArea >= 12000 && totalArea <= 25000) {
+    return 100 * 2;
+  } else {
+    return 0;
+  }
+};
+
+const calculateConferenceRoom = (totalArea) => {
+  if (totalArea >= 9000 && totalArea < 15000) {
+    return 250 * 2;
+  } else if (totalArea >= 15000 && totalArea < 18000) {
+    return 250 * 3;
+  } else if (totalArea >= 18000 && totalArea < 21000) {
+    return 250 * 4;
+  } else if (totalArea >= 21000 && totalArea <= 25000) {
+    return 250 * 5;
+  } else {
+    return 0;
+  }
+};
+
+const calculateBoardRoom = (totalArea) => {
+  if (totalArea >= 12000 && totalArea <= 25000) {
+    return 325 * 1;
+  } else {
+    return 0;
+  }
+};
+
+const calculateMeetingRoom = (totalArea) => {
+  if (totalArea >= 1500 && totalArea < 3000) {
+    return 100 * 1;
+  } else if (totalArea >= 3000 && totalArea < 6000) {
+    return 100 * 2;
+  } else if (totalArea >= 6000 && totalArea < 9000) {
+    return 100 * 3;
+  } else if (totalArea >= 9000 && totalArea < 12000) {
+    return 100 * 4;
+  } else if (totalArea >= 12000 && totalArea <= 25000) {
+    return 100 * 6;
+  } else {
+    return 0;
+  }
+};
+
+const calculateMeetingRoomLarge = (totalArea) => {
+  if (totalArea >= 15000 && totalArea <= 25000) {
+    return 120 * 2;
+  } else {
+    return 0;
+  }
+};
+
+const calculateVideoRecordingRoom = (totalArea) => {
+  if (totalArea >= 15000 && totalArea <= 25000) {
+    return 80 * 1;
+  } else {
+    return 0;
+  }
+};
+
+const calculatePhoneBooth = (totalArea) => {
+  if (totalArea >= 3000 && totalArea < 9000) {
+    return 25 * 2;
+  } else if (totalArea >= 9000 && totalArea < 18000) {
+    return 25 * 4;
+  } else if (totalArea >= 18000 && totalArea <= 25000) {
+    return 25 * 8;
+  } else {
+    return 0;
+  }
+};
+
+const calculateServer = (totalArea) => {
+  if (totalArea >= 1500 && totalArea < 6000) {
+    return 40 * 1;
+  } else if (totalArea >= 6000 && totalArea < 12000) {
+    return 40 * 2;
+  } else if (totalArea >= 12000 && totalArea < 18000) {
+    return 40 * 4;
+  } else if (totalArea >= 18000 && totalArea <= 25000) {
+    return 40 * 8;
+  } else {
+    return 0;
+  }
+};
+
+const calculateExecutiveWashroom = (totalArea) => {
+  if (totalArea >= 9000 && totalArea <= 25000) {
+    return 60 * 2;
+  } else {
+    return 0;
+  }
+};
+
 const App = () => {
   const [totalArea, setTotalArea] = useState(0);
   const [areas, setAreas] = useState(initialAreas);
   const [areaValues, setAreaValues] = useState(initialAreaValues);
-  const [variant, setVariant] = useState("medium");
+  const [variant, setVariant] = useState("large");
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md); 
+  const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md);
   const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // Define totalMdCabinArea
 
   useEffect(() => {
+    const linear = calculateLinear(totalArea);
+    const lType = calculateLType(totalArea);
+    const md = calculateMd(totalArea);
+    const manager = calculateManager(totalArea);
+    const small = calculateSmall(totalArea);
+    const discussionRoom = calculateDiscussionRoom(totalArea);
+    const interviewRoom = calculateInterviewRoom(totalArea);
+    const conferenceRoom = calculateConferenceRoom(totalArea);
+    const boardRoom = calculateBoardRoom(totalArea);
+    const meetingRoom = calculateMeetingRoom(totalArea);
+    const meetingRoomLarge = calculateMeetingRoomLarge(totalArea);
+    const videoRecordingRoom = calculateVideoRecordingRoom(totalArea);
+    const phoneBooth = calculatePhoneBooth(totalArea);
+    const server = calculateServer(totalArea);
+    const executiveWashroom = calculateExecutiveWashroom(totalArea);
     const receptionArea = calculateReceptionArea(totalArea);
     const loungeArea = calculateLoungeArea(totalArea);
     setAreas((prevAreas) => ({
       ...prevAreas,
+      linear: Math.round(linear / areaValues.linear),
+      lType: lType / areaValues.lType,
+      md: md / areaValues.md,
+      manager: manager / areaValues.manager,
+      small: small / areaValues.small,
+      discussionRoom: discussionRoom / areaValues.discussionRoom,
+      interviewRoom: interviewRoom / areaValues.interviewRoom,
+      conferenceRoom: conferenceRoom / areaValues.conferenceRoom,
+      boardRoom: boardRoom / areaValues.boardRoom,
+      meetingRoom: meetingRoom / areaValues.meetingRoom,
+      meetingRoomLarge: meetingRoomLarge / areaValues.meetingRoomLarge,
+      videoRecordingRoom: videoRecordingRoom / areaValues.videoRecordingRoom,
+      phoneBooth: phoneBooth / areaValues.phoneBooth,
+      server: server / areaValues.server,
+      executiveWashroom: executiveWashroom / areaValues.executiveWashroom,
       reception: receptionArea / areaValues.reception,
       lounge: loungeArea / areaValues.lounge,
     }));
-  }, [totalArea, areaValues.reception, areaValues.lounge]);
+  }, [totalArea, areaValues]);
 
   useEffect(() => {
     setTotalMdCabinArea(mdCabinSize * areas.md);
   }, [mdCabinSize, areas.md]);
-  
 
   const updateAreas = (type, value) => {
     const newAreas = {
@@ -140,14 +355,17 @@ const App = () => {
       0
     );
 
-    if (builtArea <= totalArea) {
+    const freeSpace = totalArea * 0.05; // 5% of totalArea
+    const usableArea = totalArea - freeSpace; // Area available for building
+
+    if (builtArea <= usableArea) {
       setAreas(newAreas);
       setError(false);
-      setShowModal(false); 
+      setShowModal(false);
     } else {
       console.log("Built area exceeds the available space, showing modal");
-      setError(true); 
-      setShowModal(true); 
+      setError(true);
+      setShowModal(true);
     }
   };
 
@@ -155,15 +373,15 @@ const App = () => {
     if (value >= MIN_AREA && value <= MAX_AREA) {
       setTotalArea(value);
       setError(false);
-      setShowModal(false); 
+      setShowModal(false);
     } else if (value > MAX_AREA) {
       console.log("Total area exceeds the max limit, showing modal");
-      setTotalArea(value); 
+      setTotalArea(value);
       setError(true);      // Trigger error due to exceeding max limit
       setShowModal(true);  // Show modal if area exceeds max limit
     } else {
-      setError(true);      
-      setShowModal(true);  
+      setError(true);
+      setShowModal(true);
     }
   };
 
@@ -178,15 +396,15 @@ const App = () => {
     setVariant(newVariant);
     const newAreaValues = { ...areaValues };
     switch (newVariant) {
-      case "large":
-        newAreaValues.linear = 24;
+      case "medium":
+        newAreaValues.linear = 20;
         break;
       case "xl":
         newAreaValues.linear = 29;
         break;
-      case "medium":
+      case "large":
       default:
-        newAreaValues.linear = 20;
+        newAreaValues.linear = 24;
         break;
     }
     setAreaValues(newAreaValues);
@@ -197,6 +415,10 @@ const App = () => {
     0
   );
   const availableArea = totalArea - builtArea;
+
+  const handleGenerateBOQ = () => {
+    window.location.href = "https://lucky-kataifi-065416.netlify.app/";
+  };
 
   const handleMdCabinAreaChange = (newMdCabinSize) => {
     setMdCabinSize(newMdCabinSize);
@@ -217,7 +439,7 @@ const App = () => {
           availableArea={availableArea}
           areas={areas}
           areaValues={areaValues}
-          totalMdCabinArea={totalMdCabinArea} 
+          totalMdCabinArea={totalMdCabinArea}
         />
         <div className="--sections">
           <OpenWorkspaces
@@ -248,7 +470,27 @@ const App = () => {
         </div>
       )}
       <Tooltip />
-
+      <button className="generate-boq-button" onClick={handleGenerateBOQ}>
+        Generate BOQ
+        <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+        </svg>
+        <svg className="star-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+        </svg>
+        <svg className="star-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+        </svg>
+        <svg className="star-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+        </svg>
+        <svg className="star-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+        </svg>
+        <svg className="star-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+        </svg>
+      </button>
     </div>
   );
 };
