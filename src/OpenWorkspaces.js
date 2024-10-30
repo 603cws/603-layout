@@ -43,7 +43,7 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
 
   const handleDecrement = (type) => {
     const newValue = (areas[type] || 0) - 1;
-    if (newValue >= -1) {
+    if (newValue >= 0) {
       updateAreas(type, newValue);
     } else {
       //alert("Negative values are not allowed.");

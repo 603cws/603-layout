@@ -79,31 +79,7 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
           </div>
         )}
       </div>
-      {/* <div className="button-container">
-        <button
-          onClick={handleSubmit}
-          title="Click to set the area"
-          aria-label="Set Area Button"
-          data-tip="Click to set the total area"
-          className="set-area-button"
-        >
-          <div className="bgContainer">
-            <span>Set Area</span>
-          </div>
-          <div className="arrowContainer">
-            {/* Add your SVG or arrow icon here *
-          </div>
-        </button>
-        <button 
-          onClick={handleReset} 
-          title="Click to reset the area input"
-          aria-label="Reset Area Button"
-          data-tip="Click to reset the area input"
-          className="reset-btn"
-        >
-          Reset
-        </button>       
-      </div> */}
+      
       <button className="generate-boq-button" onClick={handleGenerateBOQ}>
         Generate BOQ
         <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

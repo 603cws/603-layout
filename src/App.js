@@ -36,6 +36,7 @@ const initialAreaValues = {
   breakoutRoom: 80,
   executiveWashroom: 60,
   videoRecordingRoom: 80,
+  other:1,
 };
 
 const initialAreas = {
@@ -62,6 +63,7 @@ const initialAreas = {
   breakoutRoom: 0,
   executiveWashroom: 0,
   videoRecordingRoom: 0,
+  other:0,
 };
 
 const MAX_AREA = 25000;
@@ -290,6 +292,10 @@ const calculateExecutiveWashroom = (totalArea) => {
     return 0;
   }
 };
+const calculateOther = () => {
+  return 0;
+};
+
 
 const App = () => {
   const [totalArea, setTotalArea] = useState(0);
@@ -300,6 +306,7 @@ const App = () => {
   const [showModal, setShowModal] = useState(false);
   const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md);
   const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // Define totalMdCabinArea
+  
 
   useEffect(() => {
     const linear = calculateLinear(totalArea);
@@ -319,6 +326,7 @@ const App = () => {
     const executiveWashroom = calculateExecutiveWashroom(totalArea);
     const receptionArea = calculateReceptionArea(totalArea);
     const loungeArea = calculateLoungeArea(totalArea);
+    const otherArea=calculateOther(totalArea);
     setAreas((prevAreas) => ({
       ...prevAreas,
       linear: Math.round(linear / areaValues.linear),
@@ -338,6 +346,7 @@ const App = () => {
       executiveWashroom: executiveWashroom / areaValues.executiveWashroom,
       reception: receptionArea / areaValues.reception,
       lounge: loungeArea / areaValues.lounge,
+      other:otherArea / areaValues.other,
     }));
   }, [totalArea, areaValues]);
 

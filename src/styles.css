@@ -71,8 +71,9 @@ input[type="number"] {
   overflow: hidden; /* Hide both vertical and horizontal scrollbars */
   padding-right: 30px; /* Added right padding to create space for scrollbar */
   white-space: normal;  /* Allow line breaks */
-  width: 100%; /* Ensure it takes full width */
+  max-width: 100%; /* Ensure it takes full width */
   box-sizing: border-box; /* Include padding in width calculation */
+  overflow-x: hidden;
 }
 
 section {
@@ -81,9 +82,9 @@ section {
   border-bottom: 1px solid #ddd; /* Kept the bottom border */
   background-color: #f0f0f0; /* Grey background for section boxes */
   border-radius: 3px; /* Reduced border radius for less rounded corners */
-  width: 100%; /* Ensure the section takes up the full width of its container */
+  max-width: 100%; /* Ensure the section takes up the full width of its container */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  /* Prevent horizontal scrolling */
 }
 section * {
   max-width: 100%; /* Ensure child elements do not exceed the width of the section */
@@ -130,7 +131,7 @@ section h3 {
   display: flex;
   flex-wrap: nowrap; /* Prevent wrapping */
   overflow-x: auto; /* Enable horizontal scrolling */
-  padding-left: 20px; /* Add padding to shift workspaces to the right */
+  padding-left: 20px;/* Add padding to shift workspaces to the right */
 }
 
 
@@ -139,7 +140,7 @@ section h3 {
   flex-direction: column; /* Stack children vertically */
   align-items: center; /* Center children horizontally */
   margin-bottom: 30px; 
-  margin-right: 20px; /* Adjust the margin as needed */
+  margin-right: 10px;/*  Adjust the margin as needed */
 }
 
 .workspace img {
@@ -717,7 +718,7 @@ span {
 /* Media Queries for Responsiveness */
 @media (max-width:1024px){
   .grid{
-    grid-template-columns: repeat(2, 1fr) !important; 
+    /* grid-template-columns: repeat(2, 1fr) !important;  */
   }
 }
 
@@ -850,8 +851,8 @@ span {
     font-size: 16px;
   }
   .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    display: flex;
+    /* grid-template-columns: repeat(2, 1fr); 2 columns */
     gap: 16px; /* Adjust the gap as needed */
   }
   .section-heading{
@@ -898,6 +899,11 @@ span {
   }
   .seats-description{
     font-size: 13px;
+  }
+
+  /*Bottom Dots*/
+  .legend-container{
+    width: 100vw;
   }
   
 }
@@ -1071,10 +1077,13 @@ span {
 
 /* Mobile S (320px) */
 @media (max-width: 320px) {
-  .btn {
-    padding: 8px 16px;
-    font-size: 12px;
-    width: 100%; /* Full width on small mobile */
+  .flexbox-container{
+    flex-direction: column !important;
+  }
+  .cabins-grid .grid{
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between;
   }
 }
 
@@ -1088,18 +1097,14 @@ span {
 }
 
 /* Mobile L (425px) */
-@media (max-width: 425px) {
+@media (max-width: 426px) {
  .size-input-container{
   width: 100% !important;
  }
  .area-input{
   width: 100% ;
  }
-  .btn {
-    padding: 12px 20px;
-    font-size: 15px;
-    width: 100%; /* Full width on large mobile */
-  }
+
   .set-area-input::placeholder{
     font-size: 15px !important;
   }
@@ -1126,17 +1131,13 @@ span {
     height: 100% !important;
   }
   /*grid mobile view*/
-  .grid{
-    display: flex;
-    flex-direction: row;
-  }
-  
-  
 
+  
+  
   /*Open workspace mobile view css*/
   .workspace{
-    height: 150px;
-    width: 50%;
+    height: auto;
+    width: 40%;
   }
   .workspace img{
     height: 100px;
@@ -1166,6 +1167,13 @@ span {
   }
 
   /*Cabins Mobile view CSS*/
+  .grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0;
+  }
+
   .cabins-grid.workspace{
     height: 150px;
     width: 40%;
@@ -1181,6 +1189,16 @@ span {
     font-size: 12px;
   }
 
+  .other-area-input input{
+    width: 90%;
+  }
+  .other-area-input input::placeholder{
+    font-size: 11px;
+  }
+  .other-area-input{
+    font-size: 12px;
+  }
+
   /*Meeting room mobile view css*/
  
   .meeting-rooms-grid.workspace{
@@ -1190,6 +1208,14 @@ span {
   .meeting-rooms-grid.workspace img{
     height: 100px;
     width: 100%;
+  }
+  .legend-container{
+    position: absolute;
+    top: 10%;
+    background: #fff;
+  }
+  .legend-item{
+    margin: 20px;
   }
   
  
@@ -1404,4 +1430,18 @@ span {
 }
 .reset-cross:hover{
   opacity: 100%;
+}
+.info-button{
+  border-radius: 50%;
+  border: 1px solid ;
+  cursor: pointer;
+}
+@keyframes blink {
+  0% { scale: 1; }
+  50% { scale: 1.2; }
+  100% { scale: 1; }
+}
+
+.blink {
+  animation: blink 1s infinite;
 }
