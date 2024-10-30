@@ -33,7 +33,7 @@ const Radio = ({ selectedValue, onChange }) => {
             checked={selectedValue === "xl"}
             onChange={onChange}
           />
-          <span className="name">X Large</span>
+          <span className="name">X L</span>
         </label>
       </div>
     </StyledWrapper>

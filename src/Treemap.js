@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import './styles.css';
 
@@ -26,47 +26,49 @@ const fullNames = {
   financeRoom: "Finance Room",
   executiveWashroom: "Executive Washroom",
   breakoutRoom: "Breakout Room",
-  videoRecordingRoom: "Video Recording Room"
+  videoRecordingRoom: "Video Recording Room",
+  other: "Other" // Add new category here
 };
 
 const Treemap = ({ totalArea, areas, areaValues }) => {
+  const [hoveredArea, setHoveredArea] = useState(null);
+  const [isLegendVisible, setIsLegendVisible]=useState(false);
+
   const colors = {
-    'Linear Workspace': '#6495ED', // Cornflower Blue
-    'L-Type Workspace': '#4169E1', // Royal Blue
-    'MD Cabin': '#FF6347', // Tomato Red
-    'Manager Cabin': '#FF7F50', // Coral
-    'Small Cabin': '#FFC0CB', // Light Pink
-    'UPS Room': '#20B2AA', // Light Sea Green
-    'BMS Room': '#008080', // Teal
-    'Server Room': '#40E0D0', // Turquoise
-    'Reception': '#ADD8E6', // Light Blue
-    'Lounge/Pantry': '#E6E6FA', // Lavender
-    'Fitness Zone': '#E6E6FA', // Lavender
-    'Sales Team': '#9370DB', // Medium Purple
-    'Phone Booth': '#BA55D3', // Orchid
-    'Discussion Room': '#3CB371', // Medium Sea Green
-    'Interview Room': '#32CD32', // Lime Green
-    'Conference Room': '#FFD700', // Gold
-    'Board Room': '#FFE4B5', // Moccasin
-    'Meeting Room': '#FA8072', // Salmon
-    'Meeting Room (Large)': '#FFDAB9', // Peach Puff
-    'HR Room': '#90EE90', // Light Green
-    'Finance Room': '#5F9EA0', // Cadet Blue
-    'Available Space': '#D3D3D3' // Light Grey
+    'Linear Workspace': '#6495ED',
+    'L-Type Workspace': '#4169E1',
+    'MD Cabin': '#FF6347',
+    'Manager Cabin': '#FF7F50',
+    'Small Cabin': '#FFC0CB',
+    'UPS Room': '#20B2AA',
+    'BMS Room': '#008080',
+    'Server Room': '#40E0D0',
+    'Reception': '#ADD8E6',
+    'Lounge/Pantry': '#E6E6FA',
+    'Fitness Zone': '#E6E6FA',
+    'Sales Team': '#9370DB',
+    'Phone Booth': '#BA55D3',
+    'Discussion Room': '#3CB371',
+    'Interview Room': '#32CD32',
+    'Conference Room': '#FFD700',
+    'Board Room': '#FFE4B5',
+    'Meeting Room': '#FA8072',
+    'Meeting Room (Large)': '#FFDAB9',
+    'HR Room': '#90EE90',
+    'Finance Room': '#5F9EA0',
+    'Available Space': '#D3D3D3',
+    'Other': '#FF69B4' // Color for the "Other" category
   };
 
-  // Ensure totalArea is greater than zero to prevent division by zero
-  const validTotalArea = totalArea > 0 ? totalArea : 4000; // Set default to 4000 sq ft
-
-  // Calculate the built area and available area
+  const validTotalArea = totalArea > 0 ? totalArea : 4000;
   const builtArea = Object.keys(areas).reduce((acc, key) => acc + areas[key] * areaValues[key], 0);
   const availableArea = validTotalArea - builtArea;
 
   const series = [
     ...Object.keys(areas).map(key => ({
-      x: fullNames[key] || key, // Fallback to key if fullNames[key] is undefined
+      x: fullNames[key] || key,
       y: areas[key] * areaValues[key],
-      fillColor: colors[fullNames[key]] || '#000000' // Fallback color
+      fillColor: colors[fullNames[key]] || '#000000'
     })),
     {
       x: 'Available Space',
@@ -81,12 +83,16 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
       height: 350,
       toolbar: {
         show: true
+      },
+      events: {
+        dataPointMouseEnter: (event, chartContext, config) => {
+          const hoveredLabel = config.w.config.series[0].data[config.dataPointIndex].x;
+          setHoveredArea(hoveredLabel);
+        },
+        dataPointMouseLeave: () => {
+          setHoveredArea(null);
+        }
       }
-    },
-    legend: {
-      show: true,
-      position: 'bottom',
-      horizontalAlign: 'center'
     },
     title: {
       text: 'Area Distribution of Workspaces',
@@ -105,11 +111,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     },
     tooltip: {
       y: {
-        formatter: function (value) {
-          // const percentage = ((value / validTotalArea) * 100).toFixed(2);
-          // return `${percentage}% of total area`;
-          return `${value} sq ft of total area`;
-        }
+        formatter: (value) => `${value} sq ft`
       }
     },
     dataLabels: {
@@ -119,37 +121,95 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
         fontWeight: 'bold',
         colors: ['#FFFFFF']
       },
-      formatter: function (val, opts) {
-        // Check if the value is a number before applying toFixed
+      formatter: (val, opts) => {
         if (typeof val === 'number') {
           const percentage = ((val / validTotalArea) * 100).toFixed(2);
           return `${opts.w.globals.labels[opts.dataPointIndex]}: ${percentage}%`;
         }
-        return `${opts.w.globals.labels[opts.dataPointIndex]}: ${val}`; // Return raw value if not a number
+        return `${opts.w.globals.labels[opts.dataPointIndex]}: ${val}`;
       }
     }
   };
 
   const generateLegendItems = () => {
     return series
-      .filter(item => item.y > 0) // Only areas that are displayed in the chart
+      .filter(item => item.y > 0)
       .map(item => (
-        <div key={item.x} className="legend-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
-          <span className="legend-color" style={{ backgroundColor: item.fillColor, width: '20px', height: '20px', marginRight: '8px' }}></span>
-          <span className="legend-label">{item.x}</span>
+        <div
+          key={item.x}
+          className={`legend-item ${hoveredArea === item.x ? 'blink' : ''}`}
+          style={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            marginBottom: '4px'
+          }}
+          onMouseEnter={() => setHoveredArea(item.x)}
+          onMouseLeave={() => setHoveredArea(null)}
+        >
+          <span
+            className={`legend-color ${hoveredArea === item.x ? 'blink' : ''}`}
+            style={{
+              backgroundColor: item.fillColor,
+              width: '10px',
+              height: '10px',
+              marginRight: '8px',
+              borderRadius: '50%'
+            }}
+          ></span>
+          <span className="legend-label" style={{ fontSize: '13px' }}>
+            {item.x}
+          </span>
         </div>
       ));
   };
 
+  useEffect(()=>{
+    const handleResize=()=>{
+      if(window.innerWidth>426){
+        setIsLegendVisible(true);
+      }else{
+        setIsLegendVisible(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return()=>{
+    window.addEventListener('resize', handleResize);
+    };
+  },[]);
+
   return (
-    <div id="chart">
-      <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={550} />
-      <div className="legend-container" style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap' }}>
-        {generateLegendItems()}
-      </div>
+    <div id="chart" style={{ position: 'relative' }}>
+    <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={350} />
+    <button
+      className="arrow-button"
+      onClick={() => setIsLegendVisible(!isLegendVisible)}
+      style={{
+        position: 'absolute',
+        left: '10px',
+        top: '10px',
+        zIndex: 1,
+        display: window.innerWidth <= 425 ? 'block' : 'none',
+      }}
+    >
+      {isLegendVisible ? '←' : '→'}
+    </button>
+    <div
+      className="legend-container"
+      style={{
+        marginTop: '10px',
+        display: isLegendVisible ? 'flex' : 'none',
+        flexWrap:'wrap',
+        transition: 'transform 0.3s ease-in-out',
+        transform: isLegendVisible ? 'translateX(0)' : 'translateX(100%)',
+      }}
+    >
+      {generateLegendItems()}
     </div>
+  </div>
   );
 };
 
 export default Treemap;
-

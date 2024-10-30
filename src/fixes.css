@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box !important;
+}
+
 .--content {
   width: 100%;
   display: flex;
@@ -22,8 +26,9 @@
 .--sections::-webkit-scrollbar {
   display: none; /* Hide scrollbar in WebKit browsers */
 }
-@media(max-width:425px){
+@media(max-width:426px){
   .--sections{
     width: 100% !important;
+    overflow-x: hidden;
   }
 }
