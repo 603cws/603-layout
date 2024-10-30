@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 import Tooltip from './ToolTip';
 import BubbleSlider from './BubbleSlider';
+import InteractiveInputSlider from './InteractiveInputSlider';
 
 const workspaceDescriptions = {
   md: "This is the MD's cabin, designed for maximum comfort and productivity.",
@@ -10,7 +11,8 @@ const workspaceDescriptions = {
   small: "This is a small cabin, suitable for individual work.",
 };
 
-const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize }) => {
+const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinSize, setSmallCabinSize }) => {
+
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
@@ -85,9 +87,26 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize }) => {
                     onChange={handleSliderChange}
                     className="slider"
                   /> */}
-                  <BubbleSlider
+                  <InteractiveInputSlider
+                    updateAreas={updateAreas}
+                    name={"MD Cabin Size"}
                     value={mdCabinSize}
                     onChange={setMdCabinSize}
+                    min2={120}
+                    max2={240}
+                    step2={5}
+                  />
+                </div>
+              )}
+              {type === "small" && (
+                <div>
+                  <InteractiveInputSlider
+                    name={"Small Cabin Seat Count"}
+                    value={smallCabinSize}
+                    onChange={setSmallCabinSize}
+                    min2={0}
+                    max2={50}
+                    step2={2}
                   />
                 </div>
               )}

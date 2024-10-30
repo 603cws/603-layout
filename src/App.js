@@ -305,6 +305,7 @@ const App = () => {
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md);
+  const [smallCabinPeopleCount, setSmallCabinPeopleCount] = useState(0);
   const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // Define totalMdCabinArea
   
 
@@ -430,6 +431,9 @@ const App = () => {
     setMdCabinSize(newMdCabinSize);
   };
 
+  const handleSmallCabinPeopleCountChange = (newSmallCabinPeopleCount) => {
+    setSmallCabinPeopleCount(newSmallCabinPeopleCount);
+  };
   return (
     <div className="container">
       <AreaInput
@@ -459,6 +463,8 @@ const App = () => {
             updateAreas={updateAreas}
             mdCabinSize={mdCabinSize}
             setMdCabinSize={handleMdCabinAreaChange}
+            smallCabinSize={smallCabinPeopleCount}
+            setSmallCabinSize={handleSmallCabinPeopleCountChange}
           />
           <MeetingRooms areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
