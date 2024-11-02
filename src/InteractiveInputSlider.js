@@ -27,10 +27,19 @@ const InteractiveInputSlider = ({ name, value, onChange, min2, max2, step2 }) =>
 
     return (
         <div className="interactive-slider-container">
-            <label htmlFor="md-cabin-size">{name}: </label>
-
-            <button onClick={handleDecrement} className="slider-button">-</button>
+            <div className='interactive-slider-name'>
+            <label htmlFor={`${name}-input`}>{name}: </label>
+            </div>
+            <div className='interactive-slider-counter'>
+            <button
+                onClick={handleDecrement}
+                className="slider-button"
+                aria-label={`Decrease ${name}`}
+            >
+                -
+            </button>
             <input
+                id={`${name}-input`}
                 type="number"
                 min={min}
                 max={max}
@@ -38,11 +47,17 @@ const InteractiveInputSlider = ({ name, value, onChange, min2, max2, step2 }) =>
                 value={value}
                 onChange={handleInputChange}
                 className="slider-input"
+                aria-label={`${name} value`}
             />
-            <button onClick={handleIncrement} className="slider-button">+</button>
-            {/* <div className="progress-bar-container">
-                <div className="progress-bar" style={{ width: `${((value - min) / (max - min)) * 100}%` }}></div>
-            </div> */}
+            <button
+                onClick={handleIncrement}
+                className="slider-button"
+                aria-label={`Increase ${name}`}
+            >
+                +
+            </button>
+            </div>
+            
         </div>
     );
 };

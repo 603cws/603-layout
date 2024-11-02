@@ -6,7 +6,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.2rem;
+  gap: 0.5rem;
   height: 90%; /* Ensure the parent container has a height */
 }
 
@@ -19,8 +19,8 @@
   overflow-y: auto; /* Ensure vertical scrollbar is present */
   scrollbar-width: none; /* Hide scrollbar in Firefox */
   height: 80%; /* Ensure sections take full height of the parent */
-  overflow-x: auto;
-  padding: 0 5px;
+  overflow-x:hidden;
+  padding: 0;
 }
 
 .--sections::-webkit-scrollbar {

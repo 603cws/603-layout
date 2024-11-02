@@ -258,7 +258,7 @@ span {
   min-width: 200px;
   border: 0;
   border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   padding: 13px 15px;
   color: #ffff; /* Change text color to black */
@@ -273,7 +273,7 @@ span {
 }
 
 .flexbox-item:hover {
-  opacity: .95;
+  opacity: 0.95;
 }
 
 .flexbox-item .animation {
@@ -283,11 +283,15 @@ span {
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1),
+      0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1),
+      0 0 0 60px rgba(255, 255, 255, 0.1);
   }
 
   100% {
-    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1),
+      0 0 0 80px rgba(255, 255, 255, 0);
   }
 }
 /* Built Available Area Styles */
@@ -427,8 +431,9 @@ span {
   border-radius: 10px; /* Updated rounded corners */
   box-sizing: border-box; /* Include padding and border in width */
   margin-bottom: 10px; /* Space below the input box */
-  outline: 2px solid #FEBF00; /* Outline */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Font family */
+  outline: 2px solid #febf00; /* Outline */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; /* Font family */
   background-color: #f2efef; /* Background color */
   outline-offset: 3px; /* Outline offset */
   transition: 0.25s; /* Transition */
@@ -445,9 +450,9 @@ span {
 .calculator-icon {
   margin-right: 25px;
   margin-left: -60px;
-  margin-bottom: -58px; /* Adjust the margin as needed */
-  font-size: 45px; /* Adjust the size as needed */
-  color: #FFD43B; /* Adjust the color as needed */
+  margin-bottom: -60px; /* Adjust the margin as needed */
+  font-size: 60px; /* Adjust the size as needed */
+  color: #ffd43b; /* Adjust the color as needed */
   transition: transform 0.3s ease; /* Smooth transition for hover effect */
   border-radius: 10px;
   border: 0;
@@ -603,7 +608,8 @@ span {
   transition: background-color 0.3s ease;
 }
 
-.set-area-button:hover, .toggle-unit-button:hover {
+.set-area-button:hover,
+.toggle-unit-button:hover {
   background-color: #cc0000; /* Darker red on hover */
 }
 
@@ -714,6 +720,14 @@ span {
   margin-bottom: 20px; /* Space between subsections */
 }
 
+@media (min-width: 768px) {
+  .legend-container {
+    position: absolute;
+    top: 360px !important;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
 
 /* Media Queries for Responsiveness */
 @media (max-width:1024px){
@@ -892,8 +906,10 @@ span {
 
   /*Cabins Tablet view CSS*/
   .cabins-grid{
+    margin-bottom: 20px;
     gap: 50px !important;
   }
+ 
   .md-cabin-size{
     font-size: 13px !important;
   }
@@ -1076,37 +1092,18 @@ span {
 
 
 /* Mobile S (320px) */
-@media (max-width: 320px) {
-  .flexbox-container{
+@media (max-width: 321px) {
+  .flexbox-container {
     flex-direction: column !important;
   }
-  .cabins-grid .grid{
+  .cabins-grid{
     display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0;
+    gap: 0px !important;
   }
-  .workspace{
-    margin-right: 0px;
-  }
-  .slider-input{
-    font-size: 10px;
-  }
-  .interactive-slider-container{
-    font-size: 12px;
-    /* max-width: 75%; */
-    display: flex;
-    flex-direction: column;
-  }
-  .md-cabin-btn{
-    display: flex;
-    justify-content: space-evenly;
-  }
-  .slider-input{
-    max-height: 20px;
-  }
-  .slider-button{
-    font-size: 10px !important;
-    height:20px;
+  .error-message {
+    left: 7px !important;
   }
 }
 
@@ -1132,18 +1129,32 @@ span {
 
 /* Mobile L (425px) */
 @media (max-width: 426px) {
- .size-input-container{
-  width: 100% !important;
- }
- .area-input{
-  width: 100% ;
- }
+  .size-input-container {
+    width: 100% !important;
+  }
+  .area-input {
+    width: 100%;
+  }
+  .reset-cross {
+    font-size: 20px !important;
+    top: 15px !important;
+  }
 
   .set-area-input::placeholder{
     font-size: 15px !important;
   }
   .area-input{
     width: 75%;
+  }
+  .error-message {
+    font-size: 9px;
+    left: 0;
+    top: 9px;
+    font-weight: normal;
+    left: 10%;
+  }
+  .warning-icon {
+    font-size: 9px;
   }
   .flexbox-container{
     width: 100%;
@@ -1180,6 +1191,12 @@ span {
   .counter{
     width: 100%;
   }
+  .counter-value{
+    font-size: 13px;
+  }
+  .counter-btn{
+    font-size: 13px;
+  }
   .value-display {
     margin-top: 5px;
     font-weight: bold;
@@ -1191,7 +1208,7 @@ span {
   }
   .radio-inputs .radio .name{
     font-size: 12px;
-    padding: 5px !important;
+    padding: 5px 2px !important;
   }
   .value-display span{
     font-size: 12px;
@@ -1243,16 +1260,25 @@ span {
     height: 100px;
     width: 100%;
   }
-  .legend-container{
+  .legend-container {
+    height: 320px;
+    overflow-y: auto;
     position: absolute;
     top: 10%;
+    left: -100%; /* Start off the screen to the left */
     background: #fff;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
   .legend-item{
     margin: 20px;
   }
-  
- 
+  .legend-item span {
+    /* height: 10px; */
+    width: 10px;
+  }
 }
 
 /* Style for the Generate BOQ button */
@@ -1455,7 +1481,7 @@ span {
 .reset-cross {
   position: absolute;
   right: 20px;
-  font-family: 'FontAwesome';
+  font-family: "FontAwesome";
   font-size: 35px;
   cursor: pointer;
   top: 10px;
@@ -1471,9 +1497,15 @@ span {
   cursor: pointer;
 }
 @keyframes blink {
-  0% { scale: 1; }
-  50% { scale: 1.2; }
-  100% { scale: 1; }
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100% {
+    scale: 1;
+  }
 }
 
 .blink {

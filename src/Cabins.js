@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { } from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 import Tooltip from './ToolTip';
-import BubbleSlider from './BubbleSlider';
 import InteractiveInputSlider from './InteractiveInputSlider';
 
 const workspaceDescriptions = {
@@ -36,10 +35,7 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinSiz
     }
   };
 
-  const handleSliderChange = (event) => {
-    const newSize = parseInt(event.target.value, 10);
-    setMdCabinSize(newSize);
-  };
+ 
 
   return (
     <div className="section">

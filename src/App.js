@@ -307,6 +307,8 @@ const App = () => {
   const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md);
   const [smallCabinPeopleCount, setSmallCabinPeopleCount] = useState(0);
   const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // Define totalMdCabinArea
+  const [availableSpace, setAvailableSpace] = useState(1000); // Example initial value
+  const [builtSpace, setBuiltSpace] = useState(0); // Example initial value
   
 
   useEffect(() => {
@@ -328,11 +330,16 @@ const App = () => {
     const receptionArea = calculateReceptionArea(totalArea);
     const loungeArea = calculateLoungeArea(totalArea);
     const otherArea=calculateOther(totalArea);
+    const newTotalMdCabinArea=mdCabinSize * areas.md;
+    setTotalMdCabinArea(newTotalMdCabinArea);
+
+    
     setAreas((prevAreas) => ({
       ...prevAreas,
       linear: Math.round(linear / areaValues.linear),
       lType: lType / areaValues.lType,
-      md: md / areaValues.md,
+      // md: md / areaValues.md,
+      md:newTotalMdCabinArea / areaValues.md,
       manager: manager / areaValues.manager,
       small: small / areaValues.small,
       discussionRoom: discussionRoom / areaValues.discussionRoom,
@@ -348,18 +355,19 @@ const App = () => {
       reception: receptionArea / areaValues.reception,
       lounge: loungeArea / areaValues.lounge,
       other:otherArea / areaValues.other,
+      
     }));
   }, [totalArea, areaValues]);
 
   useEffect(() => {
     setTotalMdCabinArea(mdCabinSize * areas.md);
-  }, [mdCabinSize, areas.md]);
+  }, [mdCabinSize, areas.md, areaValues.md, areaValues]);
   
 
   const updateAreas = (type, value) => {
     const newAreas = {
       ...areas,
-      [type]: value,
+      [type]: value
     };
     const builtArea = Object.keys(newAreas).reduce(
       (acc, key) => acc + newAreas[key] * areaValues[key],
@@ -434,6 +442,10 @@ const App = () => {
   const handleSmallCabinPeopleCountChange = (newSmallCabinPeopleCount) => {
     setSmallCabinPeopleCount(newSmallCabinPeopleCount);
   };
+  const updateAvailableSpace = (size) => {
+    setAvailableSpace(prev => prev - size);
+    setBuiltSpace(prev => prev + size);
+};
   return (
     <div className="container">
       <AreaInput
@@ -465,6 +477,7 @@ const App = () => {
             setMdCabinSize={handleMdCabinAreaChange}
             smallCabinSize={smallCabinPeopleCount}
             setSmallCabinSize={handleSmallCabinPeopleCountChange}
+            updateAvailableSpace={updateAvailableSpace}
           />
           <MeetingRooms areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />

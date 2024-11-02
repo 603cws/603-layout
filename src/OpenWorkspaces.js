@@ -4,6 +4,7 @@ import Radio from './Radio'; // Ensure the correct path to Radio.js
 import './styles.css'; // Import the updated CSS file
 import Tooltip from './ToolTip'; // Import the Tooltip component
 
+
 const workspaceDescriptions = {
   linear: "This is a linear workspace, designed for open collaboration.",
   lType: "This is an L-type workspace, providing a semi-private environment.",

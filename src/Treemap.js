@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import './styles.css';
 
 const fullNames = {
@@ -56,6 +58,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     'Meeting Room (Large)': '#FFDAB9',
     'HR Room': '#90EE90',
     'Finance Room': '#5F9EA0',
+    'Executive Washroom': '#097969',
     'Available Space': '#D3D3D3',
     'Other': '#FF69B4' // Color for the "Other" category
   };
@@ -65,13 +68,17 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
   const availableArea = validTotalArea - builtArea;
 
   const series = [
-    ...Object.keys(areas).map(key => ({
-      x: fullNames[key] || key,
-      y: areas[key] * areaValues[key],
-      fillColor: colors[fullNames[key]] || '#000000'
-    })),
+    ...Object.keys(areas).map(key => {
+      const areaOccupied = areas[key] * areaValues[key];
+      const percentage = ((areaOccupied / validTotalArea) * 100).toFixed(2);
+      return {
+        x: `${fullNames[key] || key}: ${percentage}%`,
+        y: areaOccupied,
+        fillColor: colors[fullNames[key]] || '#000000'
+      };
+    }),
     {
-      x: 'Available Space',
+      x: `Available Space: ${((availableArea / validTotalArea) * 100).toFixed(2)}%`,
       y: availableArea,
       fillColor: colors['Available Space']
     }
@@ -124,7 +131,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
       formatter: (val, opts) => {
         if (typeof val === 'number') {
           const percentage = ((val / validTotalArea) * 100).toFixed(2);
-          return `${opts.w.globals.labels[opts.dataPointIndex]}: ${percentage}%`;
+          return `${opts.w.globals.labels[opts.dataPointIndex]} (${percentage}%)`;
         }
         return `${opts.w.globals.labels[opts.dataPointIndex]}: ${val}`;
       }
@@ -153,7 +160,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
               backgroundColor: item.fillColor,
               width: '10px',
               height: '10px',
-              marginRight: '8px',
+              marginRight: '10px',
               borderRadius: '50%'
             }}
           ></span>
@@ -163,6 +170,9 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
         </div>
       ));
   };
+  const toggleLegend = () => {
+    setIsLegendVisible(!isLegendVisible);
+  }
 
   useEffect(()=>{
     const handleResize=()=>{
@@ -185,29 +195,34 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={350} />
     <button
       className="arrow-button"
-      onClick={() => setIsLegendVisible(!isLegendVisible)}
+      onClick={() => toggleLegend(!isLegendVisible)}
       style={{
         position: 'absolute',
-        left: '10px',
-        top: '10px',
+        left: '-10px',
+        top: '200px',
+        opacity:'50%',
         zIndex: 1,
         display: window.innerWidth <= 425 ? 'block' : 'none',
       }}
     >
-      {isLegendVisible ? '←' : '→'}
+      <FontAwesomeIcon icon={isLegendVisible ? faChevronLeft : faChevronRight} />
     </button>
     <div
-      className="legend-container"
-      style={{
-        marginTop: '10px',
-        display: isLegendVisible ? 'flex' : 'none',
-        flexWrap:'wrap',
-        transition: 'transform 0.3s ease-in-out',
-        transform: isLegendVisible ? 'translateX(0)' : 'translateX(100%)',
-      }}
-    >
-      {generateLegendItems()}
-    </div>
+        className="legend-container"
+        style={{
+          transform: isLegendVisible ? 'translateX(0)' : 'translateX(-100%)', // Start hidden and slide in
+          transition: 'transform 1s ease-in-out',
+          position: 'absolute',
+          top: '10%',
+          left: '0',
+          background: '#fff',
+          padding: '10px',
+          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+          visibility: isLegendVisible ? 'visible' : 'hidden', // Fully hide off-screen
+        }}
+      >
+        {generateLegendItems()}
+      </div>
   </div>
   );
 };
