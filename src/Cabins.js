@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 import Tooltip from './ToolTip';
@@ -10,7 +10,7 @@ const workspaceDescriptions = {
   small: "This is a small cabin, suitable for individual work.",
 };
 
-const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinSize, setSmallCabinSize }) => {
+const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCount, setSmallCabinCount, smallCabinSize, setSmallCabinSize, totalArea, builtArea }) => {
 
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
@@ -34,8 +34,6 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinSiz
       //alert("Negative values are not allowed.");
     }
   };
-
- 
 
   return (
     <div className="section">
@@ -64,25 +62,29 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinSiz
                 )}
                 {type === "small" && (
                   <div className="seats-description">
-                    <strong>1 small cabin = 4 pax</strong>
+                    {/* <strong>1 small cabin = {areas["small"] * 4 + smallCabinCount} pax</strong> */}
                     <Tooltip text={`Size: 80 sq ft`} >
                       <button className="info-button">i</button>
                     </Tooltip>
+                    <InteractiveInputSlider
+                      name={"Seat Count"}
+                      value={smallCabinCount}
+                      onChange={setSmallCabinCount}
+                      min2={4}
+                      max2={18}
+                      step2={2}
+                      // areas={areas}
+                      // updateAreas={updateAreas}
+                      smallCabinSize={smallCabinSize}
+                      setSmallCabinSize={setSmallCabinSize}
+                      totalArea={totalArea}
+                      builtArea={builtArea}
+                    />
                   </div>
                 )}
               </div>
               {type === "md" && (
-                <div className="slider-container">
-                  {/* <label htmlFor="md-cabin-size">MD Cabin Size: {mdCabinSize} sq ft</label> */}
-                  {/* <input
-                    type="range"
-                    id="md-cabin-size"
-                    min="120"
-                    max="240"
-                    value={mdCabinSize}
-                    onChange={handleSliderChange}
-                    className="slider"
-                  /> */}
+                <div className="slider-container seats-description">
                   <InteractiveInputSlider
                     updateAreas={updateAreas}
                     name={"MD Cabin Size"}
@@ -91,18 +93,6 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinSiz
                     min2={120}
                     max2={240}
                     step2={5}
-                  />
-                </div>
-              )}
-              {type === "small" && (
-                <div>
-                  <InteractiveInputSlider
-                    name={"Small Cabin Seat Count"}
-                    value={smallCabinSize}
-                    onChange={setSmallCabinSize}
-                    min2={0}
-                    max2={50}
-                    step2={2}
                   />
                 </div>
               )}

@@ -36,7 +36,7 @@ const initialAreaValues = {
   breakoutRoom: 80,
   executiveWashroom: 60,
   videoRecordingRoom: 80,
-  other:1,
+  other: 1,
 };
 
 const initialAreas = {
@@ -63,7 +63,7 @@ const initialAreas = {
   breakoutRoom: 0,
   executiveWashroom: 0,
   videoRecordingRoom: 0,
-  other:0,
+  other: 0,
 };
 
 const MAX_AREA = 25000;
@@ -107,7 +107,7 @@ const calculateLoungeArea = (totalArea) => {
   }
 };
 
-const  calculateLinear = (totalArea) => {
+const calculateLinear = (totalArea) => {
   if (totalArea >= 1500 && totalArea <= 25000) {
     return Math.round(totalArea * 0.40);
   } else {
@@ -173,14 +173,18 @@ const calculateManager = (totalArea) => {
   }
 };
 
-const calculateSmall = (totalArea) => {
+const calculateSmall = (totalArea, handleSmallCabinPeopleCountChange) => {
   if (totalArea >= 1500 && totalArea < 3000) {
+    handleSmallCabinPeopleCountChange(4 * 1);
     return 80 * 1;
   } else if (totalArea >= 3000 && totalArea < 6000) {
+    handleSmallCabinPeopleCountChange(4 * 2);
     return 80 * 2;
   } else if (totalArea >= 6000 && totalArea < 9000) {
+    handleSmallCabinPeopleCountChange(4 * 3);
     return 80 * 3;
   } else if (totalArea >= 9000 && totalArea <= 25000) {
+    handleSmallCabinPeopleCountChange(4 * 4);
     return 80 * 4;
   } else {
     return 0;
@@ -305,18 +309,17 @@ const App = () => {
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md);
-  const [smallCabinPeopleCount, setSmallCabinPeopleCount] = useState(0);
+  const [smallCabinSize, setSmallCabinSize] = useState(areaValues.small); //not working as expected
+  const [smallCabinPeopleCount, setSmallCabinPeopleCount] = useState(4);
   const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // Define totalMdCabinArea
-  const [availableSpace, setAvailableSpace] = useState(1000); // Example initial value
-  const [builtSpace, setBuiltSpace] = useState(0); // Example initial value
-  
 
   useEffect(() => {
     const linear = calculateLinear(totalArea);
     const lType = calculateLType(totalArea);
     const md = calculateMd(totalArea);
     const manager = calculateManager(totalArea);
-    const small = calculateSmall(totalArea);
+    const small = calculateSmall(totalArea, handleSmallCabinPeopleCountChange);
+    setSmallCabinSize(small);
     const discussionRoom = calculateDiscussionRoom(totalArea);
     const interviewRoom = calculateInterviewRoom(totalArea);
     const conferenceRoom = calculateConferenceRoom(totalArea);
@@ -329,17 +332,12 @@ const App = () => {
     const executiveWashroom = calculateExecutiveWashroom(totalArea);
     const receptionArea = calculateReceptionArea(totalArea);
     const loungeArea = calculateLoungeArea(totalArea);
-    const otherArea=calculateOther(totalArea);
-    const newTotalMdCabinArea=mdCabinSize * areas.md;
-    setTotalMdCabinArea(newTotalMdCabinArea);
-
-    
+    const otherArea = calculateOther(totalArea);
     setAreas((prevAreas) => ({
       ...prevAreas,
       linear: Math.round(linear / areaValues.linear),
       lType: lType / areaValues.lType,
-      // md: md / areaValues.md,
-      md:newTotalMdCabinArea / areaValues.md,
+      md: md / areaValues.md,
       manager: manager / areaValues.manager,
       small: small / areaValues.small,
       discussionRoom: discussionRoom / areaValues.discussionRoom,
@@ -354,21 +352,20 @@ const App = () => {
       executiveWashroom: executiveWashroom / areaValues.executiveWashroom,
       reception: receptionArea / areaValues.reception,
       lounge: loungeArea / areaValues.lounge,
-      other:otherArea / areaValues.other,
-      
+      other: otherArea / areaValues.other,
     }));
   }, [totalArea, areaValues]);
 
   useEffect(() => {
     setTotalMdCabinArea(mdCabinSize * areas.md);
-  }, [mdCabinSize, areas.md, areaValues.md, areaValues]);
-  
+  }, [mdCabinSize, areas.md]);
 
   const updateAreas = (type, value) => {
     const newAreas = {
       ...areas,
       [type]: value
     };
+    setSmallCabinPeopleCount(newAreas.small * 4);
     const builtArea = Object.keys(newAreas).reduce(
       (acc, key) => acc + newAreas[key] * areaValues[key],
       0
@@ -406,6 +403,7 @@ const App = () => {
 
   const resetAll = () => {
     setTotalArea(0);
+    setSmallCabinPeopleCount(4);
     setAreas(initialAreas);
     setError(false);
     setShowModal(false); // Hide modal on reset
@@ -439,13 +437,21 @@ const App = () => {
     setMdCabinSize(newMdCabinSize);
   };
 
+  const handleSmallCabinAreaChange = (newSmallCabinSize) => {
+    const small = newSmallCabinSize;
+    setSmallCabinSize(small);
+    setAreas((prevAreas) => ({
+      ...prevAreas,
+      small: Math.round(small / areaValues.small)
+      // small: small,
+    }));
+
+  }
+
   const handleSmallCabinPeopleCountChange = (newSmallCabinPeopleCount) => {
     setSmallCabinPeopleCount(newSmallCabinPeopleCount);
   };
-  const updateAvailableSpace = (size) => {
-    setAvailableSpace(prev => prev - size);
-    setBuiltSpace(prev => prev + size);
-};
+
   return (
     <div className="container">
       <AreaInput
@@ -475,9 +481,12 @@ const App = () => {
             updateAreas={updateAreas}
             mdCabinSize={mdCabinSize}
             setMdCabinSize={handleMdCabinAreaChange}
-            smallCabinSize={smallCabinPeopleCount}
-            setSmallCabinSize={handleSmallCabinPeopleCountChange}
-            updateAvailableSpace={updateAvailableSpace}
+            smallCabinCount={smallCabinPeopleCount}
+            setSmallCabinCount={handleSmallCabinPeopleCountChange}
+            smallCabinSize={smallCabinSize}
+            setSmallCabinSize={handleSmallCabinAreaChange}
+            totalArea={totalArea}
+            builtArea={builtArea}
           />
           <MeetingRooms areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
