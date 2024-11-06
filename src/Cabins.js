@@ -10,7 +10,7 @@ const workspaceDescriptions = {
   small: "This is a small cabin, suitable for individual work.",
 };
 
-const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCount, setSmallCabinCount, smallCabinSize, setSmallCabinSize, totalArea, builtArea }) => {
+const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinConfig, totalArea, builtArea }) => {
 
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
@@ -68,15 +68,13 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCou
                     </Tooltip>
                     <InteractiveInputSlider
                       name={"Seat Count"}
-                      value={smallCabinCount}
-                      onChange={setSmallCabinCount}
+                      value={smallCabinConfig.seatCount}
+                      onChange={smallCabinConfig.setSeatCount}
                       min2={4}
                       max2={18}
                       step2={2}
-                      // areas={areas}
-                      // updateAreas={updateAreas}
-                      smallCabinSize={smallCabinSize}
-                      setSmallCabinSize={setSmallCabinSize}
+                      cabinSize={smallCabinConfig.roomSize}
+                      setCabinSize={smallCabinConfig.setRoomSize}
                       totalArea={totalArea}
                       builtArea={builtArea}
                     />

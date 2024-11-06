@@ -1,7 +1,7 @@
 import React from 'react';
 import './InteractiveInputSlider.css';
 
-const InteractiveInputSlider = ({ name, value, onChange, min2, max2, step2, smallCabinSize, setSmallCabinSize, totalArea, builtArea }) => {
+const InteractiveInputSlider = ({ name, value, onChange, min2, max2, step2, cabinSize, setCabinSize, totalArea, builtArea, type }) => {
     const min = min2;
     const max = max2;
     const step = step2;
@@ -11,14 +11,22 @@ const InteractiveInputSlider = ({ name, value, onChange, min2, max2, step2, smal
     const handleIncrement = () => {
         if (value < max && totalArea > 0 && builtArea <= usableArea) {
             onChange(value + step);
-            setSmallCabinSize(smallCabinSize + 40)
+            if (type === 'financeRoom') {
+                setCabinSize(cabinSize + 50)
+            } else {
+                setCabinSize(cabinSize + 40)
+            }
         }
     };
 
     const handleDecrement = () => {
         if (value > min && totalArea > 0) {
             onChange(value - step);
-            setSmallCabinSize(smallCabinSize - 40)
+            if (type === 'financeRoom') {
+                setCabinSize(cabinSize - 50)
+            } else {
+                setCabinSize(cabinSize - 40)
+            }
         }
     };
 
