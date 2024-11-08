@@ -115,236 +115,232 @@ const calculateLinear = (totalArea) => {
   }
 };
 
-const calculateLType = (totalArea) => {
+const calculateLType = (totalArea, areaValues) => {
   if (totalArea >= 9000 && totalArea < 12000) {
-    return 34 * 5;
+    return areaValues.lType * 5;
   } else if (totalArea >= 12000 && totalArea < 15000) {
-    return 34 * 10;
+    return areaValues.lType * 10;
   } else if (totalArea >= 15000 && totalArea < 18000) {
-    return 34 * 15;
+    return areaValues.lType * 15;
   } else if (totalArea >= 18000 && totalArea < 21000) {
-    return 34 * 20;
+    return areaValues.lType * 20;
   } else if (totalArea >= 21000 && totalArea <= 25000) {
-    return 34 * 25;
+    return areaValues.lType * 25;
   } else {
     return 0;
   }
 };
 
-const calculateMd = (totalArea) => {
+const calculateMd = (totalArea, areaValues) => {
   if (totalArea >= 1500 && totalArea < 6000) {
-    return 120 * 1;
+    return areaValues.md * 1;
   } else if (totalArea >= 6000 && totalArea < 9000) {
-    return 120 * 2;
+    return areaValues.md * 2;
   } else if (totalArea >= 9000 && totalArea < 12000) {
-    return 120 * 3;
+    return areaValues.md * 3;
   } else if (totalArea >= 12000 && totalArea < 15000) {
-    return 120 * 4;
+    return areaValues.md * 4;
   } else if (totalArea >= 15000 && totalArea < 18000) {
-    return 120 * 5;
+    return areaValues.md * 5;
   } else if (totalArea >= 18000 && totalArea < 21000) {
-    return 120 * 6;
+    return areaValues.md * 6;
   } else if (totalArea >= 21000 && totalArea <= 25000) {
-    return 120 * 7;
+    return areaValues.md * 7;
   } else {
     return 0;
   }
 };
 
-const calculateManager = (totalArea) => {
+const calculateManager = (totalArea, areaValues) => {
   if (totalArea >= 1500 && totalArea < 3000) {
-    return 80 * 1;
+    return areaValues.manager * 1;
   } else if (totalArea >= 3000 && totalArea < 6000) {
-    return 80 * 2;
+    return areaValues.manager * 2;
   } else if (totalArea >= 6000 && totalArea < 9000) {
-    return 80 * 3;
+    return areaValues.manager * 3;
   } else if (totalArea >= 9000 && totalArea < 12000) {
-    return 80 * 4;
+    return areaValues.manager * 4;
   } else if (totalArea >= 12000 && totalArea < 15000) {
-    return 80 * 5;
+    return areaValues.manager * 5;
   } else if (totalArea >= 15000 && totalArea < 18000) {
-    return 80 * 6;
+    return areaValues.manager * 6;
   } else if (totalArea >= 18000 && totalArea < 21000) {
-    return 80 * 7;
+    return areaValues.manager * 7;
   } else if (totalArea >= 21000 && totalArea <= 25000) {
-    return 80 * 8;
+    return areaValues.manager * 8;
   } else {
     return 0;
   }
 };
 
-const calculateSmall = (totalArea, handleSmallCabinPeopleCountChange) => {
+const calculateSmall = (totalArea, areaValues) => {
   if (totalArea >= 1500 && totalArea < 3000) {
-    handleSmallCabinPeopleCountChange(4 * 1);
-    return 80 * 1;
+    return areaValues.small * 1;
   } else if (totalArea >= 3000 && totalArea < 6000) {
-    handleSmallCabinPeopleCountChange(4 * 2);
-    return 80 * 2;
+    return areaValues.small * 2;
   } else if (totalArea >= 6000 && totalArea < 9000) {
-    handleSmallCabinPeopleCountChange(4 * 3);
-    return 80 * 3;
+    return areaValues.small * 3;
   } else if (totalArea >= 9000 && totalArea <= 25000) {
-    handleSmallCabinPeopleCountChange(4 * 4);
-    return 80 * 4;
+    return areaValues.small * 4;
   } else {
     return 0;
   }
 };
 
-const calculateDiscussionRoom = (totalArea) => {
+const calculateDiscussionRoom = (totalArea, areaValues) => {
   if (totalArea >= 12000 && totalArea <= 25000) {
-    return 380 * 1;
+    return areaValues.discussionRoom * 1;
   } else {
     return 0;
   }
 };
 
-const calculateInterviewRoom = (totalArea) => {
+const calculateInterviewRoom = (totalArea, areaValues) => {
   if (totalArea >= 6000 && totalArea < 12000) {
-    return 100 * 1;
+    return areaValues.interviewRoom * 1;
   } else if (totalArea >= 12000 && totalArea <= 25000) {
-    return 100 * 2;
+    return areaValues.interviewRoom * 2;
   } else {
     return 0;
   }
 };
 
-const calculateConferenceRoom = (totalArea) => {
+const calculateConferenceRoom = (totalArea, areaValues) => {
   if (totalArea >= 9000 && totalArea < 15000) {
-    return 250 * 2;
+    return areaValues.conferenceRoom * 2;
   } else if (totalArea >= 15000 && totalArea < 18000) {
-    return 250 * 3;
+    return areaValues.conferenceRoom * 3;
   } else if (totalArea >= 18000 && totalArea < 21000) {
-    return 250 * 4;
+    return areaValues.conferenceRoom * 4;
   } else if (totalArea >= 21000 && totalArea <= 25000) {
-    return 250 * 5;
+    return areaValues.conferenceRoom * 5;
   } else {
     return 0;
   }
 };
 
-const calculateBoardRoom = (totalArea) => {
+const calculateBoardRoom = (totalArea, areaValues) => {
   if (totalArea >= 12000 && totalArea <= 25000) {
-    return 325 * 1;
+    return areaValues.boardRoom * 1;
   } else {
     return 0;
   }
 };
 
-const calculateMeetingRoom = (totalArea) => {
+const calculateMeetingRoom = (totalArea, areaValues) => {
   if (totalArea >= 1500 && totalArea < 3000) {
-    return 100 * 1;
+    return areaValues.meetingRoom * 1;
   } else if (totalArea >= 3000 && totalArea < 6000) {
-    return 100 * 2;
+    return areaValues.meetingRoom * 2;
   } else if (totalArea >= 6000 && totalArea < 9000) {
-    return 100 * 3;
+    return areaValues.meetingRoom * 3;
   } else if (totalArea >= 9000 && totalArea < 12000) {
-    return 100 * 4;
+    return areaValues.meetingRoom * 4;
   } else if (totalArea >= 12000 && totalArea <= 25000) {
-    return 100 * 6;
+    return areaValues.meetingRoom * 6;
   } else {
     return 0;
   }
 };
 
-const calculateMeetingRoomLarge = (totalArea) => {
+const calculateMeetingRoomLarge = (totalArea, areaValues) => {
   if (totalArea >= 15000 && totalArea <= 25000) {
-    return 120 * 2;
+    return areaValues.meetingRoomLarge * 2;
   } else {
     return 0;
   }
 };
 
-const calculateVideoRecordingRoom = (totalArea) => {
+const calculateVideoRecordingRoom = (totalArea, areaValues) => {
   if (totalArea >= 15000 && totalArea <= 25000) {
-    return 80 * 1;
+    return areaValues.videoRecordingRoom * 1;
   } else {
     return 0;
   }
 };
 
-const calculatePhoneBooth = (totalArea) => {
+const calculatePhoneBooth = (totalArea, areaValues) => {
   if (totalArea >= 3000 && totalArea < 9000) {
-    return 25 * 2;
+    return areaValues.phoneBooth * 2;
   } else if (totalArea >= 9000 && totalArea < 18000) {
-    return 25 * 4;
+    return areaValues.phoneBooth * 4;
   } else if (totalArea >= 18000 && totalArea <= 25000) {
-    return 25 * 8;
+    return areaValues.phoneBooth * 8;
   } else {
     return 0;
   }
 };
 
-const calculateServer = (totalArea) => {
+const calculateServer = (totalArea, areaValues) => {
   if (totalArea >= 1500 && totalArea < 6000) {
-    return 40 * 1;
+    return areaValues.server * 1;
   } else if (totalArea >= 6000 && totalArea < 12000) {
-    return 40 * 2;
+    return areaValues.server * 2;
   } else if (totalArea >= 12000 && totalArea < 18000) {
-    return 40 * 4;
+    return areaValues.server * 4;
   } else if (totalArea >= 18000 && totalArea <= 25000) {
-    return 40 * 8;
+    return areaValues.server * 8;
   } else {
     return 0;
   }
 };
 
-const calculateExecutiveWashroom = (totalArea) => {
+const calculateExecutiveWashroom = (totalArea, areaValues) => {
   if (totalArea >= 9000 && totalArea <= 25000) {
-    return 60 * 2;
+    return areaValues.executiveWashroom * 2;
   } else {
     return 0;
   }
 };
-const calculateOther = () => {
-  return 0;
-};
-
 
 const App = () => {
   const [totalArea, setTotalArea] = useState(0);
+  const [builtArea, setBuiltArea] = useState(0);
+  const [availableArea, setAvailableArea] = useState(0);
   const [areas, setAreas] = useState(initialAreas);
   const [areaValues, setAreaValues] = useState(initialAreaValues);
   const [variant, setVariant] = useState("large");
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md);
+  const [mdCabinSize, setMdCabinSize] = useState(areaValues.md);
+  const [breakoutRoomSize, setBreakoutRoomSize] = useState(areaValues.breakoutRoom);
+  const [videoRecordingRoomSize, setVideoRecordingRoomSize] = useState(areaValues.videoRecordingRoom);
   const [smallCabinSize, setSmallCabinSize] = useState(areaValues.small);
   const [hrRoomSize, setHrRoomSize] = useState(areaValues.hrRoom);
-  const [salesRoomSize, setSalesRoomSize] = useState(areaValues.hrRoom);
-  const [financeRoomSize, setFinanceRoomSize] = useState(areaValues.financeRoom);
-  const [smallCabinSeatCount, setSmallCabinSeatCount] = useState(4);
-  const [hrRoomSeatCount, setHrRoomSeatCount] = useState(4);
-  const [salesSeatCount, setSalesSeatCount] = useState(4);
-  const [financeRoomSeatCount, setFinanceRoomSeatCount] = useState(4);
-  const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // Define totalMdCabinArea
+  const [salesRoomSize, setSalesRoomSize] = useState(areaValues.sales);
+  const [financeRoomSize,setFinanceRoomSize] = useState(areaValues.financeRoom);
+  const [smallCabinSeatCount, setSmallCabinSeatCount] = useState(0);
+  const [hrRoomSeatCount, setHrRoomSeatCount] = useState(0);
+  const [salesSeatCount, setSalesSeatCount] = useState(0);
+  const [financeRoomSeatCount, setFinanceRoomSeatCount] = useState(0);
   const [finalData, setFinalData] = useState(areas);
+  const [isOtherSelected, setIsOtherSelected] = useState(false); 
 
   useEffect(() => {
     const linear = calculateLinear(totalArea);
-    const lType = calculateLType(totalArea);
-    const md = calculateMd(totalArea);
-    const manager = calculateManager(totalArea);
-    const small = calculateSmall(totalArea, handleSmallCabinPeopleCountChange);
-    setSmallCabinSize(small);
-    const discussionRoom = calculateDiscussionRoom(totalArea);
-    const interviewRoom = calculateInterviewRoom(totalArea);
-    const conferenceRoom = calculateConferenceRoom(totalArea);
-    const boardRoom = calculateBoardRoom(totalArea);
-    const meetingRoom = calculateMeetingRoom(totalArea);
-    const meetingRoomLarge = calculateMeetingRoomLarge(totalArea);
-    const videoRecordingRoom = calculateVideoRecordingRoom(totalArea);
-    const phoneBooth = calculatePhoneBooth(totalArea);
-    const server = calculateServer(totalArea);
-    const executiveWashroom = calculateExecutiveWashroom(totalArea);
+    const lType = calculateLType(totalArea, areaValues);
+    const md = calculateMd(totalArea, areaValues);
+    const manager = calculateManager(totalArea, areaValues);
+    const small = calculateSmall(totalArea, areaValues);
+    const discussionRoom = calculateDiscussionRoom(totalArea, areaValues);
+    const interviewRoom = calculateInterviewRoom(totalArea, areaValues);
+    const conferenceRoom = calculateConferenceRoom(totalArea, areaValues);
+    const boardRoom = calculateBoardRoom(totalArea, areaValues);
+    const meetingRoom = calculateMeetingRoom(totalArea, areaValues);
+    const meetingRoomLarge = calculateMeetingRoomLarge(totalArea, areaValues);
+    const videoRecordingRoom = calculateVideoRecordingRoom(totalArea, areaValues);
+    const phoneBooth = calculatePhoneBooth(totalArea, areaValues);
+    const server = calculateServer(totalArea, areaValues);
+    const executiveWashroom = calculateExecutiveWashroom(totalArea, areaValues);
     const receptionArea = calculateReceptionArea(totalArea);
     const loungeArea = calculateLoungeArea(totalArea);
-    const otherArea = calculateOther(totalArea);
+    const otherArea = 0;
+
     setAreas((prevAreas) => ({
       ...prevAreas,
       linear: Math.round(linear / areaValues.linear),
       lType: lType / areaValues.lType,
-      md: md / areaValues.md,
+      md: Math.round(md / areaValues.md),
       manager: manager / areaValues.manager,
       small: small / areaValues.small,
       discussionRoom: discussionRoom / areaValues.discussionRoom,
@@ -361,22 +357,29 @@ const App = () => {
       lounge:Math.round (loungeArea / areaValues.lounge),
       other: otherArea / areaValues.other,
     }));
-  }, [totalArea, areaValues]);
+  }, [totalArea]);
 
+  // Calculate builtArea and set it to state
   useEffect(() => {
-    setTotalMdCabinArea(mdCabinSize * areas.md);
-  }, [mdCabinSize, areas.md]);
+    const calculatedBuiltArea = Object.keys(areas).reduce(
+      (acc, key) => acc + areas[key] * areaValues[key],
+      0
+    );
+    setBuiltArea(calculatedBuiltArea);
+  }, [areas, areaValues]); 
+
+  // Calculate availableArea based on totalArea and builtArea
+  useEffect(() => {
+    setAvailableArea(totalArea - builtArea);
+  }, [totalArea, builtArea]);
 
   const updateAreas = (type, value) => {
     const newAreas = {
       ...areas,
       [type]: value
     };
-    setSmallCabinSeatCount(newAreas.small * 4);
-    setHrRoomSeatCount(newAreas.hrRoom * 4);
-    setSalesSeatCount(newAreas.sales * 4);
-    setFinanceRoomSeatCount(newAreas.financeRoom * 4);
-    const builtArea = Object.keys(newAreas).reduce(
+    
+    const calculatedBuiltArea = Object.keys(newAreas).reduce(
       (acc, key) => acc + newAreas[key] * areaValues[key],
       0
     );
@@ -384,7 +387,8 @@ const App = () => {
     const freeSpace = totalArea * 0.05; // 5% of totalArea
     const usableArea = totalArea - freeSpace; // Area available for building
 
-    if (builtArea <= usableArea) {
+    if (calculatedBuiltArea <= usableArea) {
+      setBuiltArea(calculatedBuiltArea); // Only update builtArea and areas if valid
       setAreas(newAreas);
       setError(false);
       setShowModal(false);
@@ -413,9 +417,10 @@ const App = () => {
 
   const resetAll = () => {
     setTotalArea(0);
-    setSmallCabinSeatCount(4);
-    setHrRoomSeatCount(4);
-    setSalesSeatCount(4);
+    setSmallCabinSeatCount(0);
+    setHrRoomSeatCount(0);
+    setSalesSeatCount(0);
+    setFinanceRoomSeatCount(0);
     setAreas(initialAreas);
     setError(false);
     setShowModal(false); // Hide modal on reset
@@ -439,34 +444,27 @@ const App = () => {
     setAreaValues(newAreaValues);
   };
 
-  const builtArea = Object.keys(areas).reduce(
-    (acc, key) => acc + areas[key] * areaValues[key],
-    0
-  );
-  const availableArea = totalArea - builtArea;
-
-  const handleMdCabinAreaChange = (newMdCabinSize) => {
-    setMdCabinSize(newMdCabinSize);
-  };
-
-  const handleRoomAreaChange = (roomType, setRoomSize, areaKey) => (newCabinSize) => {
+  const handleRoomAreaChange = (roomType, setRoomSize) => (newCabinSize) => {
     setRoomSize(newCabinSize);
-    setAreas((prevAreas) => ({
-      ...prevAreas,
-      [roomType]: Math.round(newCabinSize / areaValues[areaKey]),
+    setAreaValues((prevAreaValues) => ({
+      ...prevAreaValues,
+      [roomType]: newCabinSize,
     }));
   };
 
-  const handleSmallCabinAreaChange = handleRoomAreaChange("small", setSmallCabinSize, "small");
-  const handleHrRoomAreaChange = handleRoomAreaChange("hrRoom", setHrRoomSize, "hrRoom");
-  const handleSalesRoomAreaChange = handleRoomAreaChange("sales", setSalesRoomSize, "sales");
-  const handleFinanceRoomAreaChange = handleRoomAreaChange("financeRoom", setFinanceRoomSize, "financeRoom");
+  const handleMdCabinAreaChange = handleRoomAreaChange("md", setMdCabinSize);
+  const handleSmallCabinAreaChange = handleRoomAreaChange("small", setSmallCabinSize);
+  const handleHrRoomAreaChange = handleRoomAreaChange("hrRoom", setHrRoomSize);
+  const handleSalesRoomAreaChange = handleRoomAreaChange("sales", setSalesRoomSize);
+  const handleFinanceRoomAreaChange = handleRoomAreaChange("financeRoom", setFinanceRoomSize);
+  const handleBreakoutRoomAreaChange = handleRoomAreaChange("breakoutRoom", setBreakoutRoomSize);
+  const handleVideoRecordingRoomAreaChange = handleRoomAreaChange("videoRecordingRoom",setVideoRecordingRoomSize);
 
   const handleSeatCountChange = (setter) => (newCount) => {
     setter(newCount);
   };
 
-  const handleSmallCabinPeopleCountChange = handleSeatCountChange(setSmallCabinSeatCount);
+  const handleSmallCabinSeatCountChange = handleSeatCountChange(setSmallCabinSeatCount);
   const handleHrRoomSeatCountChange = handleSeatCountChange(setHrRoomSeatCount);
   const handleSalesRoomSeatCountChange = handleSeatCountChange(setSalesSeatCount);
   const handleFinanceRoomSeatCountChange = handleSeatCountChange(setFinanceRoomSeatCount);
@@ -494,7 +492,7 @@ const App = () => {
 
   const smallCabinConfig = {
     seatCount: smallCabinSeatCount,
-    setSeatCount: handleSmallCabinPeopleCountChange,
+    setSeatCount: handleSmallCabinSeatCountChange,
     roomSize: smallCabinSize,
     setRoomSize: handleSmallCabinAreaChange,
   };
@@ -504,7 +502,6 @@ const App = () => {
     builtArea,
   };
   
-
   return (
     <div className="container">
       <AreaInput
@@ -519,7 +516,7 @@ const App = () => {
         setFinalData={setFinalData}
         showModal={showModal}
         setShowModal={setShowModal}
-
+        isOtherSelected={isOtherSelected}
       />
       <div className="--content">
         <Treemap
@@ -528,32 +525,30 @@ const App = () => {
           availableArea={availableArea}
           areas={areas}
           areaValues={areaValues}
-          totalMdCabinArea={totalMdCabinArea}
+          totalMdCabinArea={mdCabinSize}
         />
         <div className="--sections">
           <OpenWorkspaces
-            areas={areas}
-            updateAreas={updateAreas}
-            variant={variant}
-            onVariantChange={handleVariantChange}
+            areas={areas} updateAreas={updateAreas}
+            variant={variant} onVariantChange={handleVariantChange}
           />
           <Cabins
-            areas={areas}
-            updateAreas={updateAreas}
-            mdCabinSize={mdCabinSize}
-            setMdCabinSize={handleMdCabinAreaChange}
-            smallCabinConfig={smallCabinConfig}
-            totalArea={totalArea}
-            builtArea={builtArea}
+            areas={areas} updateAreas={updateAreas}
+            mdCabinSize={mdCabinSize} setMdCabinSize={handleMdCabinAreaChange}
+            smallCabinConfig={smallCabinConfig} totalArea={totalArea} 
+            builtArea={builtArea} initialAreaValues={initialAreaValues}
           />
           <MeetingRooms areas={areas} updateAreas={updateAreas}
             hrRoomConfig={hrRoomConfig} salesRoomConfig={salesRoomConfig}
-            financeRoomConfig={financeRoomConfig} areaInfo={areaInfo}
+            financeRoomConfig={financeRoomConfig} areaInfo={areaInfo} initialAreaValues={initialAreaValues}
+            videoRecordingRoomSize={videoRecordingRoomSize} setVideoRecordingRoomSize={handleVideoRecordingRoomAreaChange}
           />
-          <PublicSpaces areas={areas} updateAreas={updateAreas} />
-          <SupportSpaces areas={areas} updateAreas={updateAreas}
-            areaValues={areaValues}
+          <PublicSpaces areas={areas} updateAreas={updateAreas} 
+          breakoutRoomSize={breakoutRoomSize} setBreakoutRoomSize={handleBreakoutRoomAreaChange} 
+          totalArea={totalArea} builtArea={builtArea} initialAreaValues={initialAreaValues}
           />
+          <SupportSpaces areas={areas} updateAreas={updateAreas} areaValues={areaValues} 
+          isOtherSelected={isOtherSelected} setIsOtherSelected={setIsOtherSelected} />
         </div>
       </div>
       {showModal && (

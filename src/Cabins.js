@@ -10,7 +10,7 @@ const workspaceDescriptions = {
   small: "This is a small cabin, suitable for individual work.",
 };
 
-const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinConfig, totalArea, builtArea }) => {
+const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinConfig, totalArea, builtArea, initialAreaValues }) => {
 
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
@@ -63,20 +63,20 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCon
                 {type === "small" && (
                   <div className="seats-description">
                     {/* <strong>1 small cabin = {areas["small"] * 4 + smallCabinCount} pax</strong> */}
-                    <Tooltip text={`Size: 80 sq ft`} >
+                    <Tooltip text={`Size: ${smallCabinConfig.roomSize} sq ft \nCabin: ${4+smallCabinConfig.seatCount} seats`} >
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
                       name={"Seat Count"}
                       value={smallCabinConfig.seatCount}
                       onChange={smallCabinConfig.setSeatCount}
-                      min2={4}
-                      max2={18}
-                      step2={2}
+                      min2={0} max2={24} step2={2}
                       cabinSize={smallCabinConfig.roomSize}
                       setCabinSize={smallCabinConfig.setRoomSize}
                       totalArea={totalArea}
                       builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
                     />
                   </div>
                 )}
@@ -84,13 +84,16 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCon
               {type === "md" && (
                 <div className="slider-container seats-description">
                   <InteractiveInputSlider
-                    updateAreas={updateAreas}
                     name={"MD Cabin Size"}
                     value={mdCabinSize}
                     onChange={setMdCabinSize}
-                    min2={120}
-                    max2={240}
-                    step2={5}
+                    min2={120} max2={240} step2={5}
+                    cabinSize={mdCabinSize}
+                    setCabinSize={setMdCabinSize}
+                    totalArea={totalArea}
+                    builtArea={builtArea}
+                    type={type}
+                    initialAreaValues={initialAreaValues}
                   />
                 </div>
               )}

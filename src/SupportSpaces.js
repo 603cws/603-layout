@@ -11,7 +11,7 @@ const supportSpaceDescriptions = {
   other: "This is an additional space for miscellaneous purposes." // Description for "other"
 };
 
-const SupportSpaces = ({ areas, updateAreas }) => {
+const SupportSpaces = ({ areas, updateAreas, isOtherSelected, setIsOtherSelected }) => {
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
@@ -48,6 +48,7 @@ const SupportSpaces = ({ areas, updateAreas }) => {
   const handleOtherAreaChange = (event) => {
     const value = Math.max(0, Number(event.target.value)); // Prevent negative values
     setOtherArea(value);
+    setIsOtherSelected(true);
     updateAreas('other', value); // Update the area in the parent component
   };
 

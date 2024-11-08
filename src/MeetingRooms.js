@@ -30,7 +30,7 @@ const SEATS_PER_ROOM = {
   videoRecordingRoom: 0 // Assuming no seats defined for videoRecordingRoom
 };
 
-const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, financeRoomConfig, areaInfo }) => {
+const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, financeRoomConfig, areaInfo, initialAreaValues, videoRecordingRoomSize, setVideoRecordingRoomSize }) => {
   const { totalArea, builtArea } = areaInfo;
 
   const handleIncrement = (type) => {
@@ -105,68 +105,84 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                     <strong>1 {type.replace(/([A-Z])/g, ' $1').toLowerCase()} = {SEATS_PER_ROOM[type]} pax</strong>
                   </div>
                 )}
-
-                <Tooltip text={`Size: ${sizeArea[type]} sq ft`}>
-                  <button className="info-button">i</button>
-                </Tooltip>
+                {type !== "videoRecordingRoom" && (
+                  <Tooltip text={`Size: ${sizeArea[type]} sq ft`}>
+                    <button className="info-button">i</button>
+                  </Tooltip>
+                )}
                 {type === "hrRoom" && (
                   <div className="seats-description">
-                    <Tooltip text={`Size: 80 sq ft`}>
+                    <Tooltip text={`Size: ${hrRoomConfig.roomSize} sq ft \nCabin: ${4+hrRoomConfig.seatCount} seats`}>
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
                       name={"Seat Count"}
                       value={hrRoomConfig.seatCount}
                       onChange={hrRoomConfig.setSeatCount}
-                      min2={4}
-                      max2={24}
-                      step2={2}
+                      min2={0} max2={24} step2={2}
                       cabinSize={hrRoomConfig.roomSize}
                       setCabinSize={hrRoomConfig.setRoomSize}
                       totalArea={totalArea}
                       builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
                     />
                   </div>
                 )}
                 {type === "sales" && (
                   <div className="seats-description">
-                    <Tooltip text={`Size: 80 sq ft`}>
+                    <Tooltip text={`Size: ${salesRoomConfig.roomSize} sq ft \nCabin: ${4+salesRoomConfig.seatCount} seats`}>
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
                       name={"Seat Count"}
                       value={salesRoomConfig.seatCount}
                       onChange={salesRoomConfig.setSeatCount}
-                      min2={4}
-                      max2={24}
-                      step2={2}
+                      min2={0} max2={24} step2={2}
                       cabinSize={salesRoomConfig.roomSize}
                       setCabinSize={salesRoomConfig.setRoomSize}
                       totalArea={totalArea}
                       builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
                     />
                   </div>
                 )}
                 {type === "financeRoom" && (
                   <div className="seats-description">
-                    <Tooltip text={`Size: 80 sq ft`}>
+                    <Tooltip text={`Size: ${financeRoomConfig.roomSize} sq ft \nCabin: ${4+financeRoomConfig.seatCount} seats`}>
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
                       name={"Seat Count"}
                       value={financeRoomConfig.seatCount}
                       onChange={financeRoomConfig.setSeatCount}
-                      min2={4}
-                      max2={24}
-                      step2={2}
+                      min2={0} max2={24} step2={2}
                       cabinSize={financeRoomConfig.roomSize}
                       setCabinSize={financeRoomConfig.setRoomSize}
                       totalArea={totalArea}
                       builtArea={builtArea}
                       type={type}
+                      initialAreaValues={initialAreaValues}
                     />
                   </div>
                 )}
+                {/* {type === "videoRecordingRoom" && (
+                  <div className="slider-container seats-description">
+                    <InteractiveInputSlider
+                      name={"Video Recording Room Size"}
+                      value={videoRecordingRoomSize}
+                      onChange={setVideoRecordingRoomSize}
+                      min2={80} max2={160} step2={5}
+                      cabinSize={videoRecordingRoomSize}
+                      setCabinSize={setVideoRecordingRoomSize}
+                      totalArea={totalArea}
+                      builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
+                    />
+                  </div>
+                )} */}
               </div>
             </div>
           </div>

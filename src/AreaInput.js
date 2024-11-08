@@ -8,7 +8,7 @@ import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
 
-const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableArea, resetAll, areas, setFinalData, showModal, setShowModal }) => {
+const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableArea, resetAll, areas, setFinalData, showModal, setShowModal, isOtherSelected }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
 
@@ -49,7 +49,7 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
       setShowModal(true);
       return; // Stop execution if total area is not entered
     }
-  
+    
     setFinalData(areas, areaValues); // Store the data in finalData
   
     try {
@@ -121,7 +121,7 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
           meetingroomlarge: areaValues.meetingRoomLarge,
           hrroom: areaValues.hrRoom,
           financeroom: areaValues.financeRoom,
-          other: areaValues.other,
+          other: isOtherSelected ? areaValues.other : 0
         }]);
   
       if (areasError) {
