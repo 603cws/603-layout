@@ -309,8 +309,14 @@ const App = () => {
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md);
-  const [smallCabinSize, setSmallCabinSize] = useState(areaValues.small); //not working as expected
-  const [smallCabinPeopleCount, setSmallCabinPeopleCount] = useState(4);
+  const [smallCabinSize, setSmallCabinSize] = useState(areaValues.small);
+  const [hrRoomSize, setHrRoomSize] = useState(areaValues.hrRoom);
+  const [salesRoomSize, setSalesRoomSize] = useState(areaValues.hrRoom);
+  const [financeRoomSize, setFinanceRoomSize] = useState(areaValues.financeRoom);
+  const [smallCabinSeatCount, setSmallCabinSeatCount] = useState(4);
+  const [hrRoomSeatCount, setHrRoomSeatCount] = useState(4);
+  const [salesSeatCount, setSalesSeatCount] = useState(4);
+  const [financeRoomSeatCount, setFinanceRoomSeatCount] = useState(4);
   const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // Define totalMdCabinArea
   const [finalData, setFinalData] = useState(areas);
 
@@ -366,7 +372,10 @@ const App = () => {
       ...areas,
       [type]: value
     };
-    setSmallCabinPeopleCount(newAreas.small * 4);
+    setSmallCabinSeatCount(newAreas.small * 4);
+    setHrRoomSeatCount(newAreas.hrRoom * 4);
+    setSalesSeatCount(newAreas.sales * 4);
+    setFinanceRoomSeatCount(newAreas.financeRoom * 4);
     const builtArea = Object.keys(newAreas).reduce(
       (acc, key) => acc + newAreas[key] * areaValues[key],
       0
@@ -404,7 +413,9 @@ const App = () => {
 
   const resetAll = () => {
     setTotalArea(0);
-    setSmallCabinPeopleCount(4);
+    setSmallCabinSeatCount(4);
+    setHrRoomSeatCount(4);
+    setSalesSeatCount(4);
     setAreas(initialAreas);
     setError(false);
     setShowModal(false); // Hide modal on reset
@@ -438,19 +449,59 @@ const App = () => {
     setMdCabinSize(newMdCabinSize);
   };
 
-  const handleSmallCabinAreaChange = (newSmallCabinSize) => {
-    const small = newSmallCabinSize;
-    setSmallCabinSize(small);
+  const handleRoomAreaChange = (roomType, setRoomSize, areaKey) => (newCabinSize) => {
+    setRoomSize(newCabinSize);
     setAreas((prevAreas) => ({
       ...prevAreas,
-      small: Math.round(small / areaValues.small)
-      // small: small,
+      [roomType]: Math.round(newCabinSize / areaValues[areaKey]),
     }));
+  };
 
-  }
+  const handleSmallCabinAreaChange = handleRoomAreaChange("small", setSmallCabinSize, "small");
+  const handleHrRoomAreaChange = handleRoomAreaChange("hrRoom", setHrRoomSize, "hrRoom");
+  const handleSalesRoomAreaChange = handleRoomAreaChange("sales", setSalesRoomSize, "sales");
+  const handleFinanceRoomAreaChange = handleRoomAreaChange("financeRoom", setFinanceRoomSize, "financeRoom");
 
-  const handleSmallCabinPeopleCountChange = (newSmallCabinPeopleCount) => {
-    setSmallCabinPeopleCount(newSmallCabinPeopleCount);
+  const handleSeatCountChange = (setter) => (newCount) => {
+    setter(newCount);
+  };
+
+  const handleSmallCabinPeopleCountChange = handleSeatCountChange(setSmallCabinSeatCount);
+  const handleHrRoomSeatCountChange = handleSeatCountChange(setHrRoomSeatCount);
+  const handleSalesRoomSeatCountChange = handleSeatCountChange(setSalesSeatCount);
+  const handleFinanceRoomSeatCountChange = handleSeatCountChange(setFinanceRoomSeatCount);
+
+  const hrRoomConfig = {
+    seatCount: hrRoomSeatCount,
+    setSeatCount: handleHrRoomSeatCountChange,
+    roomSize: hrRoomSize,
+    setRoomSize: handleHrRoomAreaChange,
+  };
+
+  const salesRoomConfig = {
+    seatCount: salesSeatCount,
+    setSeatCount: handleSalesRoomSeatCountChange,
+    roomSize: salesRoomSize,
+    setRoomSize: handleSalesRoomAreaChange,
+  };
+
+  const financeRoomConfig = {
+    seatCount: financeRoomSeatCount,
+    setSeatCount: handleFinanceRoomSeatCountChange,
+    roomSize: financeRoomSize,
+    setRoomSize: handleFinanceRoomAreaChange,
+  };
+
+  const smallCabinConfig = {
+    seatCount: smallCabinSeatCount,
+    setSeatCount: handleSmallCabinPeopleCountChange,
+    roomSize: smallCabinSize,
+    setRoomSize: handleSmallCabinAreaChange,
+  };
+
+  const areaInfo = {
+    totalArea,
+    builtArea,
   };
   
 
@@ -491,14 +542,14 @@ const App = () => {
             updateAreas={updateAreas}
             mdCabinSize={mdCabinSize}
             setMdCabinSize={handleMdCabinAreaChange}
-            smallCabinCount={smallCabinPeopleCount}
-            setSmallCabinCount={handleSmallCabinPeopleCountChange}
-            smallCabinSize={smallCabinSize}
-            setSmallCabinSize={handleSmallCabinAreaChange}
+            smallCabinConfig={smallCabinConfig}
             totalArea={totalArea}
             builtArea={builtArea}
           />
-          <MeetingRooms areas={areas} updateAreas={updateAreas} />
+          <MeetingRooms areas={areas} updateAreas={updateAreas}
+            hrRoomConfig={hrRoomConfig} salesRoomConfig={salesRoomConfig}
+            financeRoomConfig={financeRoomConfig} areaInfo={areaInfo}
+          />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
           <SupportSpaces areas={areas} updateAreas={updateAreas}
             areaValues={areaValues}
