@@ -1071,7 +1071,7 @@ span {
   bottom: 100%; /* Position above the image */
   left: 50%;
   transform: translateX(-50%);
-  z-index: 11;
+  z-index: 99;
   opacity: 0;
   transition: opacity 0.3s;
 }

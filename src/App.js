@@ -312,6 +312,7 @@ const App = () => {
   const [smallCabinSize, setSmallCabinSize] = useState(areaValues.small); //not working as expected
   const [smallCabinPeopleCount, setSmallCabinPeopleCount] = useState(4);
   const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // Define totalMdCabinArea
+  const [finalData, setFinalData] = useState(areas);
 
   useEffect(() => {
     const linear = calculateLinear(totalArea);
@@ -350,8 +351,8 @@ const App = () => {
       phoneBooth: phoneBooth / areaValues.phoneBooth,
       server: server / areaValues.server,
       executiveWashroom: executiveWashroom / areaValues.executiveWashroom,
-      reception: receptionArea / areaValues.reception,
-      lounge: loungeArea / areaValues.lounge,
+      reception: Math.round(receptionArea / areaValues.reception),
+      lounge:Math.round (loungeArea / areaValues.lounge),
       other: otherArea / areaValues.other,
     }));
   }, [totalArea, areaValues]);
@@ -451,14 +452,23 @@ const App = () => {
   const handleSmallCabinPeopleCountChange = (newSmallCabinPeopleCount) => {
     setSmallCabinPeopleCount(newSmallCabinPeopleCount);
   };
+  
 
   return (
     <div className="container">
       <AreaInput
         setTotalArea={handleSetTotalArea}
+        totalArea={totalArea}
+        areaValues={areaValues}
         builtArea={builtArea}
         availableArea={availableArea}
         resetAll={resetAll}
+        areas={areas}
+        finalData={finalData}
+        setFinalData={setFinalData}
+        showModal={showModal}
+        setShowModal={setShowModal}
+
       />
       <div className="--content">
         <Treemap
@@ -490,7 +500,9 @@ const App = () => {
           />
           <MeetingRooms areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
-          <SupportSpaces areas={areas} updateAreas={updateAreas} />
+          <SupportSpaces areas={areas} updateAreas={updateAreas}
+            areaValues={areaValues}
+          />
         </div>
       </div>
       {showModal && (

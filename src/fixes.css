@@ -7,7 +7,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  height: 90%; /* Ensure the parent container has a height */
+  height: 80%; /* Ensure the parent container has a height */
 }
 
 .--sections {
@@ -26,9 +26,22 @@
 .--sections::-webkit-scrollbar {
   display: none; /* Hide scrollbar in WebKit browsers */
 }
+@media(max-width:1024px){
+  .--sections{
+    overflow-x: auto;
+  }
+}
+@media(max-width:768px){
+  .--sections{
+    height: 70%;
+    max-width: fit-content;
+    overflow-x: hidden;
+  }
+}
 @media(max-width:426px){
   .--sections{
     width: 100% !important;
     overflow-x: hidden;
+    margin-top: 50px;
   }
 }

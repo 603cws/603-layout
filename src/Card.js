@@ -42,7 +42,7 @@ const Card = () => {
 
 const StyledWrapper = styled.div`
   .brutalist-card {
-  width: 320px;
+  width: 100%;
   border: 4px solid #000;
   background-color: #fff;
   padding: 1.5rem;
