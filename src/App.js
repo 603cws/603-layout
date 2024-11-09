@@ -308,13 +308,13 @@ const App = () => {
   const [smallCabinSize, setSmallCabinSize] = useState(areaValues.small);
   const [hrRoomSize, setHrRoomSize] = useState(areaValues.hrRoom);
   const [salesRoomSize, setSalesRoomSize] = useState(areaValues.sales);
-  const [financeRoomSize,setFinanceRoomSize] = useState(areaValues.financeRoom);
+  const [financeRoomSize, setFinanceRoomSize] = useState(areaValues.financeRoom);
   const [smallCabinSeatCount, setSmallCabinSeatCount] = useState(0);
   const [hrRoomSeatCount, setHrRoomSeatCount] = useState(0);
   const [salesSeatCount, setSalesSeatCount] = useState(0);
   const [financeRoomSeatCount, setFinanceRoomSeatCount] = useState(0);
-  const [finalData, setFinalData] = useState(areas);
-  const [isOtherSelected, setIsOtherSelected] = useState(false); 
+  const [finalData, setFinalData] = useState(areas, areaValues, totalArea);
+  const [isOtherSelected, setIsOtherSelected] = useState(false);
 
   useEffect(() => {
     const linear = calculateLinear(totalArea);
@@ -354,7 +354,7 @@ const App = () => {
       server: server / areaValues.server,
       executiveWashroom: executiveWashroom / areaValues.executiveWashroom,
       reception: Math.round(receptionArea / areaValues.reception),
-      lounge:Math.round (loungeArea / areaValues.lounge),
+      lounge: Math.round(loungeArea / areaValues.lounge),
       other: otherArea / areaValues.other,
     }));
   }, [totalArea]);
@@ -366,7 +366,7 @@ const App = () => {
       0
     );
     setBuiltArea(calculatedBuiltArea);
-  }, [areas, areaValues]); 
+  }, [areas, areaValues]);
 
   // Calculate availableArea based on totalArea and builtArea
   useEffect(() => {
@@ -378,7 +378,7 @@ const App = () => {
       ...areas,
       [type]: value
     };
-    
+
     const calculatedBuiltArea = Object.keys(newAreas).reduce(
       (acc, key) => acc + newAreas[key] * areaValues[key],
       0
@@ -458,7 +458,7 @@ const App = () => {
   const handleSalesRoomAreaChange = handleRoomAreaChange("sales", setSalesRoomSize);
   const handleFinanceRoomAreaChange = handleRoomAreaChange("financeRoom", setFinanceRoomSize);
   const handleBreakoutRoomAreaChange = handleRoomAreaChange("breakoutRoom", setBreakoutRoomSize);
-  const handleVideoRecordingRoomAreaChange = handleRoomAreaChange("videoRecordingRoom",setVideoRecordingRoomSize);
+  const handleVideoRecordingRoomAreaChange = handleRoomAreaChange("videoRecordingRoom", setVideoRecordingRoomSize);
 
   const handleSeatCountChange = (setter) => (newCount) => {
     setter(newCount);
@@ -501,8 +501,9 @@ const App = () => {
     totalArea,
     builtArea,
   };
-  
+
   return (
+
     <div className="container">
       <AreaInput
         setTotalArea={handleSetTotalArea}
@@ -535,7 +536,7 @@ const App = () => {
           <Cabins
             areas={areas} updateAreas={updateAreas}
             mdCabinSize={mdCabinSize} setMdCabinSize={handleMdCabinAreaChange}
-            smallCabinConfig={smallCabinConfig} totalArea={totalArea} 
+            smallCabinConfig={smallCabinConfig} totalArea={totalArea}
             builtArea={builtArea} initialAreaValues={initialAreaValues}
           />
           <MeetingRooms areas={areas} updateAreas={updateAreas}
@@ -543,12 +544,12 @@ const App = () => {
             financeRoomConfig={financeRoomConfig} areaInfo={areaInfo} initialAreaValues={initialAreaValues}
             videoRecordingRoomSize={videoRecordingRoomSize} setVideoRecordingRoomSize={handleVideoRecordingRoomAreaChange}
           />
-          <PublicSpaces areas={areas} updateAreas={updateAreas} 
-          breakoutRoomSize={breakoutRoomSize} setBreakoutRoomSize={handleBreakoutRoomAreaChange} 
-          totalArea={totalArea} builtArea={builtArea} initialAreaValues={initialAreaValues}
+          <PublicSpaces areas={areas} updateAreas={updateAreas}
+            breakoutRoomSize={breakoutRoomSize} setBreakoutRoomSize={handleBreakoutRoomAreaChange}
+            totalArea={totalArea} builtArea={builtArea} initialAreaValues={initialAreaValues}
           />
-          <SupportSpaces areas={areas} updateAreas={updateAreas} areaValues={areaValues} 
-          isOtherSelected={isOtherSelected} setIsOtherSelected={setIsOtherSelected} />
+          <SupportSpaces areas={areas} updateAreas={updateAreas} areaValues={areaValues}
+            isOtherSelected={isOtherSelected} setIsOtherSelected={setIsOtherSelected} />
         </div>
       </div>
       {showModal && (

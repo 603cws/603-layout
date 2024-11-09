@@ -8,7 +8,7 @@ import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
 
-const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableArea, resetAll, areas, setFinalData, showModal, setShowModal, isOtherSelected }) => {
+const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, setFinalData, showModal, setShowModal, isOtherSelected }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
 
@@ -25,7 +25,7 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
       if (area >= 1500 && area <= 25000) {
         setTotalArea(area);
         setError(false);
-      } else if(area === 0 || area === undefined){
+      } else if (area === 0 || area === undefined) {
         setError(false);
         resetAll();
       }
@@ -43,15 +43,16 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
     setError(false);
     resetAll(); // Call the resetAll function passed from the parent component
   };
+
   const handleGenerateBOQ = async () => {
     if (!totalArea) {
       console.error("Please enter the total area before generating BOQ.");
       setShowModal(true);
       return; // Stop execution if total area is not entered
     }
-    
-    setFinalData(areas, areaValues); // Store the data in finalData
-  
+
+    setFinalData(areas, areaValues, totalArea); // Store the data in finalData
+
     try {
       // Step 1: Insert into 'quantity' and retrieve the generated 'id'
       const { data: quantityData, error: quantityError } = await supabase
@@ -77,24 +78,24 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
           meetingroomlarge: areas.meetingRoomLarge,
           hrroom: areas.hrRoom,
           financeroom: areas.financeRoom,
-          other: areas.other,
+          other: isOtherSelected ? areaValues.other : 0
         }])
         .select('id'); // Retrieve the ID generated for quantityData
-  
+
       if (quantityError) {
         console.error('Error inserting data into quantity:', quantityError.message);
         return;
       }
       console.log('Data inserted into quantity successfully:', quantityData);
-  
+
       // Capture the ID from the quantity insert to use in areas
-      const sharedId = quantityData[0]?.id; 
-  
+      const sharedId = quantityData[0]?.id;
+
       if (!sharedId) {
         console.error('Shared ID not retrieved. Insert into quantity may have failed.');
         return;
       }
-  
+
       // Step 2: Insert into 'areas' using the same shared ID
       const { data: areasData, error: areasError } = await supabase
         .from('areas')
@@ -121,9 +122,10 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
           meetingroomlarge: areaValues.meetingRoomLarge,
           hrroom: areaValues.hrRoom,
           financeroom: areaValues.financeRoom,
-          other: isOtherSelected ? areaValues.other : 0
+          other: areas.other,
+          totalArea: totalArea,
         }]);
-  
+
       if (areasError) {
         console.error('Error inserting data into areas:', areasError.message);
         return;
@@ -132,10 +134,10 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
     } catch (error) {
       console.error('Error saving data:', error);
     }
-  
+
     window.location.href = 'https://lucky-kataifi-065416.netlify.app/';
   };
-  
+
   return (
     <div className="area-input">
       <div className="input-container">
@@ -171,7 +173,7 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
           </div>
         )}
       </div>
-      
+
       <button className="generate-boq-button" onClick={handleGenerateBOQ}>
         Generate BOQ
         <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
