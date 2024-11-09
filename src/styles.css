@@ -1093,9 +1093,6 @@ span {
 
 /* Mobile S (320px) */
 @media (max-width: 321px) {
-  .flexbox-container {
-    flex-direction: column !important;
-  }
   .cabins-grid{
     display: flex !important;
     width: 100%;
@@ -1159,7 +1156,7 @@ span {
   .flexbox-container{
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column !important;
   }
   .flexbox-item{
     font-size: 12px;

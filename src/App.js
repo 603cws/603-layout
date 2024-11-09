@@ -11,6 +11,7 @@ import Modal from "./Modal";
 import Card from "./Card";
 import "./styles.css";
 import "./fixes.css";
+import LoginForm from "./LoginForm";
 
 const initialAreaValues = {
   linear: 24,
@@ -315,6 +316,7 @@ const App = () => {
   const [financeRoomSeatCount, setFinanceRoomSeatCount] = useState(0);
   const [finalData, setFinalData] = useState(areas, areaValues, totalArea);
   const [isOtherSelected, setIsOtherSelected] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
   useEffect(() => {
     const linear = calculateLinear(totalArea);
@@ -505,6 +507,11 @@ const App = () => {
   return (
 
     <div className="container">
+      <div>
+        {showLoginForm && <LoginForm/>}
+      </div>
+      {!showLoginForm &&
+      <>
       <AreaInput
         setTotalArea={handleSetTotalArea}
         totalArea={totalArea}
@@ -518,6 +525,7 @@ const App = () => {
         showModal={showModal}
         setShowModal={setShowModal}
         isOtherSelected={isOtherSelected}
+        setShowLoginForm={setShowLoginForm}
       />
       <div className="--content">
         <Treemap
@@ -563,7 +571,8 @@ const App = () => {
         </div>
       )}
       <Tooltip />
-
+      </>
+    }
     </div>
   );
 };

@@ -7,8 +7,9 @@ import { supabase } from './supabaseClient';
 import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
+import './LoginForm'
 
-const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, setFinalData, showModal, setShowModal, isOtherSelected }) => {
+const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableArea, resetAll, areas, setFinalData, showModal, setShowModal, isOtherSelected, setShowLoginForm }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
 
@@ -138,6 +139,10 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
     window.location.href = 'https://lucky-kataifi-065416.netlify.app/';
   };
 
+  const handleLogin =()=>{
+    setShowLoginForm(true);
+  }
+  
   return (
     <div className="area-input">
       <div className="input-container">
@@ -173,8 +178,8 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
           </div>
         )}
       </div>
-
-      <button className="generate-boq-button" onClick={handleGenerateBOQ}>
+      
+      <button className="generate-boq-button" onClick={()=>handleLogin()}>
         Generate BOQ
         <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
