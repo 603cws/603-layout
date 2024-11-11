@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
+import { supabase } from './supabaseClient'; // Import Supabase client
 
 const LoginForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -19,7 +20,7 @@ const LoginForm = () => {
       ...formData,
       [name]: value,
     });
-    setErrors({ ...errors, [name]: '' }); // Clear error on input change for specific field
+    setErrors({ ...errors, [name]: '' });
   };
 
   const toggleForm = () => {
@@ -32,7 +33,7 @@ const LoginForm = () => {
       password: '',
       confirmPassword: '',
     });
-    setErrors({}); // Clear any existing errors when toggling form
+    setErrors({});
   };
 
   const showErrorWithTimeout = (field, message) => {
@@ -45,8 +46,76 @@ const LoginForm = () => {
         ...prevErrors,
         [field]: '',
       }));
-    }, 3000); // Clear error after 3 seconds
+    }, 3000);
   };
+
+  const handleRegister = async () => {
+    try {
+      // Check if the email is already registered
+      const { data: existingUser, error: fetchError } = await supabase
+        .from('user')
+        .select('email')
+        .eq('email', formData.email)
+        .single();
+
+      if (fetchError) {
+        console.error('Error checking user:', fetchError.message);
+        return;
+      }
+
+      if (existingUser) {
+        showErrorWithTimeout('email', 'Email is already registered.');
+        return;
+      }
+
+      // Proceed with registration if email is not found
+      const { data, error } = await supabase.from('user').insert([
+        {
+          email: formData.email,
+          companyName: formData.companyName,
+          mobile: formData.mobile,
+          location: formData.location,
+          password: formData.password, // Store password securely in production
+        },
+      ]);
+
+      if (error) {
+        console.error('Error registering:', error.message);
+        showErrorWithTimeout('email', 'Registration failed. Please try again.');
+      } else {
+        console.log('Registration successful:', data);
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error);
+    }
+  };
+
+  const handleLogin = async () => {
+    try {
+      // Check if the email and password match
+      const { data, error } = await supabase
+        .from('user')
+        .select('email, password')
+        .eq('email', formData.email)
+        .single();
+
+      if (error || !data) {
+        showErrorWithTimeout('email', 'Email not registered or incorrect.');
+        return;
+      }
+
+      if (data.password !== formData.password) {
+        showErrorWithTimeout('password', 'Incorrect password.');
+        return;
+      }
+
+      console.log('Login successful:', data);
+      // Redirect or perform actions after successful login
+    } catch (error) {
+      console.error('Unexpected error during login:', error);
+    }
+  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,12 +134,12 @@ const LoginForm = () => {
         showErrorWithTimeout('confirmPassword', 'Passwords do not match.');
         return;
       }
+      handleRegister(); // Call register function on successful validation
+    } else {
+      handleLogin(); // Call login function for login
     }
-
-    // Handle login or registration logic
-    console.log(isLogin ? 'Login Data:' : 'Registration Data:', formData);
   };
-
+  
   return (
     <div className="login-form-container">
       <h2>{isLogin ? 'Login' : 'Register'}</h2>
