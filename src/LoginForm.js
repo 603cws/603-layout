@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './LoginForm.css';
 import { supabase } from './supabaseClient'; // Import Supabase client
 
-const LoginForm = () => {
-  const [isLogin, setIsLogin] = useState(true);
+const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, isOtherSelected }) => {
+  const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     companyName: '',
@@ -50,72 +50,100 @@ const LoginForm = () => {
   };
 
   const handleRegister = async () => {
+    const { email, companyName, mobile, location, password } = formData;
+
     try {
-      // Check if the email is already registered
-      const { data: existingUser, error: fetchError } = await supabase
-        .from('user')
-        .select('email')
-        .eq('email', formData.email)
-        .single();
+      // Step 1: Insert data into 'users' table and retrieve the user ID
+      const { data: userData, error: userInsertError } = await supabase
+        .from('users')
+        .insert([{
+          email,
+          companyname: companyName,
+          mobile,
+          location,
+          password,
+        }])
+        .select();
 
-      if (fetchError) {
-        console.error('Error checking user:', fetchError.message);
+      if (userInsertError || !userData.length) {
+        console.error("Error inserting new user:", userInsertError?.message);
         return;
       }
 
-      if (existingUser) {
-        showErrorWithTimeout('email', 'Email is already registered.');
+      const userId = userData[0]['userId']; // Retrieve the generated userId
+
+      // Step 2: Insert data into 'areas' table with the retrieved user ID
+      const { error: areasInsertError } = await supabase
+        .from('areas')
+        .insert([{
+          "userId": userId,
+          linear: areaValues.linear,
+          ltype: areaValues.lType,
+          md: areaValues.md,
+          manager: areaValues.manager,
+          small: areaValues.small,
+          ups: areaValues.ups,
+          bms: areaValues.bms,
+          server: areaValues.server,
+          reception: areaValues.reception,
+          lounge: areaValues.lounge,
+          sales: areaValues.sales,
+          phonebooth: areaValues.phoneBooth,
+          discussionroom: areaValues.discussionRoom,
+          interviewroom: areaValues.interviewRoom,
+          conferenceroom: areaValues.conferenceRoom,
+          boardroom: areaValues.boardRoom,
+          meetingroom: areaValues.meetingRoom,
+          meetingroomlarge: areaValues.meetingRoomLarge,
+          hrroom: areaValues.hrRoom,
+          financeroom: areaValues.financeRoom,
+          other: isOtherSelected ? areaValues.other : 0,
+          totalArea,
+        }]);
+
+      if (areasInsertError) {
+        console.error("Error inserting data into areas:", areasInsertError.message);
         return;
       }
 
-      // Proceed with registration if email is not found
-      const { data, error } = await supabase.from('user').insert([
-        {
-          email: formData.email,
-          companyName: formData.companyName,
-          mobile: formData.mobile,
-          location: formData.location,
-          password: formData.password, // Store password securely in production
-        },
-      ]);
+      // Step 3: Insert data into 'quantity' table with the retrieved user ID
+      const { error: quantityInsertError } = await supabase
+        .from('quantity')
+        .insert([{
+          "userId": userId,
+          linear: areas.linear,
+          ltype: areas.lType,
+          md: areas.md,
+          manager: areas.manager,
+          small: areas.small,
+          ups: areas.ups,
+          bms: areas.bms,
+          server: areas.server,
+          reception: areas.reception,
+          lounge: areas.lounge,
+          sales: areas.sales,
+          phonebooth: areas.phoneBooth,
+          discussionroom: areas.discussionRoom,
+          interviewroom: areas.interviewRoom,
+          conferenceroom: areas.conferenceRoom,
+          boardroom: areas.boardRoom,
+          meetingroom: areas.meetingRoom,
+          meetingroomlarge: areas.meetingRoomLarge,
+          hrroom: areas.hrRoom,
+          financeroom: areas.financeRoom,
+          other: isOtherSelected ? areaValues.other : 0,
+        }]);
 
-      if (error) {
-        console.error('Error registering:', error.message);
-        showErrorWithTimeout('email', 'Registration failed. Please try again.');
-      } else {
-        console.log('Registration successful:', data);
+      if (quantityInsertError) {
+        console.error("Error inserting data into quantity:", quantityInsertError.message);
+        return;
       }
+
+      console.log("User, areas, and quantity data inserted successfully!");
     } catch (error) {
-      console.error('Unexpected error:', error);
+      console.error("Unexpected error during registration:", error);
     }
   };
-
-  const handleLogin = async () => {
-    try {
-      // Check if the email and password match
-      const { data, error } = await supabase
-        .from('user')
-        .select('email, password')
-        .eq('email', formData.email)
-        .single();
-
-      if (error || !data) {
-        showErrorWithTimeout('email', 'Email not registered or incorrect.');
-        return;
-      }
-
-      if (data.password !== formData.password) {
-        showErrorWithTimeout('password', 'Incorrect password.');
-        return;
-      }
-
-      console.log('Login successful:', data);
-      // Redirect or perform actions after successful login
-    } catch (error) {
-      console.error('Unexpected error during login:', error);
-    }
-  };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -135,11 +163,9 @@ const LoginForm = () => {
         return;
       }
       handleRegister(); // Call register function on successful validation
-    } else {
-      handleLogin(); // Call login function for login
     }
   };
-  
+
   return (
     <div className="login-form-container">
       <h2>{isLogin ? 'Login' : 'Register'}</h2>
@@ -197,7 +223,7 @@ const LoginForm = () => {
         <div className="form-group">
           <label>Password <span className="error-message">{errors.password}</span></label>
           <input
-            type="password"
+            type="text"
             name="password"
             value={formData.password}
             onChange={handleChange}
@@ -209,7 +235,7 @@ const LoginForm = () => {
           <div className="form-group">
             <label>Confirm Password <span className="error-message">{errors.confirmPassword}</span></label>
             <input
-              type="password"
+              type="text"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}

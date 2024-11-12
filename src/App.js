@@ -508,7 +508,16 @@ const App = () => {
 
     <div className="container">
       <div>
-        {showLoginForm && <LoginForm/>}
+        {showLoginForm && 
+        <LoginForm
+        totalArea={totalArea}
+        setTotalArea={setTotalArea}
+        setFinalData={setFinalData}
+        setShowModal={setShowModal}
+        areas={areas}
+        areaValues={areaValues}
+        isOtherSelected={isOtherSelected}
+        />}
       </div>
       {!showLoginForm &&
       <>
