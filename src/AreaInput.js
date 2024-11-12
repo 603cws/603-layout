@@ -8,10 +8,12 @@ import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
 import './LoginForm'
+import { useNavigate } from 'react-router-dom';
 
-const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableArea, resetAll, areas, setFinalData, showModal, setShowModal, isOtherSelected, setShowLoginForm }) => {
+const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal, setShowModal, isOtherSelected, onAuthorize }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     if (e.target.value.length <= 5) {
@@ -52,7 +54,7 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
       return; // Stop execution if total area is not entered
     }
 
-    setFinalData(areas, areaValues, totalArea); // Store the data in finalData
+    // setFinalData(areas, areaValues, totalArea); // Store the data in finalData
 
     try {
       // Step 1: Insert into 'quantity' and retrieve the generated 'id'
@@ -139,10 +141,14 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
     window.location.href = 'https://lucky-kataifi-065416.netlify.app/';
   };
 
-  const handleLogin =()=>{
-    setShowLoginForm(true);
+  const handleLogin = () => {
+    // setShowLoginForm(true);
+    onAuthorize(); // Set user as authorized
+    navigate('/Loginform', {
+      state: { areas: areas, areaValues: areaValues, totalArea:totalArea, isOtherSelected:isOtherSelected }
+    });
   }
-  
+
   return (
     <div className="area-input">
       <div className="input-container">
@@ -178,8 +184,8 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
           </div>
         )}
       </div>
-      
-      <button className="generate-boq-button" onClick={()=>handleLogin()}>
+
+      <button className="generate-boq-button" onClick={() => handleLogin()}>
         Generate BOQ
         <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />

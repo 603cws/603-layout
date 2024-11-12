@@ -1,0 +1,36 @@
+/* Contact.css */
+.container-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background-color: #f4f4f9;
+  }
+  
+  .message-contact {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    max-width: 600px;
+    line-height: 1.5;
+    animation: bounceInText 1s ease-out;
+  }
+  
+  @keyframes bounceInText {
+    0% {
+      opacity: 0; /* Start as invisible */
+      transform: translateX(-100%); /* Start from the left */
+    }
+    60% {
+      opacity: 1; /* Fully visible */
+      transform: translateX(30px); /* Bounce slightly */
+    }
+    80% {
+      transform: translateX(-10px); /* Slight bounce back */
+    }
+    100% {
+      transform: translateX(0); /* End at original position */
+    }
+  }
+  

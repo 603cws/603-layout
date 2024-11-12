@@ -1,9 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LoginForm.css';
 import { supabase } from './supabaseClient'; // Import Supabase client
+import checkIfEmailExists from './CheckIfEmailExists';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, isOtherSelected }) => {
+const countryCodes = [
+  { code: '+91', country: 'India' },
+  { code: '+1', country: 'USA' },
+  { code: '+44', country: 'UK' },
+  { code: '+61', country: 'Australia' },
+  { code: '+81', country: 'Japan' },
+  // Add more as needed
+];
+
+const LoginForm = () => {
   const [isLogin, setIsLogin] = useState(false);
+
+  const location = useLocation();
+  const areas = location.state?.areas;
+  const areaValues = location.state?.areaValues;
+  const totalArea = location.state?.totalArea;
+  const isOtherSelected = location.state?.isOtherSelected;
+
+  console.log('Inside LoginForm');
+  console.log(areas);
+  console.log(areaValues);
+  console.log(totalArea);
+  console.log(isOtherSelected);
+
   const [formData, setFormData] = useState({
     email: '',
     companyName: '',
@@ -13,28 +37,104 @@ const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, i
     confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
+  const [debouncedEmail, setDebouncedEmail] = useState(formData.email);
+  const [debouncedMobile, setDebouncedMobile] = useState(formData.mobile); // Debounced mobile number
+  const [selectedCountryCode, setSelectedCountryCode] = useState('+91'); // Default to India code
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const mobileRegex = /^(?!([0-9])\1{9})\d{10}$/;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Only clear the error for the specific field if it hasn't been set already by the debounce effect
+    if (name !== 'email' || !errors.email) {
+      setErrors({ ...errors, [name]: '' });
+    }
+
+    if (name === 'email') {
+      setDebouncedEmail(value); // Update debounced value for email
+
+      // Perform live validation for email format
+      if (value && !emailRegex.test(value)) {
+        showErrorWithTimeout('email', 'Invalid email format. Please enter a valid email.');
+      }
+    }
+
+    if (name === 'mobile') {
+      setDebouncedMobile(value); // Set debounced mobile value
+    }
+
     setFormData({
       ...formData,
       [name]: value,
     });
-    setErrors({ ...errors, [name]: '' });
   };
 
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
-    setFormData({
-      email: '',
-      companyName: '',
-      mobile: '',
-      location: '',
-      password: '',
-      confirmPassword: '',
-    });
-    setErrors({});
+  // Debounce effect to check email in DB after user stops typing
+  useEffect(() => {
+    const timeoutId = setTimeout(async () => {
+      if (debouncedEmail) {
+        const emailExists = await checkIfEmailExists(debouncedEmail);
+        if (emailExists) {
+          // Only set the "Email already registered" error if it isn't already set
+          if (!errors.email) {
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              email: 'Email is already registered.',
+            }));
+          }
+        } else {
+          // Clear the email error if it is not registered
+          if (errors.email) {
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              email: '',
+            }));
+          }
+        }
+      }
+    }, 500); // Delay of 500ms for debounce
+
+    return () => clearTimeout(timeoutId); // Cleanup on unmount or when debouncedEmail changes
+  }, [debouncedEmail, errors.email]); // Depend on both debouncedEmail and errors.email
+
+
+  // Debounce effect to validate mobile after user stops typing
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (debouncedMobile && !mobileRegex.test(debouncedMobile)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          mobile: 'Invalid mobile number. Must be 10 unique digits.',
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          mobile: '',
+        }));
+      }
+    }, 500); // Delay of 500ms
+
+    return () => clearTimeout(timeoutId); // Clear timeout on cleanup
+  }, [debouncedMobile]);
+
+  const handleCountryCodeChange = (e) => {
+    setSelectedCountryCode(e.target.value);
   };
+
+  // const toggleForm = () => {
+  //   setIsLogin(!isLogin);
+  //   setFormData({
+  //     email: '',
+  //     companyName: '',
+  //     mobile: '',
+  //     location: '',
+  //     password: '',
+  //     confirmPassword: '',
+  //   });
+  //   setErrors({});
+  // };
 
   const showErrorWithTimeout = (field, message) => {
     setErrors((prevErrors) => ({
@@ -48,6 +148,8 @@ const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, i
       }));
     }, 3000);
   };
+
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     const { email, companyName, mobile, location, password } = formData;
@@ -140,6 +242,9 @@ const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, i
       }
 
       console.log("User, areas, and quantity data inserted successfully!");
+
+      navigate('/Contact', { replace: true });
+
     } catch (error) {
       console.error("Unexpected error during registration:", error);
     }
@@ -171,7 +276,7 @@ const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, i
       <h2>{isLogin ? 'Login' : 'Register'}</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
-          <label>Email Id <span className="error-message">{errors.email}</span></label>
+          <label>Email Id <span className="form-error-message">{errors.email}</span></label>
           <input
             type="email"
             name="email"
@@ -183,7 +288,7 @@ const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, i
         </div>
         {!isLogin && (
           <div className="form-group">
-            <label>Company Name <span className="error-message">{errors.companyName}</span></label>
+            <label>Company Name <span className="form-error-message">{errors.companyName}</span></label>
             <input
               type="text"
               name="companyName"
@@ -196,20 +301,36 @@ const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, i
         )}
         {!isLogin && (
           <div className="form-group">
-            <label>Mobile Number <span className="error-message">{errors.mobile}</span></label>
-            <input
-              type="number"
-              name="mobile"
-              value={formData.mobile}
-              onChange={handleChange}
-              required
-              placeholder="Enter Mobile Number"
-            />
+            <label>Mobile Number <span className="form-error-message">{errors.mobile}</span></label>
+            <div className="mobile-input-wrapper">
+              <select
+                className="country-code-dropdown"
+                value={selectedCountryCode}
+                onChange={handleCountryCodeChange}
+              >
+                {countryCodes.map(({ code, country }) => (
+                  <option key={code} value={code}>
+                    {country} ({code})
+                  </option>
+                ))}
+              </select>
+              <input
+                type="text"
+                name="mobile"
+                value={formData.mobile}
+                onChange={handleChange}
+                required
+                placeholder="Enter Mobile No" //Number
+                maxLength="10"
+                inputMode="numeric"
+                pattern="\d{10}"
+              />
+            </div>
           </div>
         )}
         {!isLogin && (
           <div className="form-group">
-            <label>Location <span className="error-message">{errors.location}</span></label>
+            <label>Location <span className="form-error-message">{errors.location}</span></label>
             <input
               type="text"
               name="location"
@@ -221,9 +342,9 @@ const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, i
           </div>
         )}
         <div className="form-group">
-          <label>Password <span className="error-message">{errors.password}</span></label>
+          <label>Password <span className="form-error-message">{errors.password}</span></label>
           <input
-            type="text"
+            type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
@@ -233,9 +354,9 @@ const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, i
         </div>
         {!isLogin && (
           <div className="form-group">
-            <label>Confirm Password <span className="error-message">{errors.confirmPassword}</span></label>
+            <label>Confirm Password <span className="form-error-message">{errors.confirmPassword}</span></label>
             <input
-              type="text"
+              type="password"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
@@ -248,9 +369,9 @@ const LoginForm = ({ areas, areaValues, totalArea, setShowModal, setFinalData, i
           {isLogin ? 'Login' : 'Register'}
         </button>
       </form>
-      <p onClick={toggleForm} className="toggle-link">
+      {/* <p onClick={toggleForm} className="toggle-link">
         {isLogin ? "Don't have an account? Register here" : 'Already have an account? Login'}
-      </p>
+      </p> */}
     </div>
   );
 };

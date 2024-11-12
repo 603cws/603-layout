@@ -93,13 +93,13 @@ button.submit-button:hover {
 }
 
 /* Inline error message style */
-.error-message {
+.form-error-message {
   color: red;
   font-size: 0.85em;
   margin-left: 8px;
   white-space: nowrap; /* Keeps error message inline with label */
   position: absolute;
-  left: 100px;
+  left: 140px;
   top: -10px;
 }
 @media(max-width:426px){
@@ -123,7 +123,28 @@ button.submit-button:hover {
   button.submit-button {
     font-size: 12px;
   }
-  .error-message{
+  .form-error-message{
     top: 0;
   }
+}
+
+.mobile-input-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.country-code-dropdown {
+  padding: 8px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  background-color: #f0f0f0;
+}
+
+.mobile-input-wrapper input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 0 4px 4px 0;
+  border-left: none;
 }

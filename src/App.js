@@ -11,7 +11,7 @@ import Modal from "./Modal";
 import Card from "./Card";
 import "./styles.css";
 import "./fixes.css";
-import LoginForm from "./LoginForm";
+// import LoginForm from "./LoginForm";
 
 const initialAreaValues = {
   linear: 24,
@@ -294,7 +294,7 @@ const calculateExecutiveWashroom = (totalArea, areaValues) => {
   }
 };
 
-const App = () => {
+const App = ({ onAuthorize }) => {
   const [totalArea, setTotalArea] = useState(0);
   const [builtArea, setBuiltArea] = useState(0);
   const [availableArea, setAvailableArea] = useState(0);
@@ -314,9 +314,8 @@ const App = () => {
   const [hrRoomSeatCount, setHrRoomSeatCount] = useState(0);
   const [salesSeatCount, setSalesSeatCount] = useState(0);
   const [financeRoomSeatCount, setFinanceRoomSeatCount] = useState(0);
-  const [finalData, setFinalData] = useState(areas, areaValues, totalArea);
   const [isOtherSelected, setIsOtherSelected] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
+  // const [showLoginForm, setShowLoginForm] = useState(false);
 
   useEffect(() => {
     const linear = calculateLinear(totalArea);
@@ -507,20 +506,6 @@ const App = () => {
   return (
 
     <div className="container">
-      <div>
-        {showLoginForm && 
-        <LoginForm
-        totalArea={totalArea}
-        setTotalArea={setTotalArea}
-        setFinalData={setFinalData}
-        setShowModal={setShowModal}
-        areas={areas}
-        areaValues={areaValues}
-        isOtherSelected={isOtherSelected}
-        />}
-      </div>
-      {!showLoginForm &&
-      <>
       <AreaInput
         setTotalArea={handleSetTotalArea}
         totalArea={totalArea}
@@ -529,12 +514,11 @@ const App = () => {
         availableArea={availableArea}
         resetAll={resetAll}
         areas={areas}
-        finalData={finalData}
-        setFinalData={setFinalData}
         showModal={showModal}
         setShowModal={setShowModal}
         isOtherSelected={isOtherSelected}
-        setShowLoginForm={setShowLoginForm}
+        onAuthorize={onAuthorize}
+        // setShowLoginForm={setShowLoginForm}
       />
       <div className="--content">
         <Treemap
@@ -580,8 +564,6 @@ const App = () => {
         </div>
       )}
       <Tooltip />
-      </>
-    }
     </div>
   );
 };

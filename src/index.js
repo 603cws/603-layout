@@ -1,20 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import LoginForm from './LoginForm';
+import Contact from './Contact';
+import PrivateRoute from './PrivateRoute';
+
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(
+//   <React.StrictMode>
+//     <BrowserRouter>
+//     <Routes>
+//       <Route path='/' element={<App/>}/>
+//       <Route path='/Loginform' element={<LoginForm/>}/>
+//       <Route path='/Contact' element={<Contact/>}/>
+//     </Routes>
+//     </BrowserRouter>
+//   </React.StrictMode>
+// );
+
+const Root = () => {
+  // Assume this value changes based on the user's progression through the flow
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
+  const handleAuthorize = () => {
+    setIsAuthorized(true);
+  };
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App onAuthorize={handleAuthorize} />} />
+
+        {/* Private routes */}
+        <Route element={<PrivateRoute isAuthorized={isAuthorized} />}>
+          <Route path="/Loginform" element={<LoginForm />} />
+          <Route path="/Contact" element={<Contact />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<App/>}/>
-      <Route path='/Loginform' element={<LoginForm/>}/>
-    </Routes>
-    </BrowserRouter>
+    <Root />
   </React.StrictMode>
 );
 
