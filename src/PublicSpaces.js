@@ -63,7 +63,7 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
                   </Tooltip>
                 )}
               </div>
-              {/* {type === "breakoutRoom" && (
+              {type === "breakoutRoom" && (
                 <div className="slider-container seats-description">
                   <InteractiveInputSlider
                     name={"Breakout Room Size"}
@@ -78,7 +78,7 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
                     initialAreaValues={initialAreaValues}
                   />
                 </div>
-              )} */}
+              )}
             </div>
           </div>
         ))}

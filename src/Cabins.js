@@ -67,7 +67,7 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCon
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
-                      name={"Seat Count"}
+                      name={"Add. Seat Count"}
                       value={smallCabinConfig.seatCount}
                       onChange={smallCabinConfig.setSeatCount}
                       min2={0} max2={24} step2={2}

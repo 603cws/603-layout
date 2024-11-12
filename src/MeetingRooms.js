@@ -116,7 +116,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
-                      name={"Seat Count"}
+                      name={"Add. Seat Count"}
                       value={hrRoomConfig.seatCount}
                       onChange={hrRoomConfig.setSeatCount}
                       min2={0} max2={24} step2={2}
@@ -135,7 +135,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
-                      name={"Seat Count"}
+                      name={"Add. Seat Count"}
                       value={salesRoomConfig.seatCount}
                       onChange={salesRoomConfig.setSeatCount}
                       min2={0} max2={24} step2={2}
@@ -154,7 +154,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
-                      name={"Seat Count"}
+                      name={"Add. Seat Count"}
                       value={financeRoomConfig.seatCount}
                       onChange={financeRoomConfig.setSeatCount}
                       min2={0} max2={24} step2={2}
@@ -167,7 +167,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                     />
                   </div>
                 )}
-                {/* {type === "videoRecordingRoom" && (
+                {type === "videoRecordingRoom" && (
                   <div className="slider-container seats-description">
                     <InteractiveInputSlider
                       name={"Video Recording Room Size"}
@@ -182,7 +182,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                       initialAreaValues={initialAreaValues}
                     />
                   </div>
-                )} */}
+                )}
               </div>
             </div>
           </div>
