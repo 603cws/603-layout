@@ -48,6 +48,13 @@
     }
     
   }
+  @media(max-width:426px){
+    .slider-button{
+      font-size: 12px;
+      height: 25px;
+      width: 25px;
+    }
+  }
   
   
   
