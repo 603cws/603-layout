@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './LoginForm.css';
 import { supabase } from './supabaseClient'; // Import Supabase client
 import checkIfEmailExists from './CheckIfEmailExists';
 import { useNavigate, useLocation } from 'react-router-dom';
+import countryList from 'react-select-country-list';
+import Select from 'react-select';
 
 const countryCodes = [
   { code: '+91', country: 'India' },
@@ -39,7 +41,9 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const [debouncedEmail, setDebouncedEmail] = useState(formData.email);
   const [debouncedMobile, setDebouncedMobile] = useState(formData.mobile); // Debounced mobile number
-  const [selectedCountryCode, setSelectedCountryCode] = useState('+91'); // Default to India code
+  // const [selectedCountryCode, setSelectedCountryCode] = useState('+91'); // Default to India code
+  const [value, setValue] = useState('');
+  const options = useMemo(() => countryList().getData(), []);
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const mobileRegex = /^(?!([0-9])\1{9})\d{10}$/;
@@ -119,8 +123,11 @@ const LoginForm = () => {
     return () => clearTimeout(timeoutId); // Clear timeout on cleanup
   }, [debouncedMobile]);
 
-  const handleCountryCodeChange = (e) => {
-    setSelectedCountryCode(e.target.value);
+  const handleCountryCodeChange = (value) => {
+    // setSelectedCountryCode(e.target.value);
+    setValue(value);
+    console.log('Country code');
+    console.log(value);
   };
 
   // const toggleForm = () => {
@@ -303,17 +310,18 @@ const LoginForm = () => {
           <div className="form-group">
             <label>Mobile Number <span className="form-error-message">{errors.mobile}</span></label>
             <div className="mobile-input-wrapper">
-              <select
+              <Select
                 className="country-code-dropdown"
-                value={selectedCountryCode}
+                options={options}
+                value={value}
                 onChange={handleCountryCodeChange}
-              >
-                {countryCodes.map(({ code, country }) => (
+              />
+                {/* {countryCodes.map(({ code, country }) => (
                   <option key={code} value={code}>
                     {country} ({code})
                   </option>
-                ))}
-              </select>
+                ))} */}
+              {/* </select> */}
               <input
                 type="text"
                 name="mobile"

@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import LoginForm from './LoginForm';
 import Contact from './Contact';
 import PrivateRoute from './PrivateRoute';
+import AdminPanel from './AdminPanel'
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(
@@ -33,7 +34,7 @@ const Root = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App onAuthorize={handleAuthorize} />} />
-
+        {/* <Route path="/Admin" element={<AdminPanel />} /> */}
         {/* Private routes */}
         <Route element={<PrivateRoute isAuthorized={isAuthorized} />}>
           <Route path="/Loginform" element={<LoginForm />} />
