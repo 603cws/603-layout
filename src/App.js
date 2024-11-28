@@ -22,8 +22,8 @@ const initialAreaValues = {
   ups: 90,
   bms: 90,
   server: 40,
-  reception: 120,
-  lounge: 150,
+  reception: 80,
+  lounge: 80,
   sales: 80,
   phoneBooth: 25,
   discussionRoom: 380,
@@ -315,6 +315,9 @@ const App = ({ onAuthorize }) => {
   const [salesSeatCount, setSalesSeatCount] = useState(0);
   const [financeRoomSeatCount, setFinanceRoomSeatCount] = useState(0);
   const [isOtherSelected, setIsOtherSelected] = useState(false);
+  const [managerCabinSize, setManagerCabinSize] = useState(areaValues.manager);
+  const [receptionSize, setReceptionSize] = useState(areaValues.reception);
+  const [loungeSize, setLoungeSize] = useState(areaValues.lounge)
   // const [showLoginForm, setShowLoginForm] = useState(false);
 
   useEffect(() => {
@@ -460,6 +463,9 @@ const App = ({ onAuthorize }) => {
   const handleFinanceRoomAreaChange = handleRoomAreaChange("financeRoom", setFinanceRoomSize);
   const handleBreakoutRoomAreaChange = handleRoomAreaChange("breakoutRoom", setBreakoutRoomSize);
   const handleVideoRecordingRoomAreaChange = handleRoomAreaChange("videoRecordingRoom", setVideoRecordingRoomSize);
+  const handleManagerCabinSizeChange = handleRoomAreaChange("manager", setManagerCabinSize);
+  const handleReceptionSizeChange = handleRoomAreaChange("reception", setReceptionSize);
+  const handleLoungeSizeChange = handleRoomAreaChange("lounge",setLoungeSize);
 
   const handleSeatCountChange = (setter) => (newCount) => {
     setter(newCount);
@@ -539,6 +545,7 @@ const App = ({ onAuthorize }) => {
             mdCabinSize={mdCabinSize} setMdCabinSize={handleMdCabinAreaChange}
             smallCabinConfig={smallCabinConfig} totalArea={totalArea}
             builtArea={builtArea} initialAreaValues={initialAreaValues}
+            managerCabinSize={managerCabinSize} setManagerCabinSize={handleManagerCabinSizeChange}
           />
           <MeetingRooms areas={areas} updateAreas={updateAreas}
             hrRoomConfig={hrRoomConfig} salesRoomConfig={salesRoomConfig}
@@ -548,6 +555,8 @@ const App = ({ onAuthorize }) => {
           <PublicSpaces areas={areas} updateAreas={updateAreas}
             breakoutRoomSize={breakoutRoomSize} setBreakoutRoomSize={handleBreakoutRoomAreaChange}
             totalArea={totalArea} builtArea={builtArea} initialAreaValues={initialAreaValues}
+            receptionSize={receptionSize} setReceptionSize={handleReceptionSizeChange}
+            loungeSize={loungeSize} setLoungeSize={handleLoungeSizeChange}
           />
           <SupportSpaces areas={areas} updateAreas={updateAreas} areaValues={areaValues}
             isOtherSelected={isOtherSelected} setIsOtherSelected={setIsOtherSelected} />
