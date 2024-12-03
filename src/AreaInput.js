@@ -10,7 +10,7 @@ import Card from './Card';
 import './LoginForm'
 import { useNavigate } from 'react-router-dom';
 
-const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal, setShowModal, isOtherSelected, onAuthorize }) => {
+const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal, setShowModal, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
   const handleSubmit = () => {
     const area = parseInt(inputValue, 10);
     if (!isNaN(area)) {
-      if (area >= 1500 && area <= 25000) {
+      if (area >= MIN_AREA && area <= MAX_AREA) {
         setTotalArea(area);
         setError(false);
       } else if (area === 0 || area === undefined) {
@@ -145,7 +145,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
     // setShowLoginForm(true);
     onAuthorize(); // Set user as authorized
     navigate('/Loginform', {
-      state: { areas: areas, areaValues: areaValues, totalArea:totalArea, isOtherSelected:isOtherSelected }
+      state: { areas: areas, areaValues: areaValues, totalArea: totalArea, isOtherSelected: isOtherSelected }
     });
   }
 
@@ -180,7 +180,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         {error && (
           <div className="error-message" aria-live="polite">
             <span className="warning-icon">⚠️</span>
-            Invalid area value. Must be between 1500 and 25000 square feet.
+            Invalid area value. Must be between {MIN_AREA} and {MAX_AREA} square feet.
           </div>
         )}
       </div>

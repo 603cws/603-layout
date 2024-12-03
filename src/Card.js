@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Card = () => {
+const Card = ({ message }) => {
   return (
     <StyledWrapper>
       <div className="brutalist-card">
@@ -14,14 +14,17 @@ const Card = () => {
           <div className="brutalist-card__alert">Warning</div>
         </div>
         <div className="brutalist-card__message">
-           You have exceeded the available space limit for your office layout.
-           
-            <p>
+          {message && message.split("\n").map((line, index) => (
+            <p key={index}>{line}</p>
+          ))}
+          {/* You have exceeded the available space limit for your office layout. */}
+
+          {/* <p>
             If you need assistance or expert guidance, feel free to{" "}
             <a href="mailto:support@experts.com">contact our space planning experts</a>.
-            </p>
+            </p> */}
         </div>
-        <div className="brutalist-card__actions">
+        {/* <div className="brutalist-card__actions">
           <a
             className="brutalist-card__button brutalist-card__button--mark"
             href="https://www.603thecoworkingspace.com/contactus"
@@ -34,7 +37,7 @@ const Card = () => {
           >
             Email us now
           </a>
-        </div>
+        </div> */}
       </div>
     </StyledWrapper>
   );
