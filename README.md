@@ -17,5 +17,20 @@
 - **Database**: MongoDB, Firebase, or Supabase
 - **Hosting**: Vercel, Netlify
 
+## Summary 
+![Summary Card](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=603cws&theme=vue)
 
+![GitHub Streak](https://streak-stats.demolab.com/?user=603cws&theme=radical)
 
+## Repository Analytics
+
+![Alt](https://repobeats.axiom.co/api/embed/b74eac22397914a809d87a972db4a077f858beaf.svg "Repobeats analytics image")
+
+## Contributors
+
+Thanks to these amazing people!  
+![Contributors](https://contrib.rocks/image?repo=603cws/603-layout)
+
+## Languages Used
+
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=603cws&layout=compact&theme=radical)
