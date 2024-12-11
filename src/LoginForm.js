@@ -206,6 +206,9 @@ const LoginForm = () => {
           meetingroomlarge: areaValues.meetingRoomLarge,
           hrroom: areaValues.hrRoom,
           financeroom: areaValues.financeRoom,
+          breakoutroom: areaValues.breakoutRoom,
+          executivewashroom: areaValues.executiveWashroom,
+          videorecordingroom: areaValues.videoRecordingRoom,
           other: isOtherSelected ? areaValues.other : 0,
           totalArea,
         }]);
@@ -240,6 +243,9 @@ const LoginForm = () => {
           meetingroomlarge: areas.meetingRoomLarge,
           hrroom: areas.hrRoom,
           financeroom: areas.financeRoom,
+          breakoutroom: areas.breakoutRoom,
+          executivewashroom: areas.executiveWashroom,
+          videorecordingroom: areas.videoRecordingRoom,
           other: isOtherSelected ? areaValues.other : 0,
         }]);
 
@@ -316,7 +322,7 @@ const LoginForm = () => {
                 value={value}
                 onChange={handleCountryCodeChange}
               />
-                {/* {countryCodes.map(({ code, country }) => (
+              {/* {countryCodes.map(({ code, country }) => (
                   <option key={code} value={code}>
                     {country} ({code})
                   </option>

@@ -560,6 +560,7 @@ const App = ({ onAuthorize }) => {
         areas={areas}
         showModal={showModal}
         setShowModal={setShowModal}
+        setErrorMessage={setErrorMessageHandler}
         isOtherSelected={isOtherSelected}
         onAuthorize={onAuthorize}
         MAX_AREA={MAX_AREA}

@@ -10,7 +10,7 @@ import Card from './Card';
 import './LoginForm'
 import { useNavigate } from 'react-router-dom';
 
-const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal, setShowModal, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA }) => {
+const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal, setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -50,6 +50,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
   const handleGenerateBOQ = async () => {
     if (!totalArea) {
       console.error("Please enter the total area before generating BOQ.");
+      setErrorMessage("Please enter the total area before generating BOQ.")
       setShowModal(true);
       return; // Stop execution if total area is not entered
     }
@@ -142,6 +143,12 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
   };
 
   const handleLogin = () => {
+    if (!totalArea) {
+      console.error("Please enter the total area before generating BOQ.");
+      setErrorMessage("Please enter the total area before generating BOQ.");
+      setShowModal(true);
+      return; // Stop execution if total area is not entered
+    }
     // setShowLoginForm(true);
     onAuthorize(); // Set user as authorized
     navigate('/Loginform', {
