@@ -22,6 +22,12 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-' || e.key === '.') {
+      e.preventDefault(); // Prevent the default behavior
+    }
+  };
+
   const handleSubmit = () => {
     const area = parseInt(inputValue, 10);
     if (!isNaN(area)) {
@@ -171,13 +177,16 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
             type="number"
             value={inputValue}
             onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
             onKeyUp={handleSubmit}
             placeholder="Enter total area (sq ft)"
             title="Set the area value here"
             className={`set-area-input ${error ? 'error' : ''}`}
             aria-label="Total Area Input"
-            data-tip="Enter the total area in square feet"
-          /><FontAwesomeIcon icon={faXmark}
+            data-tip="Enter the total area in square feet" />
+
+          <FontAwesomeIcon
+            icon={faXmark}
             className='reset-cross'
             onClick={handleReset}
             title="Click to reset the area input"
