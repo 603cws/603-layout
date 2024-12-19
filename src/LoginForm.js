@@ -35,8 +35,8 @@ const LoginForm = () => {
     companyName: '',
     mobile: '',
     location: '',
-    password: '',
-    confirmPassword: '',
+    // password: '',
+    // confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
   const [debouncedEmail, setDebouncedEmail] = useState(formData.email);
@@ -159,7 +159,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    const { email, companyName, mobile, location, password } = formData;
+    const { email, companyName, mobile, location, /*password*/ } = formData;
 
     try {
       // Step 1: Insert data into 'users' table and retrieve the user ID
@@ -170,7 +170,7 @@ const LoginForm = () => {
           companyname: companyName,
           mobile,
           location,
-          password,
+          // password,
         }])
         .select();
 
@@ -266,22 +266,22 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    if (!isLogin) {
-      if (!passwordRegex.test(formData.password)) {
-        showErrorWithTimeout(
-          'password',
-          'Password must be at least 8 characters, contain one uppercase, one lowercase, one number, and one symbol.'
-        );
-        return;
-      }
-      if (formData.password !== formData.confirmPassword) {
-        showErrorWithTimeout('confirmPassword', 'Passwords do not match.');
-        return;
-      }
+    // if (!isLogin) {
+    //   if (!passwordRegex.test(formData.password)) {
+    //     showErrorWithTimeout(
+    //       'password',
+    //       'Password must be at least 8 characters, contain one uppercase, one lowercase, one number, and one symbol.'
+    //     );
+    //     return;
+    //   }
+    //   if (formData.password !== formData.confirmPassword) {
+    //     showErrorWithTimeout('confirmPassword', 'Passwords do not match.');
+    //     return;
+    //   }
       handleRegister(); // Call register function on successful validation
-    }
+    // }
   };
 
   return (
@@ -355,7 +355,7 @@ const LoginForm = () => {
             />
           </div>
         )}
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Password <span className="form-error-message">{errors.password}</span></label>
           <input
             type="password"
@@ -378,7 +378,7 @@ const LoginForm = () => {
               placeholder="Re-enter Password"
             />
           </div>
-        )}
+        )} */}
         <button type="submit" className="submit-button">
           {isLogin ? 'Login' : 'Register'}
         </button>
