@@ -20,7 +20,7 @@ const Admin = () => {
             location,
             areas ( totalArea ) 
           `); // Fetching all users' data along with areas and quantity
-          console.log(data);
+        console.log(data);
         if (error) throw error;
 
         setUsersData(data);
@@ -62,7 +62,7 @@ const Admin = () => {
               <td>{user.location}</td>
               <td>{user.areas && user.areas.length > 0 ? user.areas[0].totalArea : 'N/A'}</td>
               <td>
-                    <button>Go To Layout</button>
+                <button>Go To Layout</button>
               </td>
             </tr>
           ))}

@@ -10,7 +10,7 @@ const workspaceDescriptions = {
   small: "This is a small cabin, suitable for individual work.",
 };
 
-const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinConfig, totalArea, builtArea, initialAreaValues,managerCabinSize, setManagerCabinSize }) => {
+const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinConfig, totalArea, builtArea, initialAreaValues, managerCabinSize, setManagerCabinSize }) => {
 
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
@@ -57,27 +57,27 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCon
 
                 {type === "manager" && (
                   <div className='seats-description'>
-                  <Tooltip text={`Size: 80 sq ft`}>
-                    <button className="info-button">i</button>
-                  </Tooltip>
-                  <InteractiveInputSlider
-                    name={"Manager Cabin Size"}
-                    value={managerCabinSize}
-                    cabinSize={managerCabinSize}
-                    setCabinSize={setManagerCabinSize}
-                    onChange={setManagerCabinSize}
-                    min2={50} max2={180} step2={5}
-                    totalArea={totalArea}
-                    builtArea={builtArea}
-                    type={type}
-                    initialAreaValues={initialAreaValues}
-                  />
+                    <Tooltip text={`Size: 80 sq ft`}>
+                      <button className="info-button">i</button>
+                    </Tooltip>
+                    <InteractiveInputSlider
+                      name={"Manager Cabin Size"}
+                      value={managerCabinSize}
+                      cabinSize={managerCabinSize}
+                      setCabinSize={setManagerCabinSize}
+                      onChange={setManagerCabinSize}
+                      min2={50} max2={180} step2={5}
+                      totalArea={totalArea}
+                      builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
+                    />
                   </div>
                 )}
                 {type === "small" && (
                   <div className="seats-description">
                     {/* <strong>1 small cabin = {areas["small"] * 4 + smallCabinCount} pax</strong> */}
-                    <Tooltip text={`Size: ${smallCabinConfig.roomSize} sq ft \nCabin: ${4+smallCabinConfig.seatCount} seats`} >
+                    <Tooltip text={`Size: ${smallCabinConfig.roomSize} sq ft \nCabin: ${4 + smallCabinConfig.seatCount} seats`} >
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider

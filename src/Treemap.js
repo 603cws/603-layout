@@ -34,7 +34,7 @@ const fullNames = {
 
 const Treemap = ({ totalArea, areas, areaValues }) => {
   const [hoveredArea, setHoveredArea] = useState(null);
-  const [isLegendVisible, setIsLegendVisible]=useState(false);
+  const [isLegendVisible, setIsLegendVisible] = useState(false);
 
   const colors = {
     'Linear Workspace': '#6495ED',
@@ -174,40 +174,40 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     setIsLegendVisible(!isLegendVisible);
   }
 
-  useEffect(()=>{
-    const handleResize=()=>{
-      if(window.innerWidth>426){
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 426) {
         setIsLegendVisible(true);
-      }else{
+      } else {
         setIsLegendVisible(false);
       }
     };
     window.addEventListener('resize', handleResize);
     handleResize();
 
-    return()=>{
-    window.addEventListener('resize', handleResize);
+    return () => {
+      window.addEventListener('resize', handleResize);
     };
-  },[]);
+  }, []);
 
   return (
     <div id="chart" style={{ position: 'relative' }}>
-    <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={"100%"} className='distribution-chart'/>
-    <button
-      className="arrow-button"
-      onClick={() => toggleLegend(!isLegendVisible)}
-      style={{
-        position: 'absolute',
-        left: '-10px',
-        top: '200px',
-        opacity:'50%',
-        zIndex: 1,
-        display: window.innerWidth <= 425 ? 'block' : 'none',
-      }}
-    >
-      <FontAwesomeIcon icon={isLegendVisible ? faChevronLeft : faChevronRight} />
-    </button>
-    <div
+      <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={"100%"} className='distribution-chart' />
+      <button
+        className="arrow-button"
+        onClick={() => toggleLegend(!isLegendVisible)}
+        style={{
+          position: 'absolute',
+          left: '-10px',
+          top: '200px',
+          opacity: '50%',
+          zIndex: 1,
+          display: window.innerWidth <= 425 ? 'block' : 'none',
+        }}
+      >
+        <FontAwesomeIcon icon={isLegendVisible ? faChevronLeft : faChevronRight} />
+      </button>
+      <div
         className="legend-container"
         style={{
           transform: isLegendVisible ? 'translateX(0)' : 'translateX(-100%)', // Start hidden and slide in
@@ -223,7 +223,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
       >
         {generateLegendItems()}
       </div>
-  </div>
+    </div>
   );
 };
 

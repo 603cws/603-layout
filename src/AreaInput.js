@@ -10,7 +10,8 @@ import Card from './Card';
 import './LoginForm'
 import { useNavigate } from 'react-router-dom';
 
-const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal, setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA }) => {
+const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal,
+  setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA }) => {   //, comeBack
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -69,7 +70,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         .from('quantity')
         .insert([{
           linear: areas.linear,
-          ltype: areas.lType,
+          lType: areas.lType,
           md: areas.md,
           manager: areas.manager,
           small: areas.small,
@@ -79,15 +80,15 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
           reception: areas.reception,
           lounge: areas.lounge,
           sales: areas.sales,
-          phonebooth: areas.phoneBooth,
-          discussionroom: areas.discussionRoom,
-          interviewroom: areas.interviewRoom,
-          conferenceroom: areas.conferenceRoom,
-          boardroom: areas.boardRoom,
-          meetingroom: areas.meetingRoom,
-          meetingroomlarge: areas.meetingRoomLarge,
-          hrroom: areas.hrRoom,
-          financeroom: areas.financeRoom,
+          phoneBooth: areas.phoneBooth,
+          discussionRoom: areas.discussionRoom,
+          interviewRoom: areas.interviewRoom,
+          conferenceRoom: areas.conferenceRoom,
+          boardRoom: areas.boardRoom,
+          meetingRoom: areas.meetingRoom,
+          meetingRoomLarge: areas.meetingRoomLarge,
+          hrRoom: areas.hrRoom,
+          financeRoom: areas.financeRoom,
           other: isOtherSelected ? areaValues.other : 0
         }])
         .select('id'); // Retrieve the ID generated for quantityData
@@ -113,7 +114,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
           id: sharedId, // Use the shared ID from quantity as the ID in areas
           quantity_id: sharedId, // Optionally set quantity_id if used as a foreign key
           linear: areaValues.linear,
-          ltype: areaValues.lType,
+          lType: areaValues.lType,
           md: areaValues.md,
           manager: areaValues.manager,
           small: areaValues.small,
@@ -123,15 +124,15 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
           reception: areaValues.reception,
           lounge: areaValues.lounge,
           sales: areaValues.sales,
-          phonebooth: areaValues.phoneBooth,
-          discussionroom: areaValues.discussionRoom,
-          interviewroom: areaValues.interviewRoom,
-          conferenceroom: areaValues.conferenceRoom,
-          boardroom: areaValues.boardRoom,
-          meetingroom: areaValues.meetingRoom,
-          meetingroomlarge: areaValues.meetingRoomLarge,
-          hrroom: areaValues.hrRoom,
-          financeroom: areaValues.financeRoom,
+          phoneBooth: areaValues.phoneBooth,
+          discussionRoom: areaValues.discussionRoom,
+          interviewRoom: areaValues.interviewRoom,
+          conferenceRoom: areaValues.conferenceRoom,
+          boardRoom: areaValues.boardRoom,
+          meetingRoom: areaValues.meetingRoom,
+          meetingRoomLarge: areaValues.meetingRoomLarge,
+          hrRoom: areaValues.hrRoom,
+          financeRoom: areaValues.financeRoom,
           other: areas.other,
           totalArea: totalArea,
         }]);
@@ -175,7 +176,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         <div className='input-wrapper'>
           <input
             type="number"
-            value={inputValue}
+            value={inputValue}   //value={comeBack ? totalArea : inputValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             onKeyUp={handleSubmit}

@@ -6,14 +6,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import countryList from 'react-select-country-list';
 import Select from 'react-select';
 
-const countryCodes = [
-  { code: '+91', country: 'India' },
-  { code: '+1', country: 'USA' },
-  { code: '+44', country: 'UK' },
-  { code: '+61', country: 'Australia' },
-  { code: '+81', country: 'Japan' },
-  // Add more as needed
-];
+// const countryCodes = [
+//   { code: '+91', country: 'India' },
+//   { code: '+1', country: 'USA' },
+//   { code: '+44', country: 'UK' },
+//   { code: '+61', country: 'Australia' },
+//   { code: '+81', country: 'Japan' },
+//   // Add more as needed
+// ];
 
 const LoginForm = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -187,7 +187,7 @@ const LoginForm = () => {
         .insert([{
           "userId": userId,
           linear: areaValues.linear,
-          ltype: areaValues.lType,
+          lType: areaValues.lType,
           md: areaValues.md,
           manager: areaValues.manager,
           small: areaValues.small,
@@ -197,19 +197,19 @@ const LoginForm = () => {
           reception: areaValues.reception,
           lounge: areaValues.lounge,
           sales: areaValues.sales,
-          phonebooth: areaValues.phoneBooth,
-          discussionroom: areaValues.discussionRoom,
-          interviewroom: areaValues.interviewRoom,
-          conferenceroom: areaValues.conferenceRoom,
-          boardroom: areaValues.boardRoom,
-          meetingroom: areaValues.meetingRoom,
-          meetingroomlarge: areaValues.meetingRoomLarge,
-          hrroom: areaValues.hrRoom,
-          financeroom: areaValues.financeRoom,
-          breakoutroom: areaValues.breakoutRoom,
-          executivewashroom: areaValues.executiveWashroom,
-          videorecordingroom: areaValues.videoRecordingRoom,
-          other: isOtherSelected ? areaValues.other : 0,
+          phoneBooth: areaValues.phoneBooth,
+          discussionRoom: areaValues.discussionRoom,
+          interviewRoom: areaValues.interviewRoom,
+          conferenceRoom: areaValues.conferenceRoom,
+          boardRoom: areaValues.boardRoom,
+          meetingRoom: areaValues.meetingRoom,
+          meetingRoomLarge: areaValues.meetingRoomLarge,
+          hrRoom: areaValues.hrRoom,
+          financeRoom: areaValues.financeRoom,
+          breakoutRoom: areaValues.breakoutRoom,
+          executiveWashroom: areaValues.executiveWashroom,
+          videoRecordingRoom: areaValues.videoRecordingRoom,
+          other: isOtherSelected ? areas.other : 0,
           totalArea,
         }]);
 
@@ -224,7 +224,7 @@ const LoginForm = () => {
         .insert([{
           "userId": userId,
           linear: areas.linear,
-          ltype: areas.lType,
+          lType: areas.lType,
           md: areas.md,
           manager: areas.manager,
           small: areas.small,
@@ -234,18 +234,18 @@ const LoginForm = () => {
           reception: areas.reception,
           lounge: areas.lounge,
           sales: areas.sales,
-          phonebooth: areas.phoneBooth,
-          discussionroom: areas.discussionRoom,
-          interviewroom: areas.interviewRoom,
-          conferenceroom: areas.conferenceRoom,
-          boardroom: areas.boardRoom,
-          meetingroom: areas.meetingRoom,
-          meetingroomlarge: areas.meetingRoomLarge,
-          hrroom: areas.hrRoom,
-          financeroom: areas.financeRoom,
-          breakoutroom: areas.breakoutRoom,
-          executivewashroom: areas.executiveWashroom,
-          videorecordingroom: areas.videoRecordingRoom,
+          phoneBooth: areas.phoneBooth,
+          discussionRoom: areas.discussionRoom,
+          interviewRoom: areas.interviewRoom,
+          conferenceRoom: areas.conferenceRoom,
+          boardRoom: areas.boardRoom,
+          meetingRoom: areas.meetingRoom,
+          meetingRoomLarge: areas.meetingRoomLarge,
+          hrRoom: areas.hrRoom,
+          financeRoom: areas.financeRoom,
+          breakoutRoom: areas.breakoutRoom,
+          executiveWashroom: areas.executiveWashroom,
+          videoRecordingRoom: areas.videoRecordingRoom,
           other: isOtherSelected ? areaValues.other : 0,
         }]);
 
@@ -280,7 +280,7 @@ const LoginForm = () => {
     //     showErrorWithTimeout('confirmPassword', 'Passwords do not match.');
     //     return;
     //   }
-      handleRegister(); // Call register function on successful validation
+    handleRegister(); // Call register function on successful validation
     // }
   };
 

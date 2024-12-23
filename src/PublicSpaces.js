@@ -56,13 +56,13 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)}: <span>{Math.round(areas[type] || 0)}</span> {/* Round the value before displaying */}
-                {type==="reception"&&(
+                {type === "reception" && (
                   <div className="slide-container">
                     <InteractiveInputSlider
                       name={"Reception Size"}
                       value={receptionSize}
                       onChange={setReceptionSize}
-                      min2={80} max2={700} step2={5} 
+                      min2={80} max2={700} step2={5}
                       cabinSize={receptionSize}
                       setCabinSize={setReceptionSize}
                       totalArea={totalArea}
@@ -72,7 +72,7 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
                     />
                   </div>
                 )}
-                {type==="lounge"&&(
+                {type === "lounge" && (
                   <div className="slide-container">
                     <InteractiveInputSlider
                       name={"Lounge Size"}

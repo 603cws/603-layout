@@ -21,7 +21,7 @@ const CheckIfEmailExists = async (email) => {
     return !!data; // Email exists if data is returned
   } catch (err) {
     console.error('Not a serious error:', err.message);
-      //throw new Error('Unexpected error occurred');
+    //throw new Error('Unexpected error occurred');
   }
 };
 

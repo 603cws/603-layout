@@ -4,7 +4,6 @@ import Radio from './Radio'; // Ensure the correct path to Radio.js
 import './styles.css'; // Import the updated CSS file
 import Tooltip from './ToolTip'; // Import the Tooltip component
 
-
 const workspaceDescriptions = {
   linear: "This is a linear workspace, designed for open collaboration.",
   lType: "This is an L-type workspace, providing a semi-private environment.",
@@ -81,13 +80,13 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
                 <>
                   <Radio selectedValue={selectedSize} onChange={handleSizeChange} />
                   <div className="size-display">
-                     <span>Desk Size:{sizeMapping[selectedSize]}</span>
+                    <span>Desk Size:{sizeMapping[selectedSize]}</span>
                   </div>
                 </>
               )}
               {type === "lType" && (
                 <div className="size-display">
-                   <span>Desk Size:{sizeMapping.lType}</span>
+                  <span>Desk Size:{sizeMapping.lType}</span>
                 </div>
               )}
               <div className="value-display">

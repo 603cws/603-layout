@@ -112,7 +112,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                 )}
                 {type === "hrRoom" && (
                   <div className="seats-description">
-                    <Tooltip text={`Size: ${hrRoomConfig.roomSize} sq ft \nCabin: ${4+hrRoomConfig.seatCount} seats`}>
+                    <Tooltip text={`Size: ${hrRoomConfig.roomSize} sq ft \nCabin: ${4 + hrRoomConfig.seatCount} seats`}>
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
@@ -131,7 +131,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                 )}
                 {type === "sales" && (
                   <div className="seats-description">
-                    <Tooltip text={`Size: ${salesRoomConfig.roomSize} sq ft \nCabin: ${4+salesRoomConfig.seatCount} seats`}>
+                    <Tooltip text={`Size: ${salesRoomConfig.roomSize} sq ft \nCabin: ${4 + salesRoomConfig.seatCount} seats`}>
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
@@ -150,7 +150,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                 )}
                 {type === "financeRoom" && (
                   <div className="seats-description">
-                    <Tooltip text={`Size: ${financeRoomConfig.roomSize} sq ft \nCabin: ${4+financeRoomConfig.seatCount} seats`}>
+                    <Tooltip text={`Size: ${financeRoomConfig.roomSize} sq ft \nCabin: ${4 + financeRoomConfig.seatCount} seats`}>
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
