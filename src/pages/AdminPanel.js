@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from './supabaseClient';
-import '../src/AdminPanel.css'
+import { supabase } from '../services/supabaseClient';
+import '../styles/AdminPanel.css';
 
 const Admin = () => {
   const [usersData, setUsersData] = useState([]);

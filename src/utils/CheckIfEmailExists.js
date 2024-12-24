@@ -1,4 +1,4 @@
-import { supabase } from './supabaseClient'; // Ensure your Supabase client is properly imported
+import { supabase } from '../services/supabaseClient'; // Ensure your Supabase client is properly imported
 
 const CheckIfEmailExists = async (email) => {
   try {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Counter from './Counter';
-import './styles.css';
-import Tooltip from './ToolTip';
+import Counter from '../components/Counter';
+import '../styles/styles.css';
+import Tooltip from '../components/ToolTip';
 
 const supportSpaceDescriptions = {
   ups: "This is the UPS room, ensuring uninterrupted power supply.",

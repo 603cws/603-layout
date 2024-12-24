@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import AreaInput from "./AreaInput";
+import AreaInput from "./AreaInput.js";
 import OpenWorkspaces from "./OpenWorkspaces";
 import Cabins from "./Cabins";
 import SupportSpaces from "./SupportSpaces";
 import PublicSpaces from "./PublicSpaces";
 import MeetingRooms from "./MeetingRooms";
 import { Tooltip } from "react-tooltip";
-import Treemap from "./Treemap";
-import Modal from "./Modal";
-import Card from "./Card";
-import "./styles.css";
-import "./fixes.css";
+import Treemap from "./Treemap.js";
+import Modal from "../components/Modal.js";
+import Card from "../components/Card.js";
+import "../styles/styles.css";
+import "../styles/fixes.css";
 // import LoginForm from "./LoginForm";
 
 const initialAreaValues = {
@@ -298,8 +298,8 @@ const App = ({ onAuthorize }) => {
   const [totalArea, setTotalArea] = useState(0);
   const [builtArea, setBuiltArea] = useState(0);
   const [availableArea, setAvailableArea] = useState(0);
-  const [areas, setAreas] = useState(initialAreas);
-  const [areaValues, setAreaValues] = useState(initialAreaValues);
+  const [areas, setAreas] = useState(initialAreas);   //Quantity
+  const [areaValues, setAreaValues] = useState(initialAreaValues);    //Areas
   const [variant, setVariant] = useState("large");
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);

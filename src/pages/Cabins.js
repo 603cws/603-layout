@@ -1,8 +1,8 @@
 import React from 'react';
-import Counter from './Counter'; // Ensure the correct path to Counter.js
-import './styles.css'; // Import the updated CSS file
-import Tooltip from './ToolTip';
-import InteractiveInputSlider from './InteractiveInputSlider';
+import Counter from '../components/Counter'; // Ensure the correct path to Counter.js
+import '../styles/styles.css'; // Import the updated CSS file
+import Tooltip from '../components/ToolTip';
+import InteractiveInputSlider from '../components/InteractiveInputSlider';
 
 const workspaceDescriptions = {
   md: "This is the MD's cabin, designed for maximum comfort and productivity.",

@@ -1,8 +1,8 @@
 import React from 'react';
-import Counter from './Counter'; // Ensure the correct path to Counter.js
-import './styles.css'; // Import the updated CSS file
-import Tooltip from './ToolTip';
-import InteractiveInputSlider from './InteractiveInputSlider';
+import Counter from '../components/Counter'; // Ensure the correct path to Counter.js
+import '../styles/styles.css'; // Import the updated CSS file
+import Tooltip from '../components/ToolTip';
+import InteractiveInputSlider from '../components/InteractiveInputSlider';
 
 const meetingRoomDescriptions = {
   discussionRoom: "This is the discussion room, ideal for small group discussions.",

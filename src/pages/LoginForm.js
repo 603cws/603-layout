@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import './LoginForm.css';
-import { supabase } from './supabaseClient'; // Import Supabase client
-import checkIfEmailExists from './CheckIfEmailExists';
+import '../styles/LoginForm.css';
+import { supabase } from '../services/supabaseClient'; // Import Supabase client
+import checkIfEmailExists from '../utils/CheckIfEmailExists';
 import { useNavigate, useLocation } from 'react-router-dom';
 import countryList from 'react-select-country-list';
 import Select from 'react-select';

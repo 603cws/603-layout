@@ -1,5 +1,5 @@
 import React from 'react';
-import './InteractiveInputSlider.css';
+import '../styles/InteractiveInputSlider.css';
 
 const InteractiveInputSlider = ({ name, value, onChange, min2, max2, step2, cabinSize, setCabinSize, totalArea, builtArea, type, initialAreaValues }) => {
     const min = min2;

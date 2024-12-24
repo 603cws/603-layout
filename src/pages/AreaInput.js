@@ -3,15 +3,15 @@ import { Tooltip } from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { supabase } from './supabaseClient';
-import './styles.css';
-import Modal from './Modal';
-import Card from './Card';
+import { supabase } from '../services/supabaseClient';
+import '../styles/styles.css';
+import Modal from '../components/Modal';
+import Card from '../components/Card';
 import './LoginForm'
 import { useNavigate } from 'react-router-dom';
 
 const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal,
-  setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA }) => {   //, comeBack
+  setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA, comeBack }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -176,7 +176,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         <div className='input-wrapper'>
           <input
             type="number"
-            value={inputValue}   //value={comeBack ? totalArea : inputValue}
+            value={comeBack ? totalArea : inputValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             onKeyUp={handleSubmit}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Counter from './Counter'; // Ensure the correct path to Counter.js
-import Radio from './Radio'; // Ensure the correct path to Radio.js
-import './styles.css'; // Import the updated CSS file
-import Tooltip from './ToolTip'; // Import the Tooltip component
+import Counter from '../components/Counter'; // Ensure the correct path to Counter.js
+import Radio from '../components/Radio'; // Ensure the correct path to Radio.js
+import '../styles/styles.css'; // Import the updated CSS file
+import Tooltip from '../components/ToolTip'; // Import the Tooltip component
 
 const workspaceDescriptions = {
   linear: "This is a linear workspace, designed for open collaboration.",
