@@ -11,6 +11,10 @@ import Modal from "../components/Modal.js";
 import Card from "../components/Card.js";
 import "../styles/styles.css";
 import "../styles/fixes.css";
+import { handleUserId } from "../utils/handleUserId.js";
+import { fetchAreas } from "../utils/fetchAreas.js"; // Fetches areas from Supabase
+import { fetchQuantity } from "../utils/fetchQuantity.js"; // Fetches quantity from Supabase
+import { prepareQuantityData } from '../utils/dataToInsert.js';
 // import LoginForm from "./LoginForm";
 
 const initialAreaValues = {
@@ -361,7 +365,64 @@ const App = ({ onAuthorize }) => {
       lounge: Math.round(loungeArea / areaValues.lounge),
       other: otherArea / areaValues.other,
     }));
+    // console.log("Other Value Cal: ", otherArea / areaValues.other, "Other Quantity:", otherArea, "Area Values:", areaValues.other);
   }, [totalArea]);
+
+  const [userId, setUserId] = useState(null);
+  const [comeBack, setComeBack] = useState(false);
+
+  useEffect(() => {
+    if (userId) {
+      console.log("User ID:", userId);
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        // Get the decrypted userId
+        const id = handleUserId();
+        if (!id) {
+          return;
+        }
+
+        setComeBack(true);
+
+        setUserId(id);
+
+        // Fetch areas data from Supabase
+        const areasData = await fetchAreas(id);
+        const quantityData = await fetchQuantity(id);
+
+        setTotalArea(areasData[0]?.totalArea);
+
+        if (areasData[0]?.other === 0) {
+          const modifiedData = {
+            ...areasData[0],
+            other: 1, // Change 'other' to 1 if it is 0
+          };
+
+          const modifiedAreasData = prepareQuantityData(modifiedData);
+          setAreaValues(modifiedAreasData); // Store the modified object in state
+          console.log("Modified area values:", modifiedAreasData);
+        } else {
+          const modifiedAreasData = prepareQuantityData(areasData[0]);
+          setAreaValues(modifiedAreasData); // Store the original object in state
+          console.log("Modified area values 2:", modifiedAreasData);
+        }
+
+        const modifiedQuantityData = prepareQuantityData(quantityData[0]);
+        setAreas(modifiedQuantityData);
+        console.log("Modified qunatity values:", modifiedQuantityData);
+
+      } catch (err) {
+        setError(err.message);
+        console.log('Error', err);
+      }
+    };
+
+    loadData();
+  }, []);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -378,14 +439,18 @@ const App = ({ onAuthorize }) => {
       0
     );
     setBuiltArea(calculatedBuiltArea);
+    // console.log("Built area cal:", calculatedBuiltArea, "Areas:", areas, "Area values:", areaValues);
   }, [areas, areaValues]);
 
   // Calculate availableArea based on totalArea and builtArea
   useEffect(() => {
     setAvailableArea(totalArea - builtArea);
+    // console.log("Available area:", availableArea);
+    // console.log("Built area:", builtArea);
   }, [totalArea, builtArea]);
 
   const updateAreas = (type, value) => {
+    // console.log("Here");
     if (!totalArea) {
       setErrorMessageHandler(
         "The input box for total area cannot be left empty.\n" +
@@ -565,6 +630,7 @@ const App = ({ onAuthorize }) => {
         onAuthorize={onAuthorize}
         MAX_AREA={MAX_AREA}
         MIN_AREA={MIN_AREA}
+        comeBack={comeBack}
       // setShowLoginForm={setShowLoginForm}
       />
       <div className="--content">
@@ -600,7 +666,7 @@ const App = ({ onAuthorize }) => {
             loungeSize={loungeSize} setLoungeSize={handleLoungeSizeChange}
           />
           <SupportSpaces areas={areas} updateAreas={updateAreas} areaValues={areaValues}
-            isOtherSelected={isOtherSelected} setIsOtherSelected={setIsOtherSelected} />
+            isOtherSelected={isOtherSelected} setIsOtherSelected={setIsOtherSelected} comeBack={comeBack} />
         </div>
       </div>
       {showModal && (
