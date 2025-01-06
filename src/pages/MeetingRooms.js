@@ -3,6 +3,7 @@ import Counter from '../components/Counter'; // Ensure the correct path to Count
 import '../styles/styles.css'; // Import the updated CSS file
 import Tooltip from '../components/ToolTip';
 import InteractiveInputSlider from '../components/InteractiveInputSlider';
+import { InfoIcon } from 'lucide-react';
 
 const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, financeRoomConfig, areaInfo, initialAreaValues,
   videoRecordingRoomSize, setVideoRecordingRoomSize, conferenceRoomSize, setConferenceRoomSize, boardRoomSize, setBoardRoomSize }) => {
@@ -33,7 +34,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
   const renderRoomSlider = (type, config) => (
     <div className="seats-description">
       <Tooltip text={`Size: ${config.roomSize} sq ft \nCabin: ${4 + config.seatCount} seats`}>
-        <button className="info-button">i</button>
+        <InfoIcon />
       </Tooltip>
       <InteractiveInputSlider
         name={"Add. Seat Count"}
@@ -90,7 +91,7 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                 )}
                 {type !== "videoRecordingRoom" && type !== "boardRoom" && type !== "conferenceRoom" && (
                   <Tooltip text={`Size: ${sizeArea[type]} sq ft`}>
-                    <button className="info-button">i</button>
+                    <InfoIcon />
                   </Tooltip>
                 )}
                 {/* {type === "hrRoom" && (

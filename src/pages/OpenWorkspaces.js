@@ -3,6 +3,7 @@ import Counter from '../components/Counter'; // Ensure the correct path to Count
 import Radio from '../components/Radio'; // Ensure the correct path to Radio.js
 import '../styles/styles.css'; // Import the updated CSS file
 import Tooltip from '../components/ToolTip'; // Import the Tooltip component
+import { BadgeInfo, BadgeInfoIcon, Info, InfoIcon, LucideBadgeInfo } from 'lucide-react';
 
 const workspaceDescriptions = {
   linear: "This is a linear workspace, designed for open collaboration.",
@@ -94,14 +95,14 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
                 {type === "linear" && (
                   <div className="tooltip-container">
                     <Tooltip text={`Size: ${sizeArea[selectedSize]}`}>
-                      <button className="info-button">i</button>
+                      <InfoIcon />
                     </Tooltip>
                   </div>
                 )}
                 {type === "lType" && (
                   <div className="tooltip-container">
                     <Tooltip text={`Size: 34 sq ft`}>
-                      <button className="info-button">i</button>
+                      <InfoIcon />
                     </Tooltip>
                   </div>
                 )}

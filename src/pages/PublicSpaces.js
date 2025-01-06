@@ -3,6 +3,7 @@ import Counter from '../components/Counter'; // Ensure the correct path to Count
 import '../styles/styles.css'; // Import the updated CSS file
 import Tooltip from '../components/ToolTip';
 import InteractiveInputSlider from '../components/InteractiveInputSlider';
+import { InfoIcon } from 'lucide-react';
 
 const publicSpaceDescriptions = {
   reception: "This is the reception area, the first point of contact for visitors.",
@@ -91,7 +92,7 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
 
                 {type === "phoneBooth" && (
                   <Tooltip text={`Size: 25 sq ft`}>
-                    <button className="info-button">i</button>
+                    <InfoIcon />
                   </Tooltip>
                 )}
               </div>

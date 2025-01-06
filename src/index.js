@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './styles/index.css';
+import './index.css';
 import App from './pages/App';
 import reportWebVitals from './tests/reportWebVitals';
 import LoginForm from './pages/LoginForm';

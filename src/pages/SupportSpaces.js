@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Counter from '../components/Counter';
 import '../styles/styles.css';
 import Tooltip from '../components/ToolTip';
+import { InfoIcon } from 'lucide-react';
 
 const supportSpaceDescriptions = {
   ups: "This is the UPS room, ensuring uninterrupted power supply.",
@@ -100,7 +101,7 @@ const SupportSpaces = ({ areas, updateAreas, isOtherSelected, setIsOtherSelected
                   <div className="value-display">
                     {type.charAt(0).toUpperCase() + type.slice(1)} Room: <span>{areas[type] || 0}</span>
                     <Tooltip text={`Size: ${sizeArea[type]} sq ft`}>
-                      <button className="info-button">i</button>
+                      <InfoIcon />
                     </Tooltip>
                   </div>
                 </>

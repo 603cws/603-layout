@@ -3,6 +3,7 @@ import Counter from '../components/Counter'; // Ensure the correct path to Count
 import '../styles/styles.css'; // Import the updated CSS file
 import Tooltip from '../components/ToolTip';
 import InteractiveInputSlider from '../components/InteractiveInputSlider';
+import { InfoIcon } from 'lucide-react';
 
 const workspaceDescriptions = {
   md: "This is the MD's cabin, designed for maximum comfort and productivity.",
@@ -57,9 +58,9 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCon
 
                 {type === "manager" && (
                   <div className='seats-description'>
-                    <Tooltip text={`Size: 80 sq ft`}>
-                      <button className="info-button">i</button>
-                    </Tooltip>
+                    {/* <Tooltip text={`Size: 80 sq ft`}>
+                      <InfoIcon />
+                    </Tooltip> */}
                     <InteractiveInputSlider
                       name={"Manager Cabin Size"}
                       value={managerCabinSize}
@@ -78,7 +79,7 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCon
                   <div className="seats-description">
                     {/* <strong>1 small cabin = {areas["small"] * 4 + smallCabinCount} pax</strong> */}
                     <Tooltip text={`Size: ${smallCabinConfig.roomSize} sq ft \nCabin: ${4 + smallCabinConfig.seatCount} seats`} >
-                      <button className="info-button">i</button>
+                      <InfoIcon />
                     </Tooltip>
                     <InteractiveInputSlider
                       name={"Add. Seat Count"}
