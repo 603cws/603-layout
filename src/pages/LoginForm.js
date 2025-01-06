@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import '../styles/LoginForm.css';
 import { supabase } from '../services/supabaseClient'; // Import Supabase client
 import checkIfEmailExists from '../utils/CheckIfEmailExists';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useHref } from 'react-router-dom';
 import countryList from 'react-select-country-list';
 import Select from 'react-select';
 
@@ -256,7 +256,8 @@ const LoginForm = () => {
 
       console.log("User, areas, and quantity data inserted successfully!");
 
-      navigate('/Contact', { replace: true });
+      // navigate('/Contact', { replace: true });
+      window.location.href = 'https://603-boq.vercel.app/';     //Goto BOQ page from here
 
     } catch (error) {
       console.error("Unexpected error during registration:", error);
